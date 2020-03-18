@@ -1,6 +1,6 @@
 install.packages("installr")
-library(installr)
-installr()
+require(installr)
+updateR()
 
 library(googlesheets4)
 library(dplyr)
