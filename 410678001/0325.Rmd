@@ -80,6 +80,31 @@ char1Vector<-c("你好","How are you?")
 ###Atomic
 
 ```{r}
-complexVector <- c("小名今年歲數", 15)
+complexVector <- 
+c("小名今年歲數", 15)
+#這是錯的
+c("小名今年歲數", "15")
+#這才是對的
+```
+
+```{r}
+dialogue <- c('小明說："明天不用上課。"',
+               '小花說："真的嗎？"')
+
+cat(dialogue, sep="\n")
+```
+
+
+跳出commend的紀錄
+```{r}
+library(httr)
+library(dplyr)
+GET("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits") %>%
+  content() %>%
+  View()
+```
+
+
+
 
 
