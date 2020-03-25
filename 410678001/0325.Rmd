@@ -121,7 +121,36 @@ homework_sheet <- sheets_read(ss,sheet=1)
 鍵號的左邊一定不能出現單引號跟雙引號，只能現在右邊，若寫在左邊就算錯
 鍵號的左邊使用反頓點`
 
+##logic
 
+```{r}
+logi1 <- c(T,TRUE,F,FALSE,FALSE)
+```
+```{r}
+sum(logi1)
+#true = 1, false = 0
+```
 
+###Extened atomic vectors
+```{r}
+# 10位學生的主系
+majors10_char <- c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
 
+typeof(majors10_char)
+class(majors10_char)
+```
 
+```{r}
+majors10_factor <- factor(majors10_char)
+# 或
+majors10_factor <- factor(
+  c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
+)
+#從下面level的排序可以知道,這邊factor定義社會學系=1,經濟學系=2(每台便腦的順序可能會不一樣)
+typeof(majors10_factor)
+class(majors10_factor)
+```
+
+```{r}
+levels(majors10_factor)
+```
