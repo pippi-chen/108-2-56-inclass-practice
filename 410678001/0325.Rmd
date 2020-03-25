@@ -2,7 +2,8 @@
 title: '0325'
 output: html_document
 ---
-## Atomic vector
+
+##Atomic vector
 ```{r}
 num1 <- 5
 vNum1 <- c(2, 5)
@@ -22,3 +23,63 @@ vNum5 <- c(c(-1,5),c(2,3))
 ```{r}
 vNumComplex <- c(c(1, 3, c(-5, 23)))
 vNumComplexNotComplesAtAll <- c(1, 3, -5, 23)
+```
+Vector stacking
+```{r}
+vNum1 <- c(-1,5)
+vNum2 <- c(2,3)
+vNum4 <- c() # 空向量
+```
+
+
+```{r}
+vNum3 <- c(vNum2, vNum1)
+vNum4 <- c(vNum4, vNum1) # 向量疊代 （recursive vector concatenate）
+#可以發現一直重複repeat這部分,vNum4會一直在改變
+```
+
+##Different types
+```{r}
+num1<-5 # 非整數
+num2<-5L # 整數
+
+num1Vector<-c(5,6,7)
+num2Vector<-c(5L,6L,7L)
+```
+
+```{r}
+typeof(num1Vector)
+typeof(num2Vector)
+```
+
+###Character
+
+```{r}
+char1<-"你好"
+char2<-'你好'
+```
+
+他說:"今天多了一個確診。"
+
+```{r}
+HeSaid <- "他說:"今天多了一個確診。""
+```
+以下兩種為讓R讓R區隔出雙引號代表不同的意義
+```{r}
+HeSaid <- "他說:\"今天多了一個確診。\""
+```
+
+```{r}
+HeSaid <- '他說:"今天多了一個確診。"'
+```
+
+```{r}
+char1Vector<-c("你好","How are you?")
+```
+
+###Atomic
+
+```{r}
+complexVector <- c("小名今年歲數", 15)
+
+
