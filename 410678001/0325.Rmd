@@ -96,6 +96,7 @@ cat(dialogue, sep="\n")
 
 
 跳出commend的紀錄
+(游標放在名稱上,按F1,就會出現help的用法)
 ```{r}
 library(httr)
 library(dplyr)
