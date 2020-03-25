@@ -105,6 +105,22 @@ GET("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits") 
   View()
 ```
 
+```{r}
+library(googlesheets4)
+`出席狀況表單網址` <-  # 缺乏定義值
+ss <- as_sheets_id(`出席狀況表單網址`)
+homework_sheet <- sheets_read(ss,sheet=1)
+```
+
+```{r}
+library(googlesheets4)
+`出席狀況表單網址` <-  "https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBPfkvxYY-J3xLAHY/edit#gid=458686645"
+ss <- as_sheets_id(`出席狀況表單網址`)
+homework_sheet <- sheets_read(ss,sheet=1)
+```
+鍵號的左邊一定不能出現單引號跟雙引號，只能現在右邊，若寫在左邊就算錯
+鍵號的左邊使用反頓點`
+
 
 
 
