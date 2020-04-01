@@ -23,6 +23,8 @@ library(lubridate)
 tpeTime <- ymd_hms("2020-03-18 13:52:40",
                    tz="Asia/Taipei")
 tpeTime
+class(tpeTime)
+typeof(tpeTime) #數值
 ```
 
 葡萄牙 Mar.18, 2020, 05:52:40
@@ -30,11 +32,26 @@ tpeTime
 pgTime <- mdy_hms("Mar.18, 2020, 05:52:40",
                   tz="Europe/Lisbon")
 pgTime
+class(pgTime)
+typeof(pgTime) #數值
+as.double(pgTime)
+as.double(tpeTime)
+```
+
+轉成同時區的時間
+```{r}
+with_tz(tpeTime, tzone="UTC")
+with_tz(pgTime, tzone="UTC")
 ```
 
 ```{r}
 
 ```
+
+```{r}
+
+```
+
 
 
 ##List
