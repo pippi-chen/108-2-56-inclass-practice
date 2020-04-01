@@ -71,6 +71,7 @@ list(
 print(`小明108學年課表A`)
 ```
 
+[註]list中若還有list, 叫做nested list(巢狀)
 ```{r}
 # list含兩個lists
 `小明108學年課表B` <- list(
@@ -94,6 +95,16 @@ print(`小明108學年課表B`)
 )
 print(`小明108學年課表C`)
 ```
+
+
+
+
+
+
+
+
+
+
 
 
 
