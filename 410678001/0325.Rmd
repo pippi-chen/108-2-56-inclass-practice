@@ -3,7 +3,13 @@ title: '0325'
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
 ##Atomic vector
+
 ```{r}
 num1 <- 5
 vNum1 <- c(2, 5)
