@@ -133,7 +133,34 @@ commit <- list(
 print(commit)
 ```
 
+跟上面其實是一樣的
+```{r}
+library(lubridate)
+authorValues <- 
+  list(
+    name="Martin老師",  
+    email="mtlin@gm.ntpu.edu.tw",
+    time=ymd_hms("2020-03-25T07:17:40Z")
+  )
+committerValues <- 
+  list(
+    name="emilyluckey", 
+    email="emily007@gmail.com",
+    time=ymd_hms("2020-03-26T08:18:40Z")
+  )
 
+commit <- list(
+  author=authorValues,
+  committer=committerValues,
+  message="update"
+)
+
+print(commit)
+```
+
+```{r}
+browseURL("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits") 
+```
 
 
 
