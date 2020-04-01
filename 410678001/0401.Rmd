@@ -15,16 +15,21 @@ browseURL("https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBP
 ```
 
 ```{r}
-
+library(lubridate)
 ```
 
+台北 2020-03-18 13:52:40
 ```{r}
-
+tpeTime <- ymd_hms("2020-03-18 13:52:40",
+                   tz="Asia/Taipei")
+tpeTime
 ```
 
-
+葡萄牙 Mar.18, 2020, 05:52:40
 ```{r}
-
+pgTime <- mdy_hms("Mar.18, 2020, 05:52:40",
+                  tz="Europe/Lisbon")
+pgTime
 ```
 
 ```{r}
