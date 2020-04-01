@@ -128,11 +128,9 @@ commit <- list(
     "emily007@gmail.com", 
     ymd_hms("2020-03-26T08:18:40Z")
   ), 
-  message = c(
-    "update"
-  )
+  message = "update"
 )
-print(commie)
+print(commit)
 ```
 
 
