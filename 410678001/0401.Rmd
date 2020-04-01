@@ -162,6 +162,12 @@ print(commit)
 browseURL("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits") 
 ```
 
+```{r}
+library(jsonlite) 
+toJSON(commit)
+```
+
+
 
 
 
