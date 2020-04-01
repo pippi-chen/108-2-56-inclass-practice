@@ -17,3 +17,28 @@ listExample <- list(2, 6, 7)
 print(vectorExample)
 print(listExample)
 ```
+
+每個元素值可以是不同type的物件值。
+```{r}
+#用vector儲存(4個值都需要相同的type)
+c("2020-03-31T13:40:55Z", 
+  "一芳", 
+  "2", 
+  "水果茶")
+
+#用list儲存(可以依照資料有的特質，而直接用那個特質底下的type儲存)
+library(lubridate) #把時間轉成電腦懂的一種date class
+
+list(
+  ymd_hms("2020-03-31T13:40:55Z"),  #Date/Time
+  "一芳",  #Character
+  "2",  #Numeric
+  "水果茶") #Character
+```
+
+
+
+
+
+
+
