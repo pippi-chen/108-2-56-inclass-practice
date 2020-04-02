@@ -7,22 +7,43 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+install.packages("googlesheets4")
+install.packages("dplyr")
+install.packages("lubridate")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+library(googlesheets4)
+library(dplyr)
+library(lubridate)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+a <- 2
+a = 2 # = 與 <-同義
+3 -> b
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+a <- 15
+b <- a
+```
+
+##看以下那些有命名錯誤的存在
+
+A variable name starts with:
+1. a letter;
+2. or the dot not followed by a number.
+```{r}
+my_108_total_credits <- 15
+## _108_total_credits <- 15 #wrong
+## 108_total_credits <- 15 #wrong
+## _my_108_total_credits <- 15 #wrong
+my.108.total_credits <- 15
+## .108.total_credits <- 15 # 隱藏變數 #wrong
+.my.108.total_credits <- 15
+我的108學年總學分數 <- 15
+`我的108學年總學分數` <- 15 # 特殊名稱處理，`不是名稱的一部份
+`.108.total_credits` <- 15
+```
