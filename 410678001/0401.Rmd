@@ -8,69 +8,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-##Date/Time
-
-```{r}
-browseURL("https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBPfkvxYY-J3xLAHY/edit#gid=458686645")
-```
-
-```{r}
-library(lubridate)
-```
-
-台北 2020-03-18 13:52:40
-```{r}
-tpeTime <- ymd_hms("2020-03-18 13:52:40",
-                   tz="Asia/Taipei")
-tpeTime
-class(tpeTime)
-typeof(tpeTime) #數值
-```
-
-葡萄牙 Mar.18, 2020, 05:52:40
-```{r}
-pgTime <- mdy_hms("Mar.18, 2020, 05:52:40",
-                  tz="Europe/Lisbon")
-pgTime
-class(pgTime)
-typeof(pgTime) #數值
-as.double(pgTime)
-as.double(tpeTime)
-```
-
-轉成同時區的時間
-```{r}
-with_tz(tpeTime, tzone="UTC")
-with_tz(pgTime, tzone="UTC")
-```
-
-```{r}
-ymd_hms("2020-03-04T06:56:29Z", #一旦看到T開頭Z結尾,代表他已經是UTC了,所以不能再接tz
-        tz = "Asia/Taipei") 
-ymd_hms("2020-03-04T06:56:29Z", 
-        tz = "Europe/Lisbon")
-```
-
-```{r}
-ymd_hms("2020-03-04T06:56:29Z") 
-ymd_hms("2020-03-04T06:56:29Z")
-```
-
-```{r}
-utcTime <- ymd_hms("2020-03-04T06:56:29Z") 
-with_tz(
-  utcTime, 
-  tzone = "Asia/Taipei") 
-```
-
-與上方相同
-```{r}
-with_tz(
-  ymd_hms("2020-03-04T06:56:29Z"), 
-  tzone = "Asia/Taipei") 
-```
-
-
 ##List
 
 ```{r}
