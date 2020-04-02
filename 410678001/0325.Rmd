@@ -226,6 +226,12 @@ char3 <- c("小明","1","3")
 as.integer(char3) #"小明" 變成 NA
 ```
 
+```{r}
+studentId <- c(410773002, 410773015)
+studentId <- as.character(studentId)
+class(studentId)
+```
+
 ##Date/Time
 
 ```{r}
@@ -325,8 +331,3 @@ time <- Taipei - Paris
 time
 ```
 
-```{r}
-studentId <- c(410773002, 410773015)
-studentId <- as.character(studentId)
-class(studentId)
-```
