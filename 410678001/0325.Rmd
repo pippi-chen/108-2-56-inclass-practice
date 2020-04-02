@@ -176,12 +176,14 @@ class(logi) #logical
 
 ##Atomic vector extended
 
+#factor
+
 ```{r}
 # 10位學生的主系
 majors10_char <- c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
 
-typeof(majors10_char)
-class(majors10_char)
+typeof(majors10_char) #character
+class(majors10_char) #character
 ```
 
 ```{r}
@@ -191,10 +193,35 @@ majors10_factor <- factor(
   c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
 )
 #從下面level的排序可以知道,這邊factor定義社會學系=1,經濟學系=2(每台便腦的順序可能會不一樣)
-typeof(majors10_factor)
-class(majors10_factor)
+typeof(majors10_factor) #integer
+class(majors10_factor) #factor
 ```
 
 ```{r}
+majors10_char
+majors10_factor
+```
+
+```{r}
+as.integer(majors10_factor)
 levels(majors10_factor)
+```
+
+class conversion
+```{r}
+stringInteger <- c("1","2","-11")
+class(stringInteger) #無法進行數值運算
+stringInteger+2
+```
+
+```{r}
+trueInteger <- as.integer(stringInteger)
+class(trueInteger) #可以進行數值運算
+typeof(trueInteger)
+trueInteger+2
+```
+
+```{r}
+char3 <- c("小明","1","3")
+as.integer(char3) #"小明" 變成 NA
 ```
