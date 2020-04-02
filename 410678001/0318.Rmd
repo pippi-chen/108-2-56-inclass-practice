@@ -30,7 +30,9 @@ a <- 15
 b <- a
 ```
 
-##看以下那些有命名錯誤的存在
+#practice
+
+看以下那些有命名錯誤的存在
 
 A variable name starts with:
 1. a letter;

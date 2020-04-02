@@ -60,9 +60,7 @@ list(
   c("108學年第1學期", "高級會計學", "高等統計學"),  #向量1
   c("108學年第2學期", "食在拉丁美洲") #向量2
 )
-```
 
-```{r}
 # list含兩個vectors
 `小明108學年課表A` <- list(
   c("108-1","高級會計學","高等統計學"),
@@ -114,7 +112,7 @@ print(`小明108學年課表D`)
 ```
 
 
-##Github Commit
+#Github Commit
 
 ```{r}
 commit <- list(
@@ -228,4 +226,49 @@ save(commit, listExample, `小明108學年課表D`, file = "today.Rda")
 
 ```{r}
 load("today.Rda")
+```
+
+#practice
+
+```{r}
+library(lubridate)
+Weather <- c(
+  list(
+    Date = ymd("2020-03-31"), 
+    City = "TaipeiCity", 
+    Temperature = 
+      list(
+        Highest = "25度", 
+        Lowest = "18度"
+      )
+  ), 
+  list(
+    Date = ymd("2020-04-01"), 
+    City = "TaipeiCity", 
+    Temperature = 
+      list(
+        Highest = "25度", 
+        Lowest = "18度"
+    )
+  ), 
+  list(
+    Date = ymd("2020-03-31"), 
+    City = "NewTaipeiCity", 
+    Temperature = 
+      list(
+        Highest = "24度", 
+        Lowest = "15度"
+      )
+    ), 
+  list(
+    Date = ymd("2020-04-01"), 
+    City = "NewTaipeiCity", 
+    Temperature = 
+      list(
+        Highest = "24度", 
+        Lowest = "15度"
+    )
+  )
+)
+print(Weather)
 ```
