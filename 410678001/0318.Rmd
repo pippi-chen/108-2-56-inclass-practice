@@ -47,3 +47,12 @@ my.108.total_credits <- 15
 `我的108學年總學分數` <- 15 # 特殊名稱處理，`不是名稱的一部份
 `.108.total_credits` <- 15
 ```
+
+#常見命名方式
+```{r}
+#snake
+my_total_credits <- 15
+
+#camel
+myTotalCredits <- 15
+```
