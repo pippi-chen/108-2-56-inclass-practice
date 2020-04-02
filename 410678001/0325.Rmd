@@ -237,6 +237,8 @@ library(lubridate)
 ```
 
 台北 2020-03-18 13:52:40
+時間輸入方式: ymd_hms
+時間來自時區: Asia/Taipei
 ```{r}
 tpeTime <- ymd_hms("2020-03-18 13:52:40",
                    tz="Asia/Taipei")
@@ -246,12 +248,17 @@ typeof(tpeTime) #數值
 ```
 
 葡萄牙 Mar.18, 2020, 05:52:40
+時間輸入方式: mdy_hms
+時間來自時區: Europe/Lisbon
 ```{r}
 pgTime <- mdy_hms("Mar.18, 2020, 05:52:40",
                   tz="Europe/Lisbon")
 pgTime
 class(pgTime)
 typeof(pgTime) #數值
+```
+
+```{r}
 as.double(pgTime)
 as.double(tpeTime)
 ```
@@ -263,12 +270,25 @@ with_tz(pgTime, tzone="UTC")
 ```
 
 ```{r}
-ymd_hms("2020-03-04T06:56:29Z", #一旦看到T開頭Z結尾,代表他已經是UTC了,所以不能再接tz
+with_tz(tpeTime, tzone="Europe/Paris")
+with_tz(pgTime, tzone="Europe/Lisbon")
+```
+
+將UTC的時間換算成各個地區的時區時間
+```{r}
+with_tz(tpeTime, tzone="Asia/Taipei")
+with_tz(pgTime, tzone="Europe/Paris")
+```
+
+```{r}
+ymd_hms("2020-03-04T06:56:29Z", #一旦看到T開頭Z結尾,代表他已經是UTC了,所以不用再接tz
         tz = "Asia/Taipei") 
+
 ymd_hms("2020-03-04T06:56:29Z", 
         tz = "Europe/Lisbon")
 ```
 
+若時間字串來自UTC，那可以不設定tz參數
 ```{r}
 ymd_hms("2020-03-04T06:56:29Z") 
 ymd_hms("2020-03-04T06:56:29Z")
