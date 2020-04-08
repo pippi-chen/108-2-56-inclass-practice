@@ -171,6 +171,7 @@ str(taipeiNightMarkets[c("寧夏觀光夜市", "華西街觀光夜市")])
 ```
 
 用「要/不要」邏輯向量選[c(T,T,F,...)]
+(此方法不能做到排序)
 ```{r}
 vectorExample
 vectorExample[c(T,T,F)] # 要，要，不要
@@ -179,6 +180,11 @@ vectorExample[c(T,T,F)] # 要，要，不要
 ```{r}
 str(listExample[c(F,T)]) # 不要，要
 str(listExample[c(T,T)]) # 要，要
+```
+
+用「要/不要」邏輯向量自taipeiNightMarkets選出 寧夏觀光夜市，西昌街觀光夜市，大龍街夜市， 雙城街夜市。
+```{r}
+str(taipeiNightMarkets[c(T, F, F, F, T, F, F, F, F, T, F, F, F, T)])
 ```
 
 ```{r}
