@@ -98,9 +98,28 @@ student <- "student"
 listExample[[student]]
 ```
 
+新北市各區衛生所之門診時間及疫苗種類彙整表
 ```{r}
 fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
          simplifyDataFrame = F) -> newTaipeiCityVaccine
+```
+
+```{r}
+str(newTaipeiCityVaccine)
+length(newTaipeiCityVaccine)
+names(newTaipeiCityVaccine)
+```
+
+```{r}
+str(newTaipeiCityVaccine[[1]])
+str(newTaipeiCityVaccine$success)
+str(newTaipeiCityVaccine[["success"]])
+
+str(newTaipeiCityVaccine[[2]])
+str(newTaipeiCityVaccine$result)
+str(newTaipeiCityVaccine[["result"]])
+
+str(newTaipeiCityVaccine[[2]], max.level = 1) #設定選取的元素顯現的level多寡
 ```
 
 #選「多個元素」
