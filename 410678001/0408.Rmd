@@ -250,7 +250,6 @@ numVector[c(1,4)][[1]]
 ```{r}
 select1 <- numVector[c(T,T,F,T,F,F,T)]; select1
 select2 <- select1[c(1,4)]; select2
-
 # 相當於
 numVector[c(T,T,F,T,F,F,T)][c(1,4)]
 ```
@@ -261,63 +260,17 @@ names <- c("小英", "小美", "大雄","阿華", "阿尼")
 gender <- c("F","F","M","F","M")
 ```
 
-```{r}
-today <- list(
-  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
-  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
-tomorrow <- list(
-  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
-  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
-
-weather <- list(today,tomorrow)
-
-print(weather)
-```
-
-```{r}
-weather[[1]][[2]][[2]] # 今天/新北市/highest_temp
-weather[[2]][[2]][[2]] # 明天/新北市/highest_temp
-```
-
-```{r}
-weather[[1]][[2]]$highest_temp # 今天/新北市/highest_temp
-weather[[2]][[2]]$highest_temp # 明天/新北市/highest_temp
-```
-
-#list補充
-
-```{r}
-library(jsonlite)
-fromJSON("https://www.dropbox.com/s/6252gbdnv9owljm/dance.json?dl=1", simplifyDataFrame = F) -> dance
-```
-
-```{r}
-fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=3", simplifyDataFrame = F) -> dance
-```
-
-```{r}
-# 前三筆演出的名稱
-dance[[1]]$title
-dance[[2]]$title
-dance[[3]]$title 
-```
-
+#practice
 ```{r}
 
+econOnly <- c(T, T, F, F, T) ; econOnly
+
+names[econOnly]
+gender[econOnly]
+
+gender[econOnly] <- c(T, T, F)
+econFemaleOnly <- gender[econOnly] ; econFemaleOnly
+
+result <- names[econOnly][c(T, T, F)] ; result
+
 ```
-
-```{r}
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
