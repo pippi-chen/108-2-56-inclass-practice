@@ -167,6 +167,7 @@ str(taipeiNightMarkets[[1]])
 str(taipeiNightMarkets[["寧夏觀光夜市"]])
 str(taipeiNightMarkets$`寧夏觀光夜市`)
 str(taipeiNightMarkets[c(1, 2)])
+str(taipeiNightMarkets[c("寧夏觀光夜市", "華西街觀光夜市")])
 ```
 
 用「要/不要」邏輯向量選[c(T,T,F,...)]
