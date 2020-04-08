@@ -198,22 +198,42 @@ print(selectedMarkets)
 ```
 
 ```{r}
-str(listExample)
+str(taipeiNightMarkets[selectedMarkets], max.level = 1)
 ```
 
+```{r, results="asis"}
+str(listExample, max.level = 3)
+```
+
+```
+listExample: length=2, list class
+  |
+  |--student: length=1, character class
+  |
+  |--學期: length=3, list class
+```
+
+以下兩個表面都是選取“學期”:
 ```{r}
 get1 <- listExample[["學期"]]
 get2 <- listExample["學期"]
 ```
 
+[[]]: 拿出某個物件值。
 ```{r}
 get1 # 學期拿出來，有3個元素的list
-str(get1)
+str(listExample, max.level = 3)
 ```
 
 ```{r}
+str(get1, max.level = 1)
+```
+
+[]: 留下某個物件值。
+```{r}
 get2 # listExample 只留下 學期元素，是個只有一個元素的list
-str(get2)
+str(get2, max.level = 1)
+str(get2, max.level = 2)
 ```
 
 #連鎖選取
