@@ -85,10 +85,17 @@ str(listExample)
 
 ```{r}
 listExample[["student"]]
+listExample[[student]] #error
 listExample$student
 
 listExample[["學期"]] # 小心不是反頓點喔。
 listExample$`學期`
+```
+
+對於已經出現在global environment中的object,才可以不需要在[[]]中加入""
+```{r}
+student <- "student"
+listExample[[student]]
 ```
 
 ```{r}
@@ -156,8 +163,70 @@ get2 # listExample 只留下 學期元素，是個只有一個元素的list
 str(get2)
 ```
 
-```{r}
+#連鎖選取
 
+```{r}
+numVector <- c(2,3,6,-1,4,2,6)
+select1 <- numVector[c(1,4)]; select1
+select2 <- select1[[1]]; select2
+
+# 相當於
+numVector[c(1,4)][[1]]
+```
+
+```{r}
+select1 <- numVector[c(T,T,F,T,F,F,T)]; select1
+select2 <- select1[c(1,4)]; select2
+
+# 相當於
+numVector[c(T,T,F,T,F,F,T)][c(1,4)]
+```
+
+```{r}
+majors <- c("經濟學系","經濟學系","社會學系","社工系","經濟學系")
+names <- c("小英", "小美", "大雄","阿華", "阿尼")
+gender <- c("F","F","M","F","M")
+```
+
+```{r}
+today <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+tomorrow <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+
+weather <- list(today,tomorrow)
+
+print(weather)
+```
+
+```{r}
+weather[[1]][[2]][[2]] # 今天/新北市/highest_temp
+weather[[2]][[2]][[2]] # 明天/新北市/highest_temp
+```
+
+```{r}
+weather[[1]][[2]]$highest_temp # 今天/新北市/highest_temp
+weather[[2]][[2]]$highest_temp # 明天/新北市/highest_temp
+```
+
+#list補充
+
+```{r}
+library(jsonlite)
+fromJSON("https://www.dropbox.com/s/6252gbdnv9owljm/dance.json?dl=1", simplifyDataFrame = F) -> dance
+```
+
+```{r}
+fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=3", simplifyDataFrame = F) -> dance
+```
+
+```{r}
+# 前三筆演出的名稱
+dance[[1]]$title
+dance[[2]]$title
+dance[[3]]$title 
 ```
 
 ```{r}
@@ -167,24 +236,6 @@ str(get2)
 ```{r}
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
