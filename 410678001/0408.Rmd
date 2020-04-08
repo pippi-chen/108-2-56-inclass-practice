@@ -136,20 +136,37 @@ vectorExample[c(3,2,1)] # 產生重新排列效果
 str(listExample, max.level=1)
 
 listExample[c(1,2)]
+
+str(listExample[c(1, 2)], max.level = 1)
+str(listExample[c(2, 1)], max.level = 1)
+```
+
+任選數筆tainanSportsMap的運動地點。
+```{r}
+str(tainanSportsMap, max.level = 1)
+str(tainanSportsMap[c(1, 382, 1076)], max.level = 1)
 ```
 
 用名字選[c("name1","name2",...)]
 ```{r}
 # 顯示到第一層
-str(listExample, max.level=1)
+str(listExample, max.level = 1)
 
-listExample[c("學期")]
-listExample[c("student","學期")]
+listExample[c("學期")] #不建議用()只選一個物件,正確的寫法應該用[[]]
+listExample[c("student", "學期")]
+listExample[c("學期", "student")]
 ```
 
 臺北市夜市資料（來自臺北市食材登錄平台食材來源資訊）：
 ```{r}
 fromJSON("https://www.dropbox.com/s/qnm9bnz7vccrvcz/taipeiNightMarkets.json?dl=1", simplifyDataFrame = F) -> taipeiNightMarkets
+```
+
+```{r}
+str(taipeiNightMarkets[[1]])
+str(taipeiNightMarkets[["寧夏觀光夜市"]])
+str(taipeiNightMarkets$`寧夏觀光夜市`)
+str(taipeiNightMarkets[c(1, 2)])
 ```
 
 用「要/不要」邏輯向量選[c(T,T,F,...)]
