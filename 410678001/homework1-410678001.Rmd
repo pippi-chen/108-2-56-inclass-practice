@@ -61,8 +61,7 @@ taiwan_time1 <- as_datetime(taiwan_time, format="西元%Y年%m月%d日 %H點%M�
 taiwan_time_new <- ymd_hms(taiwan_time1, tz="Asia/Taipei")
 oslo_time_new <- dmy_hms(oslo_time, tz="Europe/Oslo")
 two_times <- c(taiwan_time_new, oslo_time_new)
-class(taiwan_time_new)
-class(oslo_time_new)
+
 class(two_times)
 
 two_times
@@ -74,10 +73,7 @@ two_times
 
 ```{r ans23}
 
-first_time <- with_tz(taiwan_time_new, tzone="America/Chicago")
-second_time <- with_tz(oslo_time_new, tzone="America/Chicago")
-
-two_times_chicago <- c(first_time, second_time)
+two_times_chicago <- with_tz(two_times, tzone = "America/Chicago")
 
 #註解:CST為中部標準時間，CDT為中部夏令時間
 
@@ -92,7 +88,7 @@ two_times_chicago
 ```
 List of 2
  $ approve: logi TRUE
- $ course :List of 4
+ $ course_info :List of 4
   ..$ coursename: chr "會計學"
   ..$ type      : chr "必"
   ..$ credits   : num 3
@@ -107,25 +103,23 @@ List of 2
 
 ```{r ans31}
 
-course <- c(
-  list(
-    approve = TRUE
-    ), 
-  list(
-    course = list(
-      coursename = "會計學", 
-      type = "必", 
-      credits = 3, 
-      time_place = list(
-        list(
-          weekday = "星期三", 
-          time_slots = c(7, 8, 9), 
-          classroom = "商2F05"
-        )
+course <- list(
+   approve = TRUE,
+   course_info = list(
+    coursename = "會計學", 
+    type = "必", 
+    credits = 3, 
+    time_place = list(
+      list(
+        weekday = "星期三", 
+        time_slots = c(7, 8, 9), 
+        classroom = "商2F05"
       )
     )
   )
 )
+
+str(course)
 
 course
 
@@ -141,18 +135,16 @@ course
 
 ```{r ans32}
 
-courseUpdate <- c(
-  list(
-    approve = TRUE
-    ), 
-  list(
-    course = list(
-      coursename = "會計學", 
-      type = "必", 
-      credits = 3, 
-      time_place = list(
-        list(
-          time_slots = c(c("每星期三78節"), c("每星期二5節")), 
+courseUpdate <- list(
+  approve = TRUE,
+  course_info = list(
+    coursename = "會計學", 
+    type = "必", 
+    credits = 3, 
+    time_place = list(
+      list(
+        time_slots = list(
+          c("每星期三78節", "每星期二5節"), 
           classroom = "商2F05"
         )
       )
@@ -196,26 +188,18 @@ accidents <- list(
   time = ymd("2014-01-01"),
   bureaus = list(
     `板橋分局` = list(
-      type = c("駕駛人過失-超速失控_含未減速", "駕駛人過失-酒後駕車", "駕駛人過失-未注意車前狀況",
-               "駕駛人過失-肇事逃逸", "駕駛人過失-未保持行車安全間距", "駕駛人過失-未依規定讓車",
-               "駕駛人過失-行駛疏忽", "駕駛人過失－違反號誌管制", "駕駛人過失-違反標誌標線", 
-               "駕駛人過失-逆向行駛", "駕駛人過失-轉彎不當", "駕駛人過失-搶越行人穿越道", 
-               "駕駛人過失-其他", "機件故障", "行人過失", "交通管制設施缺陷", "其他"), 
-      casualties = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+      type = "駕駛人過失-其他", 
+      casualties = 1
     ),
     `海山分局` = list(
-      type = c("駕駛人過失-超速失控_含未減速", "駕駛人過失-酒後駕車", "駕駛人過失-未注意車前狀況",
-               "駕駛人過失-肇事逃逸", "駕駛人過失-未保持行車安全間距", "駕駛人過失-未依規定讓車",
-               "駕駛人過失-行駛疏忽", "駕駛人過失－違反號誌管制", "駕駛人過失-違反標誌標線", 
-               "駕駛人過失-逆向行駛", "駕駛人過失-轉彎不當", "駕駛人過失-搶越行人穿越道", 
-               "駕駛人過失-其他", "機件故障", "行人過失", "交通管制設施缺陷", "其他"
+      type = c("駕駛人過失-搶越行人穿越道"
                ), 
-      casualties = c(
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
-      )
+      casualties = 1
     )
   )
 )
+
+str(accidents)
 
 accidents
 
@@ -263,9 +247,10 @@ chr_fiveReceipts
 ### 4.4
 若我們想要把fiveReceipts的螢幕顯示值用sum()函數加總，在只使用as.{class name}函數下，要怎麼做？把sum完的結果存在sum_fiveReceipts。
 ```{r ans44}
+sum_fiveReceipts <- sum(as.numeric(chr_fiveReceipts))
 
+sum_fiveReceipts
 
-# sum_fiveReceipts
 ```
 
 ## 5
