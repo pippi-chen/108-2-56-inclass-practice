@@ -95,10 +95,6 @@ fromJSON("https://www.dropbox.com/s/6252gbdnv9owljm/dance.json?dl=1", simplifyDa
 ```
 
 ```{r}
-fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=3", simplifyDataFrame = F) -> dance
-```
-
-```{r}
 # 前三筆演出的名稱
 dance[[1]]$title
 dance[[2]]$title
@@ -136,6 +132,18 @@ library(jsonlite)
 fromJSON("https://data.ntpc.gov.tw/od/data/api/67BB3C2B-E7D1-43A7-B872-61B2F082E11B?$format=json", simplifyDataFrame = F) ->
   busRoutes
 ```
+
+##新增/替換/刪除元素
+
+元素提取[.],[[.]],$.也可用來進行元素「值」的修改與新增, 使用方法為：
+
+obj[.] <- value
+obj[[.]] <- value
+obj$. <- value
+
+若.所指定的元素不存在，則為「新增」。
+
+若.所指定的元素存在，則為「修改」。
 
 ```{r}
 a <- c("1","b","TRUE")
