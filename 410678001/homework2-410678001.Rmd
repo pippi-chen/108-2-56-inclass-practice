@@ -86,7 +86,10 @@ course_update
 系辦決定在修課資料加上授課教師的名字，請在course_update的course資料中新增teacher欄位，授課教師是紀學檜老師，把改完的結果存到course_update2。
 ```{r ans23}
 
-# course_update2
+course_update$course[["teacher"]] <- "紀學檜老師"
+course_update2 <- course_update
+
+course_update2
 
 ```
 
@@ -123,27 +126,25 @@ List of 9
 ```{r ans31}
 
 Pikachu <- list(
-  dex = 
-  speciesName =
-  speciesId = 
+  dex = Gamemaster$pokemon[[27]]$dex, 
+  speciesName = Gamemaster$pokemon[[27]]$speciesName, 
+  speciesId = Gamemaster$pokemon[[27]]$speciesId, 
   baseStates = list(
-    atk = 
-    def = 
-    hp = 
+    atk = Gamemaster$pokemon[[27]]$baseStats$atk, 
+    def = Gamemaster$pokemon[[27]]$baseStats$def, 
+    hp = Gamemaster$pokemon[[27]]$baseStats$hp
   ), 
-  types = 
-  fastMoves = 
-  chargeMoves = 
-  legacyMoves = 
+  types = Gamemaster$pokemon[[27]]$types, 
+  fastMoves = Gamemaster$pokemon[[27]]$fastMoves, 
+  chargeMoves = Gamemaster$pokemon[[27]]$chargedMoves, 
+  legacyMoves = Gamemaster$pokemon[[27]]$legacyMoves, 
   defaultIVs = list(
-    cp1500 = 
-    cp2500 = 
+    cp1500 = Gamemaster$pokemon[[27]]$defaultIVs$cp1500, 
+    cp2500 = Gamemaster$pokemon[[27]]$defaultIVs$cp2500
   )
 )
 
-
-
-# Pikachu
+Pikachu
 ```
 
 ### 3.2 特定物件取出&class調整
