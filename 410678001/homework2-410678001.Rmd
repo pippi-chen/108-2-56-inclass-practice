@@ -157,7 +157,8 @@ Pikachu
 selected_stats <- c(Pikachu$baseStates$atk, Pikachu$baseStates$def, Pikachu$baseStates$hp)
 Pikachu_stats <- as.numeric(selected_stats)
 
-# Pikachu_stats
+Pikachu_stats
+
 ```
 
 ### 3.3 特定物件改寫&特定物件取出
@@ -165,7 +166,30 @@ Pikachu_stats <- as.numeric(selected_stats)
 最後跟3.1一樣，將胖丁的相關資料並存在叫做Jigglypuff的list物件。
 
 ```{r ans33}
-# Jigglypuff
+
+Gamemaster$pokemon[[46]]$speciesName <- "Jigglypuff"
+
+Jigglypuff <- list(
+  dex = Gamemaster$pokemon[[46]]$dex, 
+  speciesName = Gamemaster$pokemon[[46]]$speciesName, 
+  speciesId = Gamemaster$pokemon[[46]]$speciesId, 
+  baseStates = list(
+    atk = Gamemaster$pokemon[[46]]$baseStats$atk, 
+    def = Gamemaster$pokemon[[46]]$baseStats$def, 
+    hp = Gamemaster$pokemon[[46]]$baseStats$hp
+  ), 
+  types = Gamemaster$pokemon[[46]]$types, 
+  fastMoves = Gamemaster$pokemon[[46]]$fastMoves, 
+  chargeMoves = Gamemaster$pokemon[[46]]$chargedMoves, 
+  legacyMoves = Gamemaster$pokemon[[46]]$legacyMoves, 
+  defaultIVs = list(
+    cp1500 = Gamemaster$pokemon[[46]]$defaultIVs$cp1500, 
+    cp2500 = Gamemaster$pokemon[[46]]$defaultIVs$cp2500
+  )
+)
+
+Jigglypuff
+
 ```
 
 ### 3.4 魔王題——考驗自己有沒有成為程式設計大師/洛托姆的時候到了
@@ -184,7 +208,28 @@ Pikachu_stats <- as.numeric(selected_stats)
 提示:
 注意Mimikyu的各種資料格式都應該要跟Pikachu、Jigglypuff他們一樣喔。
 ```{r ans34}
-# Gamemaster
+
+Gamemaster$pokemon[[731]] <- list(
+  dex = 778, 
+  speciesName = "Mimikyu", 
+  speciesId = "Mimikyu", 
+  baseStates = list(
+    atk = Gamemaster$pokemon[[27]]$baseStats$atk, 
+    def = Gamemaster$pokemon[[27]]$baseStats$def, 
+    hp = Gamemaster$pokemon[[27]]$baseStats$hp
+  ), 
+  types = c("ghost", "fairy"), 
+  fastMoves = Gamemaster$pokemon[[46]]$fastMoves, 
+  chargeMoves = Gamemaster$pokemon[[46]]$chargedMoves, 
+  legacyMoves = Gamemaster$pokemon[[46]]$legacyMoves, 
+  defaultIVs = list(
+    cp1500 = Gamemaster$pokemon[[46]]$defaultIVs$cp1500, 
+    cp2500 = Gamemaster$pokemon[[46]]$defaultIVs$cp2500
+  )
+)
+
+Gamemaster
+
 ```
 
 # 恭喜你寫完了!最後記得回去檢查注意事項有沒有都做到，避免被白扣分喔~
