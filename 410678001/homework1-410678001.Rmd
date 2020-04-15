@@ -267,6 +267,7 @@ source("https://www.dropbox.com/s/xtge2ghfb7dhple/108-2-hw1-4.R?dl=1")
   * 找出有錯誤的行，直接把它更正，更正時不要隨意斷句徒增新行。
 
 ```{r ans5c, eval=F}
+library(lubridate)  #因為上方的指令造成之前引入的套件都被移除，所以這裡需要重新library一次
 yy <- 2020
 mm <- "Mar."  #鍵號右邊要用「成對」的雙引號"或單引號'
 dd <- 15
@@ -274,7 +275,7 @@ event_list <- list(
   time=ymd(paste0(yy,",",mm,dd)),
   list(
     name="小明",
-    `是否完成`=TRUE,  #TRUE需全部大寫
+    `是否完成`=TRUE,  #TRUE需全部大寫或單寫一個大T
     `完成所花時間(秒)`=350,  #鍵號左邊需要加上``
     tools=c(
       "anchor","axe")
