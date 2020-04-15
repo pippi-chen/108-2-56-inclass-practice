@@ -145,6 +145,7 @@ Pikachu <- list(
 )
 
 Pikachu
+
 ```
 
 ### 3.2 特定物件取出&class調整
