@@ -12,23 +12,31 @@ str(listExample)
 ```
 
 ```{r}
+get1 <- listExample[["學期"]] #拿出來
+get1 <- listExample$`學期` #拿出來
 
+get2 <- listExample["學期"] #只留下
 ```
 
 ```{r}
-
+get1$`108-1` -> get1_layer1
+get1_layer1[[1]] -> get1_layer2
+get1_layer2$teacher
 ```
 
 ```{r}
-
+get1$`108-1`[[1]]$teacher
 ```
 
 ```{r}
-
+get2_layer1 <- get2[[1]]
+get2_layer2 <- get2_layer1[["108-1"]]
+get2_layer3 <- get2_layer2[[1]]
+get2_layer3$teacher
 ```
 
 ```{r}
-
+get2[[1]][["108-1"]][[1]]$teacher
 ```
 
 ```{r}
