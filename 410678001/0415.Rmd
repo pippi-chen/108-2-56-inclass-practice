@@ -82,6 +82,8 @@ weather[[1]][[2]][[2]] # 今天/新北市/highest_temp
 weather[[2]][[2]][[2]] # 明天/新北市/highest_temp
 ```
 
+$只能用在list的名稱
+此處是放在c()裡面，所以行不通
 ```{r}
 weather[[1]][[2]]$highest_temp # 今天/新北市/highest_temp
 weather[[2]][[2]]$highest_temp # 明天/新北市/highest_temp
@@ -127,24 +129,59 @@ length(dance[[34]]$showInfo)
 map(dance,~length(.x$showInfo)) -> dance_showInfoLength
 ```
 
+新北市公車路線清單
 ```{r}
-
+fromJSON("https://data.ntpc.gov.tw/od/data/api/67BB3C2B-E7D1-43A7-B872-61B2F082E11B?$format=json", simplifyDataFrame = F) ->
+  busRoutes
 ```
 
 ```{r}
-
-
-```
-```{r}
-
-```
-
-```{r}
-
+a <- c("1","b","TRUE")
+a
+a[[2]] <- "c" # 元素存在: 替換
+a[[4]] <- "7" # 元素不存在： 增加
+a[c(5,6)] <- c("J", "K")
+a
 ```
 
 ```{r}
+library(lubridate)
+list1 <- 
+  list(
+    list(
+      name="Jack",
+      birthday=ymd("1998-03-21"),
+      status=c(height=177, weight=80)
+    )
+  )
 
+str(list1)
+```
+
+```{r}
+# 更改日期
+list1[[1]]$birthday <- ymd("1997-03-21")
+
+# 新增資料
+list1[[2]] <- list(
+  name="Mary",
+  birthday=ymd("1998-08-24")
+)
+
+str(list1)
+```
+
+```{r}
+# 更改日期
+list1[[1]]$birthday <- ymd("1997-03-21")
+
+# 新增資料
+list1[[2]] <- list(
+  name="Mary",
+  birthday=ymd("1998-08-24")
+)
+
+str(list1)
 ```
 
 ```{r}
