@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 str(listExample)
 ```
 
+#[[]]及[]的差別
 ```{r}
 get1 <- listExample[["學期"]] #拿出來
 get1 <- listExample$`學期` #拿出來
@@ -18,7 +19,9 @@ get1 <- listExample$`學期` #拿出來
 get2 <- listExample["學期"] #只留下
 ```
 
+#從get1取出
 ```{r}
+get1 <- listExample[["學期"]]
 get1$`108-1` -> get1_layer1
 get1_layer1[[1]] -> get1_layer2
 get1_layer2$teacher
@@ -28,7 +31,9 @@ get1_layer2$teacher
 get1$`108-1`[[1]]$teacher
 ```
 
+#從get2取出
 ```{r}
+get2 <- listExample["學期"]
 get2_layer1 <- get2[[1]]
 get2_layer2 <- get2_layer1[["108-1"]]
 get2_layer3 <- get2_layer2[[1]]
@@ -40,9 +45,96 @@ get2[[1]][["108-1"]][[1]]$teacher
 ```
 
 ```{r}
+listExample["學期"][[1]][["108-1"]][[1]]$teacher
+listExample["學期"][["學期"]][["108-1"]][[1]]$teacher
+```
+
+list多了一個$的取法
+atomic vector不能用$取
+```{r}
+vector1 <- c(a = 1, b = 3, c = 4)
+vector1[["a"]]
+vector1[c("a", "c")]
+vector1$a #error
+
+vector2 <- list(a = 1, b = 3, c = 4)
+vector2[["a"]]
+vector2[c("a", "c")]
+vector2$a
+```
+
+今明兩日台北市、新北市氣溫：
+```{r}
+today <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+tomorrow <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+
+weather <- list(today,tomorrow)
+
+print(weather)
+```
+
+```{r}
+weather[[1]][[2]][[2]] # 今天/新北市/highest_temp
+weather[[2]][[2]][[2]] # 明天/新北市/highest_temp
+```
+
+```{r}
+weather[[1]][[2]]$highest_temp # 今天/新北市/highest_temp
+weather[[2]][[2]]$highest_temp # 明天/新北市/highest_temp
+```
+
+```{r}
+library(jsonlite)
+fromJSON("https://www.dropbox.com/s/6252gbdnv9owljm/dance.json?dl=1", simplifyDataFrame = F) -> dance
+```
+
+```{r}
+fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=3", simplifyDataFrame = F) -> dance
+```
+
+```{r}
+# 前三筆演出的名稱
+dance[[1]]$title
+dance[[2]]$title
+dance[[3]]$title 
+```
+
+```{r}
+library(purrr)
+map(dance,~.x$title) -> dance_title
+```
+
+```{r}
+dance[[1]]$showInfo
+length(dance[[1]]$showInfo)
+
+dance[[2]]$showInfo
+length(dance[[1]]$showInfo)
+```
+
+```{r}
+length(dance[[1]]$showInfo)
+length(dance[[2]]$showInfo)
+# :
+length(dance[[34]]$showInfo)
+```
+
+```{r}
+map(dance,~length(.x$showInfo)) -> dance_showInfoLength
+```
+
+```{r}
 
 ```
 
+```{r}
+
+
+```
 ```{r}
 
 ```
@@ -66,23 +158,6 @@ get2[[1]][["108-1"]][[1]]$teacher
 ```{r}
 
 ```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-
-
-
-
 
 
 
