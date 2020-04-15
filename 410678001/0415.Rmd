@@ -301,4 +301,23 @@ library(jsonlite)
 fromJSON("https://data.ntpc.gov.tw/od/data/api/54DDDC93-589C-4858-9C95-18B2046CC1FC?$format=json", simplifyDataFrame = F) -> newTaipeiYouBike
 ```
 
+```{r}
+jsonlite::fromJSON("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits", simplifyDataFrame = F) -> githubCommit
+```
+
+
+```{r}
+githubCommit[[3]][["commit"]][["committer"]][-c(2)] -> 
+  githubCommit[[3]][["commit"]][["committer"]]
+githubCommit[[3]][["commit"]][["committer"]]
+```
+
+```{r}
+githubCommit[[2]][["commit"]][["committer"]][c(2)] <- NULL
+githubCommit[[2]][["commit"]][["committer"]]
+```
+
+```{r}
+githubCommit[[1]][["commit"]][["committer"]]
+```
 
