@@ -1,0 +1,176 @@
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1
+A valid variable name consists of:
+letters, numbers and the dot (.) or underline (_) characters.
+
+A variable name starts with:
+a letter; or the dot not followed by a number.
+
+*Character/String vector
+在定義object value時，必需要用「成對」的雙引號"或單引號'，把每個字串括起來。
+
+鍵號的左邊一定不能出現單引號跟雙引號，只能現在右邊，若寫在左邊就算錯
+鍵號的左邊使用反頓點`
+
+```{r}
+my_108_total_credits <- 15
+## _108_total_credits <- 15 #wrong
+## 108_total_credits <- 15 #wrong
+## _my_108_total_credits <- 15 #wrong
+my.108.total_credits <- 15
+## .108.total_credits <- 15 # 隱藏變數 #wrong
+.my.108.total_credits <- 15
+我的108學年總學分數 <- 15 #wrong 有些電腦不行
+`我的108學年總學分數` <- 15 #correct 特殊名稱處理，`不是名稱的一部份 
+`.108.total_credits` <- 15
+```
+
+
+#2
+
+他說:"今天多了一個確診。"
+```{r}
+HeSaid <- "他說:"今天多了一個確診。"" #wrong
+```
+
+以下兩種為讓R區隔出雙引號代表不同的意義
+```{r}
+HeSaid <- "他說:\"今天多了一個確診。\""
+```
+
+```{r}
+HeSaid1 <- '他說:"今天多了一個確診。"'
+```
+
+
+#3
+
+一旦看到T開頭Z結尾,代表他已經是UTC了,所以不用再接tz
+eg. 
+```{r}
+ymd_hms("2020-03-04T06:56:29Z", 
+        tz = "Asia/Taipei") 
+ymd_hms("2020-03-04T06:56:29Z", 
+        tz = "Europe/Lisbon")
+```
+
+若時間字串來自UTC，那可以不設定tz參數
+```{r}
+ymd_hms("2020-03-04T06:56:29Z") 
+ymd_hms("2020-03-04T06:56:29Z")
+```
+
+
+#4
+
+小心以下兩函數的input中一個是tz，一個是tzone
+```{r}
+ymd_hms(pgTime, tz="Asia/Taipei")
+with_tz(pgTime, tzone="Asia/Taipei")
+```
+
+
+#5
+
+時間的加減
+```{r}
+Taipei <- ymd_hms("2020-03-11 12:55:30", tz = "Asia/Taipei")
+Paris <- ymd_hms("2020-02-13 15:33:10", tz = "Europe/Paris")
+time <- Taipei - Paris
+time
+```
+
+
+#6
+
+c() 括號中需為相同的type
+list() 括號中可以有不同的type
+
+
+#7
+
+特殊命名依然要用反頓點呼叫
+```{r}
+listExample$student
+listExample$`學期` 
+```
+
+
+#8
+
+選位置的語法
+```{r}
+listExample[["student"]]
+listExample[[student]] #error
+listExample$student
+
+listExample[["學期"]] # 小心不是反頓點喔。
+listExample$`學期`
+```
+
+
+#9
+
+使用[.] <-
+
+由於[.]會保留母層結構，所以<-右側要使用和母層相同的型態設定：
+
+母層若為list，則需用list(...)方式增加。
+
+母層若為atomic vector，則用c(...)方式增加。
+
+如果前面是[]，箭頭右邊要加上他母層的結構
+
+改變「一個」時，使用[[ ]]比較不會錯
+
+```{r}
+list1[[1]][["age"]] <- 21
+list1[[2]]["age"] <- list(21) 
+```
+
+
+#10
+
+刪除可以使用[- c(數字位置)]
+
+只能「一個」中括號（[[.]]不能接受負數值）
+
+只能用負數值，不能用元素名稱。
+
+```{r}
+print(a)
+a[-c(1,3)]
+a[c(-2)]
+#以上都沒有儲存到
+
+print(a)
+a[-c(1,3)] -> a # 要回存才算真的刪除
+a
+```
+
+
+#11
+
+檢查刪減資料過後回存的位置
+
+```{r}
+list1[[1]][-3] -> list1[[1]] # 小心回存的位置
+#回存的位置是改變的那一層，不能存到整個list1
+
+list1[[2]][-c(3,5)] -> list1[[2]]
+str(list1)
+```
+
+
+
+
+
+
+
+

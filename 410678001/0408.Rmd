@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 vectorExample <- c("小明","小英","大雄")
 
 # 有多少位置可選：
-length(vectorExample)
+length(vectorExample) #3
 ```
 
 ```{r}
@@ -46,12 +46,12 @@ listExample <-
     )
   )
 # 有多少位置可選：
-length(listExample)
+length(listExample) #2
 ```
 
 ```{r}
-listExample[[1]]
-listExample[[2]]
+listExample[[1]] #student
+listExample[[2]] #學期
 ```
 
 #臺南市運動地圖:
@@ -70,7 +70,7 @@ tainanSportsMap[[1076]]
 用名字選$.
 ```{r}
 # 有多少名字可選：
-names(listExample)
+names(listExample) #student, 學期
 ```
 
 ```{r}
@@ -162,6 +162,8 @@ listExample[c("學期", "student")]
 fromJSON("https://www.dropbox.com/s/qnm9bnz7vccrvcz/taipeiNightMarkets.json?dl=1", simplifyDataFrame = F) -> taipeiNightMarkets
 ```
 
+#practice
+
 ```{r}
 str(taipeiNightMarkets[[1]])
 str(taipeiNightMarkets[["寧夏觀光夜市"]])
@@ -205,14 +207,6 @@ str(taipeiNightMarkets[selectedMarkets], max.level = 1)
 str(listExample, max.level = 3)
 ```
 
-```
-listExample: length=2, list class
-  |
-  |--student: length=1, character class
-  |
-  |--學期: length=3, list class
-```
-
 以下兩個表面都是選取“學期”:
 ```{r}
 get1 <- listExample[["學期"]]
@@ -242,7 +236,6 @@ str(get2, max.level = 2)
 numVector <- c(2,3,6,-1,4,2,6)
 select1 <- numVector[c(1,4)]; select1
 select2 <- select1[[1]]; select2
-
 # 相當於
 numVector[c(1,4)][[1]]
 ```

@@ -136,18 +136,19 @@ course
 ```{r ans32}
 
 courseUpdate <- list(
-  approve = TRUE,
-  course_info = list(
-    coursename = "會計學", 
-    type = "必", 
-    credits = 3, 
-    time_place = list(
-      list(
-        time_slots = list(
-          c("每星期三78節", "每星期二5節"), 
-          classroom = "商2F05"
-        )
-      )
+  coursename="會計學",
+  type="必",
+  credits=3,
+  time_place = list(
+    list(
+    weekday="星期三",
+    time_slots=c(7,8),
+    classroom="商2F05"
+    ),
+    list(
+    weekday="星期二",
+    time_slots=c(5),
+    classroom="商2F05"
     )
   )
 )
@@ -247,7 +248,11 @@ chr_fiveReceipts
 ### 4.4
 若我們想要把fiveReceipts的螢幕顯示值用sum()函數加總，在只使用as.{class name}函數下，要怎麼做？把sum完的結果存在sum_fiveReceipts。
 ```{r ans44}
-sum_fiveReceipts <- sum(as.numeric(chr_fiveReceipts))
+sum_fiveReceipts <- sum(
+  as.integer(
+    as.character(fiveReceipts)
+  )
+)
 
 sum_fiveReceipts
 

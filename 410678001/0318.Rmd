@@ -45,7 +45,7 @@ my_108_total_credits <- 15
 my.108.total_credits <- 15
 ## .108.total_credits <- 15 # 隱藏變數 #wrong
 .my.108.total_credits <- 15
-我的108學年總學分數 <- 15
+我的108學年總學分數 <- 15 #wrong 有些電腦不行
 `我的108學年總學分數` <- 15 # 特殊名稱處理，`不是名稱的一部份
 `.108.total_credits` <- 15
 ```
