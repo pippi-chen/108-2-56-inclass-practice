@@ -436,6 +436,8 @@ stringr::str_detect(fruit, "^a")
 
 #找的字必須由a字元結尾的元素
 stringr::str_detect(fruit, "a$")
+stringr::str_detect(fruit, "a$", negate = T)
+
 stringr::str_detect(fruit, "b")
 stringr::str_detect(fruit, "[aeiou]")
 
