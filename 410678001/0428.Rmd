@@ -1,0 +1,323 @@
+---
+title: "0428"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##on numeric class
+
+```{r}
+a <- c(2, 3, 5)
+b <- c(4,-1, 3)
+```
+
+#elementwise operation
+```{r}
+a+b
+a-b
+a*b
+a/b
+```
+
+餘數：%%
+次方：** 或 ^
+```{r}
+a %% b
+#相當於
+c(2%%4, 3%%(-1), 5%%3)
+
+a ** b
+```
+
+奇、偶數判斷
+```{r}
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+print(sequenceNums)
+
+sequenceNums %% 2 # 餘數為1則是奇數，0則是偶數
+```
+
+```{r}
+# a+b 即等於
+c(2+4, 3+(-1), 5+3)
+# a**b 即等於
+c(2**4, 3**(-1), 5**3)
+```
+
+當向量間不等長度時，R則對短的向量進行Recycle的動作（即Python的Broadcast）:
+將其中較短的向量反複堆疊到可以長得跟最長的向量一樣長度。
+
+以下4個得到的結果都一樣
+```{r}
+5*c(1,3,4)+7
+# 其實是
+c(5)*c(1,3,4)+c(7)
+
+## 對向量5，向量7進行recycle:
+c(5,5,5)*c(1,3,4)+c(7,7,7)
+## Recycle等長後才進行elementwise operation:
+c(5*1+7, 5*3+7, 5*4+7)
+```
+當運算的兩物件內容長度不同時，則將其中較短的一個反複堆疊到可以長得跟另一個一樣高時才來運算，稱為recycling。
+
+```{r}
+# 狀況一: 堆疊一定倍數剛好一樣長
+c(2,3)/c(-2,-13,10,22)
+c(2,3,2,3)/c(-2,-13,10,22)
+```
+
+```{r}
+# 狀況二: 倍數堆疊一定會超過，只好截斷
+c(2,3)/c(-2,-13,10)
+c(2,3,2)/c(-2,-13,10)
+```
+
+Recycling不只用在數值class, 只要向量間的處理要等長度才合理時，recycling通常也會用在其他的class。
+```{r}
+paste0(
+  c("我叫"), c("小明","小美")
+)
+```
+
+```{r}
+paste0(
+  c("我叫","我叫"), c("小明","小美")
+)
+```
+
+```{r}
+paste0(
+  c("他叫","我叫"), c("小明","小美","大雄")
+)
+```
+
+##relational operators
+
+```{r}
+example <- list(
+  name=c("小明","小花","小新","美美"),
+  height=c(175,166,170,160),
+  weight=c(77,NA,60,43),
+  birthday=lubridate::ymd(c("1998-03-11","1999-12-22","1995-08-22","2001-10-10")),
+  hobby=c("美食 旅遊","旅遊 時尚","3C 美食","音樂 旅遊"),
+  residence=c("Taipei","New Taipei","Taichung","Kaohsiung"),
+  allowance=factor(c("0-1000","1001-2000","2000+","1001-2000")),
+  bloodType=c("A","B","B","O")
+)
+```
+
+#比較
+'>','<','<=','>=': 分別為大於、小於、小於等於、大於等於
+使用於:數字/時間/可排序類別資料比較
+
+數字比較:
+example裡誰的身高大於等於170
+```{r}
+str(example[c("name","height")])
+
+pick_above170 <- example$height >= 170
+example$name[pick_above170]
+```
+
+不同屆入學學生在2年級的學業表現
+```{r}
+source("https://www.dropbox.com/s/qsrw069n94k61lj/transcript100to103_list.R?dl=1")
+```
+
+```{r}
+# 各學屆2年級人數
+table(transcript100to103$`學屆`)
+# 各學屆2年級成績大於85人數
+pick_above85 <- transcript100to103$`成績`>85
+table(transcript100to103$`學屆`[pick_above85])
+```
+
+時間比較:
+要先看class是否正確
+class() -> Date
+typeof() -> double
+比較的雙方一定要是一樣的class
+
+example裡誰1998年(含)以後出生
+```{r}
+print(example[c("name","birthday")])
+
+#錯誤()
+pick_after98 <- example$birthday >= "1998-01-01"
+
+#正確
+pick_after98 <- example$birthday >= lubridate::ymd("1998-01-01")
+example$name[pick_after98]
+```
+
+美元匯率
+```{r}
+source("https://www.dropbox.com/s/16h6ggua6qtydci/exchangeRate.R?dl=1")
+```
+
+```{r}
+exchangeRate_after98 <-
+  list(
+    `期間`=exchangeRate$`期間`[pick_after98_01],
+    `幣別`=exchangeRate$`幣別`[pick_after98_01],
+    `匯率`=exchangeRate$`匯率`[pick_after98_01]
+    
+  )
+```
+
+選1998年1月(含)以後的匯率
+```{r}
+# 只要1998年1月（含）以後的
+library(lubridate)
+pick_after98_01 <-
+  exchangeRate$`期間` >= ymd("1998-01-01")
+```
+
+選出1998年1月(含)以後的匯率資料
+```{r}
+exchangeRate_after98 <-
+  list(
+    `期間`=exchangeRate$`期間`[pick_after98_01],
+    `幣別`=exchangeRate$`幣別`[pick_after98_01],
+    `匯率`=exchangeRate$`匯率`[pick_after98_01]
+  )
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
