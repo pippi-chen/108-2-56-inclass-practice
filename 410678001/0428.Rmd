@@ -213,6 +213,7 @@ pick_allowanceOver1000 <- example$allowance >= "1001-2000"
 example$name[pick_allowanceOver1000]
 ```
 
+#practice
 刑事案件被害者人數
 ```{r}
 jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_female.json?dl=1", simplifyDataFrame = F) -> list_victimAges_female
@@ -245,36 +246,70 @@ pick_above30 <-
 
 選出「30_39歲以上受害者」的數目
 ```{r}
-sum(list_victimAges_female$`數目`, na.rm=T)
+sum(list_victimAges_female$`數目`, na.rm=T) #na.rm -> remove NA(先移除NA再進行相加)
 sum(list_victimAges_female$`數目`[pick_above30], na.rm = T)
 ```
 
-```{r}
+#相等，屬於
+==: 等於
+!=: 不等於
+==與!=可使用於字串
 
+example裡誰血型B型
+```{r}
+print(example[c("name","bloodType")])
+
+pick_bloodB <- example$bloodType == "B"
+example$name[pick_bloodB]
+```
+
+創造可留下偶數的「要/不要」向量pick_evens。
+```{r}
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+pick_evens <- (sequenceNums%%2) == 0
+sequenceNums[pick_evens]
+```
+
+還有一個常用的關聯運算：
+%in%: 屬於
+
+左邊元素「一一」檢視是不是屬於右邊元素集合。
+```{r}
+x <- c(1,5,8)
+y <- c(5,8)
+
+# x裡的元素值是不是屬於y集合
+x %in% y
+```
+
+example裡誰來自大台北
+```{r}
+print(example[c("name","residence")])
+
+set_TaipeiMetro <- c("Taipei","New Taipei")
+pick_fromTaipeiMetro <- example$residence %in% set_TaipeiMetro
+example$name[pick_fromTaipeiMetro]
+```
+
+#practice
+創造 可選出來自法商學院的「要/不要」向量，pick_lawBusiness。
+```{r}
+str(transcript100to103)
+```
+
+#negation(否定用法)
+在「要/不要」向量前加上!會成為否定句的「要/不要」向量，元素裡的TRUE會轉成FALSE, FALSE則轉成TRUE。
+```{r}
+pick_not_fromTaipeiMetro <- ! pick_fromTaipeiMetro
+# 或
+pick_not_fromTaipeiMetro <- !(example$residence %in% set_TaipeiMetro) # (..) 裡面會先運算完才做外面!的處理
 ```
 
 ```{r}
+print(example[c("name","residence")])
 
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+example$name[pick_fromTaipeiMetro]
+example$name[pick_not_fromTaipeiMetro]
 ```
 
 ```{r}
