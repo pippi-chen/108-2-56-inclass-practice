@@ -295,6 +295,11 @@ example$name[pick_fromTaipeiMetro]
 創造 可選出來自法商學院的「要/不要」向量，pick_lawBusiness。
 ```{r}
 str(transcript100to103)
+levels(factor(transcript100to103$`學院`))
+unique(transcript100to103$`學院`)
+
+set_lawbusiness <- c("法學院", "商學院")
+pick_lawbusiness <- transcript100to103$`學院` %in%set_lawbusiness
 ```
 
 #negation(否定用法)
@@ -312,24 +317,49 @@ example$name[pick_fromTaipeiMetro]
 example$name[pick_not_fromTaipeiMetro]
 ```
 
-```{r}
+#資料狀態
+is.na: 有缺失
 
+is.{class/type name}: is.integer, is.character, is.factor … etc
+
+有時資料有缺失，在R裡會記成NA(即not available)如下例：
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
 ```
 
+前述的關係判斷遇到NA時，結果都會是NA——即無法判斷。
+要知道向量內各元素值是否NA，可使用is.na():
 ```{r}
-
+x2
+is.na(x2)
 ```
 
+example裡誰沒有體重資料
 ```{r}
+print(example[c("name","weight")])
 
+pick_na <- is.na(example$weight)
+example$name[pick_na]
 ```
 
+R還有一種特別的缺失資料NaN (即not a number) -> 只會在數值出現:
+出現在沒有定義的數學運算上，如：
 ```{r}
-
+0/0
+log(-10)
 ```
 
+#practice
+創立 可選出缺失資料的「要/不要」向量pick_na, 並計算有多少筆缺失。
 ```{r}
-
+list_victimAges_female$`數目` <- as.integer(list_victimAges_female$`數目`)
+pick_na <- is.na(list_victimAges_female$`數目`)
+total_na <- sum(pick_na)
+print(total_na)
 ```
 
 ```{r}
