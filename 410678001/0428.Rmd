@@ -158,16 +158,6 @@ example$name[pick_after98]
 source("https://www.dropbox.com/s/16h6ggua6qtydci/exchangeRate.R?dl=1")
 ```
 
-```{r}
-exchangeRate_after98 <-
-  list(
-    `期間`=exchangeRate$`期間`[pick_after98_01],
-    `幣別`=exchangeRate$`幣別`[pick_after98_01],
-    `匯率`=exchangeRate$`匯率`[pick_after98_01]
-    
-  )
-```
-
 選1998年1月(含)以後的匯率
 ```{r}
 # 只要1998年1月（含）以後的
@@ -186,40 +176,77 @@ exchangeRate_after98 <-
   )
 ```
 
+「可」排序類別資料比較:
+example裡誰零用錢大於1000:
 ```{r}
+print(example[c("name","allowance")])
 
+#錯誤:類別資料比大小是沒有意義的(問題:他不是可排序的)
+pick_allowanceOver1000 <- example$allowance >= "1001-2000"
+example$name[pick_allowanceOver1000]
+```
+
+factor資料可進一步分成可排序，與不可排序的，如：
+* 可排序： 以年齡層區分的類別，以所得級距區分的類別等。
+* 不排序： 性別，學系等。
+
+factor的設定在不調整時內定為不可排序資料，如要改成可排序類別資料，以先前已處理好的example$allowance 為例：
+```{r}
+levels(example$allowance)
+#如果覺得以上levels的排序是對的，則使用下方的order
+example$allowance <- 
+  ordered(example$allowance)
+#--or--
+example$allowance <-
+  factor(
+    example$allowance,
+    levels=c("0-1000", "1001-2000", "2000+"),
+    ordered = T # 設定為可排序factor
+  )
+
+class(example$allowance)
+#多了一個order
 ```
 
 ```{r}
+pick_allowanceOver1000 <- example$allowance >= "1001-2000"
+example$name[pick_allowanceOver1000]
+```
 
+刑事案件被害者人數
+```{r}
+jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_female.json?dl=1", simplifyDataFrame = F) -> list_victimAges_female
+```
+
+請將list_victimAges_female各元素的class做合理設定。
+```{r}
+list_victimAges_female$`數目` <-
+  as.integer(list_victimAges_female$`數目`)
+list_victimAges_female$`年齡層` <- 
+  as.factor(list_victimAges_female$`年齡層`)
 ```
 
 ```{r}
-
+levels(list_victimAges_female$`年齡層`) -> levels_ages
+print(levels_ages)
 ```
 
+將levels順序改成: 不詳，總計，0_5歲，12_17歲，…，70歲以上。
 ```{r}
-
+levels_new <- c(levels_ages[c(12,13,1,8,2:7,9:11)])
+levels(list_victimAges_female$`年齡層`) <- levels_new
 ```
 
+可選出「30_39歲以上受害者」的「要/不要」向量：
 ```{r}
-
+pick_above30 <- 
+  list_victimAges_female$`年齡層` >= "30_39歲"
 ```
 
+選出「30_39歲以上受害者」的數目
 ```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+sum(list_victimAges_female$`數目`, na.rm=T)
+sum(list_victimAges_female$`數目`[pick_above30], na.rm = T)
 ```
 
 ```{r}
