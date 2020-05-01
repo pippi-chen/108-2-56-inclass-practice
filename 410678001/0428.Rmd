@@ -437,18 +437,20 @@ stringr::str_detect(fruit, "^a")
 #找的字必須由a字元結尾的元素
 stringr::str_detect(fruit, "a$")
 stringr::str_detect(fruit, "a$", negate = T)
+!stringr::str_detect(fruit, "a$")
 
 stringr::str_detect(fruit, "b")
 stringr::str_detect(fruit, "[aeiou]")
 
 # Also vectorised over pattern
-str_detect("aecfg", letters)
+stringr::str_detect("aecfg", letters)
 
 # Returns TRUE if the pattern do NOT match
-str_detect(fruit, "^p", negate = TRUE)
+stringr::str_detect(fruit, "^p", negate = TRUE)
 ```
 
 #practice
+找出問題中包含“肺炎”字眼的問題。
 ```{r}
 CDC_chatbox <- readr::read_csv("http://od.cdc.gov.tw/pr/CDC_chatbox.csv")
 
