@@ -38,33 +38,57 @@ fromJSON("https://data.ntpc.gov.tw/od/data/api/CB6C96C8-D514-42EA-8591-0F4447E79
 ### 1.1 違反法條種類
 針對law元素，列出裡面出現過的條款（不重覆陳列）存在violatedArticles (class character)：
 ```{r ans11}
-# violatedArticles
+print(badEmployers$law)
+pick_na <- is.na(badEmployers$law)
+none_na <- badEmployers$law[!pick_na]
+violatedArticles <- unique(none_na)
+
+violatedArticles
 ```
 
 ### 1.2 各項法條違反者數目
 使用table()函數呈現出每個條款的違法廠商數目，存在table_countsByArticle (class table), 正確答案在執行names(table_countsByArticle)時會出現前一題的所有條款。
 ```{r ans12}
-# table_countsByArticle
+table_countsByArticle <- table(badEmployers$law)
+names(table_countsByArticle)
+
+table_countsByArticle
 ```
 
 ### 1.3 違反數最多的法條
-自1.2題的table_countsByAricle找出最多廠商違反的條款名稱及數目，即透過「要/不要」向量選出違反數最高的項目；結果存在mostViolatedArticle（class table）。正確答案下，names(mostViolatedArticle)會呈現該條款，而as.integer(mostViolatedArticle)會呈現違法廠商數目。
+自1.2題的table_countsByAricle找出最多廠商違反的條款名稱及數目，即透過「要/不要」向量選出違反數最高的項目；結果存在mostViolatedArticle（class integer）。正確答案下，names(mostViolatedArticle)會呈現該條款，而as.integer(mostViolatedArticle)會呈現違法廠商數目。
 
 提示：table class物件為integer type，可對它取max()得到最大值。
 ```{r ans13}
-# mostViolatedArticle
+pick <- as.integer(table_countsByArticle)==max(table_countsByArticle)
+mostViolatedArticle <- table_countsByArticle[pick]
+names(mostViolatedArticle)
+as.integer(mostViolatedArticle)
+
+mostViolatedArticle
 ```
 
 ### 1.4 最常違反法條之內容
 找出最常違反條款的法條內容（可參見lawContent這個元素），並將此內容存在mostViolatedArticle_content (class character, length=1)
 ```{r ans14}
-# mostViolatedArticle_content
+count <- table(badEmployers$lawContent)
+pick <- as.integer(count)==max(count)
+mostViolatedArticle_content <- names(count[pick])
+class(mostViolatedArticle_content)
+
+mostViolatedArticle_content
 ```
 
 ### 1.5 處份日期最常落在幾月
 找出處份日期最常出現的月份並存在popularSentenceMonth（class character, length=1）：
 ```{r ans15}
-# popularSentenceMonth
+table(badEmployers$dt)
+month <- substr(badEmployers$dt, 6, 7)
+pick <- (as.integer(table(month)) == max(table(month)))
+popularSentenceMonth <- names(table(month)[pick])
+class(popularSentenceMonth)
+
+popularSentenceMonth
 ```
 
 ## 2 個人申請
@@ -89,13 +113,21 @@ source("https://www.dropbox.com/s/5oy56om4q0857tt/student10.R?dl=1",encoding = "
 小知識:
 factor是從1開始的整數，沒有0喔。
 ```{r ans21}
-# chinese
+Chinese_factor <- as.factor(table$`國文`)
+chinese <- levels(Chinese_factor)
+class(Chinese_factor)
+
+chinese
 ```
 
 ### 2.2 str_detect()
 請取出10位學生中志願為北大的學生名字並存到名為ntpu_namelist的答案物件(class為chr):
 ```{r ans22}
-# ntpu_namelist
+print(students10[c("姓名","志願")])
+pick_ntpu <- stringr::str_detect(students10$`志願`,"北大")
+ntpu_namelist <- students10$`姓名`[pick_ntpu]
+
+ntpu_namelist
 ```
 
 ### 2.3 vector計算&logical應用練習
@@ -110,7 +142,15 @@ factor是從1開始的整數，沒有0喔。
 志願沒有填北大經濟的人可以進一階篩選嗎?
 logical儲存的本質是甚麼?
 ```{r ans23}
-# ntpu_econtpu_eco
+one <- students10$`國文`[pick_ntpu]>=12
+sum <- students10$`英文`+students10$`數學`
+students10[[8]] <- sum
+two <- students10[[8]][pick_ntpu]>=26
+sum_final <- one+two
+final <- sum_final==2
+ntpu_econtpu_eco <- students10$`姓名`[pick_ntpu][final]
+
+ntpu_econtpu_eco
 ```
 
 ### 2.4 %in%
@@ -121,5 +161,14 @@ logical儲存的本質是甚麼?
 
 請將榜單文字儲存到名為congrats的答案物件(class為chr)。
 ```{r ans24}
-# congrats
+eco <- "北大經濟"
+pick_eco <- students10$`志願` %in% eco
+
+pass <- students10$`姓名`[pick_eco] %in% ntpu_econtpu_eco
+students10$`姓名`[pick_eco][pass]
+congrats <- paste0(
+  c("恭喜"), students10$`姓名`[pick_eco][pass], c("同學錄取國立臺北大學經濟系")
+)
+
+congrats
 ```
