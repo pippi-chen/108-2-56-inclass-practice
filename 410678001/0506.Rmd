@@ -264,6 +264,13 @@ print(pattern)
 str_view(phrase, pattern) 
 ```
 
+#前後鄰居描述Look around:
+target後面是B：target_regex(?=B_regex)： target_pattern後面是年
+
+target前面是A：(?<=A_regex)target_regex：target_pattern前面是民國
+
+target前有A後有B：(?<=A_regex)target_regex(?=B_regex)
+
 ```{r}
 twDate <-  c("民國108年12月5日","民國98年10月5日")
 
