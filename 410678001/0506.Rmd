@@ -124,20 +124,25 @@ str_view_all(heartSutra,"色") # 檢視
 #all -> 回傳一個list
 
 str_count(heartSutra,"色") # 計數
+
+str_view_all(heartSutra,"異色") # 檢視
 str_count(heartSutra,"異色") # 計數
 ```
 
+字「群」組合(..|..|..): strip上的出象會出現一組字時用，如“(AB|ab)”, 可以產生“AB”或“ab”兩種出象。
 ```{r}
 studentIds <- c("410873029","410773005","410772035","410562123")
 # 取出學號中的入學屆為107或108
 str_view_all(studentIds,"(107|108)")
 
-str_view_all(studentIds, "107|108") # 可不寫()
+str_view_all(studentIds, "107|108") # 可不寫() -> 不寫的情形:不會讓前後的程式發生誤解
 
 # 是否來自107或108學屆
 str_detect(studentIds, "107|108")
 ```
 
+字「元」組合[]: strip上的出象「均」是一個字「元」時用，如[af78]可以產生“a”,“f”,“7”,“8”四種字元出象。
+幾種常見的字元模版：[0-9](或[:digit:])，[a-z](或[:lower:])，[A-Z](或[:upper:]),[0-9a-zA-Z](或[:alnum:])
 ```{r}
 Ids <- c("A283743192","B829103720","A10920402","C291022384")
 
@@ -171,6 +176,9 @@ str_detect(
 )
 ```
 
+以否定法定義的字「元」組合[^ ]: “[^趙錢孫李]”不能有趙錢孫李任何一個
+
+範例
 ```{r}
 headline <- "資科系的謝陳官乃飛鳶書院三大名師，其中謝無雙的策略運算，陳大器的數理資科學，及官求敗的運算成本更是打通演算思維任督二脈的三大好課。書院目前有陳一、陳二、陳三四這三名學生。"
 ```
@@ -197,6 +205,113 @@ addresses <- c(
   '臺中市后里區公館里尾社路385號',
   '新竹市東區科學園路125號1樓'
   )
+
+strip1 <- "[0-9]"
+strip2 <- "[0-9]"
+strip3 <- "[0-9]"
+strip4 <- "號"
+result <- paste0(strip1, strip2, strip3, strip4)
+str_extract(addresses, result)
+```
+
+#複製次數Quantifiers:
+
+(..|..|...)或[...]只是一條reel strip, 前者是寬的（每個出象可以是多字元）後者是窄的（每個出象只是一個字元）。有時我們同樣的belt想連放很多條，可以在(..|..|...)或[...]後面加：
+
+{n}: 放n條belt，n是數字。
++: 放1條或以上（多少不限）。
+{n,m}: 放n到m條belt，n及m都是數字。
+
+```{r}
+addresses <- c(
+  '臺中市后里區公館里尾社路385號',
+  '新竹市東區科學園路125號1樓',
+  '新竹市北區竹光路99號',
+  '金門縣金城鎮賢庵里山前33號',
+  '臺中市南屯區工業區二十四路23號1樓')
+```
+
+```{r}
+myRegexSlotMachine <- "[0-9]+號"
+print(myRegexSlotMachine)
+str_view_all(addresses,myRegexSlotMachine)
+str_extract(addresses,myRegexSlotMachine)
+
+str_view_all(addresses,"[0-9]+") # 樓號也會選到
+```
+
+#頭尾定位 Anchors:
+在開頭：^target_regex
+在結尾：target_regex$
+
+```{r}
+phrase <- c("唧唧复唧唧")
+```
+
+```{r}
+# 目標是前面的唧唧
+target_regex <- "唧唧"
+pattern <- glue::glue("^{target_regex}")
+print(pattern)
+str_view(phrase, pattern) 
+```
+
+```{r}
+# 目標是後面的唧唧
+target_regex2 <- "唧唧"
+pattern <- glue::glue("{target_regex2}$")
+print(pattern)
+str_view(phrase, pattern) 
+```
+
+```{r}
+twDate <-  c("民國108年12月5日","民國98年10月5日")
+
+library(stringr)
+# 準備regex: 
+## 取出：「前有」民國，「後有」年的「數字」「們」
+## "(?<={A_regex}){target_regex}(?={B_regex})"
+
+target_regex <- "[0-9]+"
+A_regex <- "民國"
+B_regex <- "年"
+
+regex_pattern <- glue::glue(
+  "(?<={A_regex}){target_regex}(?={B_regex})"
+  )
+
+print(regex_pattern)
+
+## 如果同學已經很熟就可以直接寫
+regex_pattern <-
+  "(?<=民國)[0-9]+(?=年)"
+
+# 取出民國年，計算西元年
+year <- 
+  str_extract(
+    twDate,
+    regex_pattern)
+westernYear <- as.integer(year)+1911
+
+# 替換民國xx年的xx成西元年數字
+str_replace(
+  twDate,
+  regex_pattern,  # 要換掉的文字
+  as.character(westernYear) # 要替換的內容
+) -> twDate_reformat
+print(twDate_reformat)
+
+
+lubridate::ymd(twDate_reformat)
+```
+
+#practice
+之前我們使用str_extract函數粹取出以下地址的“xx號”包含“號”字，如果不要取到「號」字只取出數字，你會怎麼做？
+```{r}
+addresses <- c(
+  '臺中市后里區公館里尾社路385號',
+  '新竹市東區科學園路125號1樓'
+  )
 ```
 
 ```{r}
@@ -211,6 +326,22 @@ addresses <- c(
 
 ```
 
+```{r}
 
+```
 
+```{r}
 
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
