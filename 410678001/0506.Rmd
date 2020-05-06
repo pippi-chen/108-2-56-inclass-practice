@@ -124,6 +124,7 @@ str_view_all(heartSutra,"色") # 檢視
 #all -> 回傳一個list
 
 str_count(heartSutra,"色") # 計數
+str_count(heartSutra,"異色") # 計數
 ```
 
 ```{r}
