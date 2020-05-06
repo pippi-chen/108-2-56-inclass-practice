@@ -271,6 +271,7 @@ target前面是A：(?<=A_regex)target_regex：target_pattern前面是民國
 
 target前有A後有B：(?<=A_regex)target_regex(?=B_regex)
 
+民國年月日存成date class：
 ```{r}
 twDate <-  c("民國108年12月5日","民國98年10月5日")
 
@@ -313,42 +314,39 @@ lubridate::ymd(twDate_reformat)
 ```
 
 #practice
+康熙元年是西元1662年，請將“康熙23年5月6日”轉成date class。（假設月日已是西曆月日）
+```{r}
+date <- "康熙23年5月6日"
+regex_pattern <-
+  "(?<=康熙)[0-9]+(?=年)"
+
+year <- 
+  str_extract(
+    date,
+    regex_pattern)
+
+westernYear <- as.integer(year)+1661
+
+str_replace(
+  date,
+  regex_pattern, 
+  as.character(westernYear) 
+) -> date_reformat
+
+print(date_reformat)
+
+
+lubridate::ymd(date_reformat)
+```
+
+#practice
 之前我們使用str_extract函數粹取出以下地址的“xx號”包含“號”字，如果不要取到「號」字只取出數字，你會怎麼做？
 ```{r}
 addresses <- c(
   '臺中市后里區公館里尾社路385號',
   '新竹市東區科學園路125號1樓'
   )
+str_extract(addresses,"[0-9]+(?=號)")
 ```
 
-```{r}
 
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
