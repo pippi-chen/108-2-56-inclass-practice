@@ -50,6 +50,7 @@ violatedArticles
 使用table()函數呈現出每個條款的違法廠商數目，存在table_countsByArticle (class table), 正確答案在執行names(table_countsByArticle)時會出現前一題的所有條款。
 ```{r ans12}
 table_countsByArticle <- table(badEmployers$law)
+class(table_countsByArticle)
 names(table_countsByArticle)
 
 table_countsByArticle
@@ -60,10 +61,8 @@ table_countsByArticle
 
 提示：table class物件為integer type，可對它取max()得到最大值。
 ```{r ans13}
-pick <- as.integer(table_countsByArticle)==max(table_countsByArticle)
-mostViolatedArticle <- table_countsByArticle[pick]
-names(mostViolatedArticle)
-as.integer(mostViolatedArticle)
+pick <- as.integer(table_countsByArticle) == max(table_countsByArticle)
+mostViolatedArticle <- as.integer(table_countsByArticle[pick])
 
 mostViolatedArticle
 ```
@@ -72,7 +71,7 @@ mostViolatedArticle
 找出最常違反條款的法條內容（可參見lawContent這個元素），並將此內容存在mostViolatedArticle_content (class character, length=1)
 ```{r ans14}
 count <- table(badEmployers$lawContent)
-pick <- as.integer(count)==max(count)
+pick <- as.integer(count) == max(count)
 mostViolatedArticle_content <- names(count[pick])
 class(mostViolatedArticle_content)
 
@@ -113,9 +112,8 @@ source("https://www.dropbox.com/s/5oy56om4q0857tt/student10.R?dl=1",encoding = "
 小知識:
 factor是從1開始的整數，沒有0喔。
 ```{r ans21}
-Chinese_factor <- as.factor(table$`國文`)
-chinese <- levels(Chinese_factor)
-class(Chinese_factor)
+chinese <- as.factor(levels(chinese_factor))
+class(chinese)
 
 chinese
 ```
@@ -147,7 +145,7 @@ sum <- students10$`英文`+students10$`數學`
 students10[[8]] <- sum
 two <- students10[[8]][pick_ntpu]>=26
 sum_final <- one+two
-final <- sum_final==2
+final <- (sum_final == 2)
 ntpu_econtpu_eco <- students10$`姓名`[pick_ntpu][final]
 
 ntpu_econtpu_eco
@@ -169,6 +167,7 @@ students10$`姓名`[pick_eco][pass]
 congrats <- paste0(
   c("恭喜"), students10$`姓名`[pick_eco][pass], c("同學錄取國立臺北大學經濟系")
 )
+class(congrats)
 
 congrats
 ```
