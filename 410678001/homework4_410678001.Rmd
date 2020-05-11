@@ -36,7 +36,10 @@ str_extract_all(twoNames, "段(兄|兄弟)")
 ```
 請在小明的target regex後面加上「後面鄰居不能有弟」的regex描述並存在back_regex (class character) 裡. (hint: 查cheat sheet look around)
 ```{r ans1}
-# back_regex
+back_regex <- "(?!弟)"
+class(back_regex)
+
+back_regex
 ```
 若你的答案正確，執行以下程式會得到一個段兄，一個段兄弟。
 ```{r}
@@ -53,7 +56,13 @@ jsonlite::fromJSON("https://www.dropbox.com/s/kv0xa0spa6q5l7q/semiGodsSemiDevils
 ### 2.1
 取出回數為"P2"的內文存在context_picked (class character). 
 ```{r ans21}
-# context_picked
+str(semiGodsSemiDevils)
+
+pick_p2 <- (semiGodsSemiDevils$data[[1]]$section == "P2")
+context_picked <- semiGodsSemiDevils$data[[1]]$text[pick_p2]
+class(context_picked)
+
+context_picked
 ```
 
 ### 2.2
@@ -70,7 +79,14 @@ List of 1
 ```
 
 ```{r ans22}
-# context_picked_split
+strip1 = "\\s"
+strip2 = "\\s"
+pattern = paste0(strip1, strip2)
+context_picked_split <- str_split(context_picked, pattern)
+class(context_picked_split)
+str(context_picked_split)
+
+context_picked_split
 ```
 
 ### 2.3
@@ -79,13 +95,20 @@ List of 1
 可能有用的提示: 出現0或1次的複製次數是用?號接在文字的後面。
 
 ```{r ans23}
-# mention_duan
+pattern <- ("(段譽|段兄|段兄弟|段大哥|段相公|段君|姓段的小子)")
+mention_duan <- str_extract_all(context_picked_split[[1]], pattern)
+class(mention_duan)
+
+mention_duan
 ```
 
 ### 2.4
 使用`unlist()`函數將mention_duan轉成字串後用`table()`函數統計段譽各稱號被提到的次數，並將table結果存在table_duan (class table)。
 ```{r ans24}
-# table_duan
+chr_mention_duan <- unlist(mention_duan)
+table_duan <- table(chr_mention_duan)
+
+table_duan
 ```
 
 
