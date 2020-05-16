@@ -267,36 +267,102 @@ levels(covid19$`年齡層`) <- newLevels
 covid19$`年齡層`
 ```
 
-```{r}
+#levels擴充
 
+levels <-右邊值的部份包含原本的外，還有想新增的類別。
+```{r}
+factor2 <- 
+  factor(c("好","好","普通","普通", "好"))
+levels(factor2)
 ```
 
+加一筆新資料“差”（之前沒有這類）
 ```{r}
-
+factor2[[6]] <- "差"
+factor2 # 元素6變NA
 ```
 
+先擴大levels, 再加新資料
 ```{r}
+factor2 <- 
+  factor(c("好","好","普通","普通", "好"))
+levels(factor2)
 
+# 先擴大levels
+levels(factor2) <- c(levels(factor2), "差")
+levels(factor2)
+factor2[[6]] <- "差"
+factor2
+
+levels(factor2)[[4]] <- "尚可"
+factor2[[7]] <- "尚可"
+levels(factor2)
 ```
 
+factor無法用c(...)把兩個factor vector串接在一起：
 ```{r}
+# non factor
+char1 <- c("小明","小美")
+char2 <- c("大雄","技安")
+c(char1, char2)
 
+# factor
+factor1 <- factor(c("好", "壞", "壞"))
+factor2 <- factor(c("壞", "好", "好"))
+c(factor1, factor2)
 ```
 
+正確接法：
 ```{r}
-
+factor1[4:6] <- factor2
+factor1
+```
+或使用套件forcats裡的fct_c函數
+```{r}
+forcats::fct_c(factor1, factor2)
 ```
 
+#practice
+將covid19$性別的levels名稱男、女改Male、Female。
 ```{r}
-
+levels(covid19$`性別`) <- c("Male", "Female")
+levels(covid19$`性別`)
 ```
 
+#practice
+以下資料為新北市垃圾車路線
 ```{r}
-
+jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") ->
+  garbageRoutes
 ```
 
+在garbageRoutes新增route元素，其元素值為對應garbageRoutes$linename裡粹取出的“XXX路線”字眼，如原本“A11路線(一、四)下午”的linename, 它的route值為“A11路線” 。（garbageRoutes$route為factor class)
 ```{r}
-
+route <- stringr::str_extract(garbageRoutes$linename, ("[A-Z]路線|[A-Z][0-9]+路線"))
+garbageRoutes[["route"]] <- route
 ```
+
+請設定garbageRoutes$route的levels依其路線停靠總站數由小排到大陳列。
+```{r}
+newlevels <- names(sort(table(garbageRoutes$route)))
+levels(garbageRoutes$route) <- newlevels
+
+levels(garbageRoutes$route)
+```
+
+linename的“路線”字眼後面接的是營運時間，如“A11路線(一、四)下午”的linename, 它的營運時間為“(一、四)下午”。若沒寫時間的路線，它的營運時間為“全天”。請在garbageRoutes新增time元素，其元素值為對應linename所隱含的營運時間。（garbageRoutes$time為factor class, levels會有“(一、四)下午”, “下午”, “下午(1.4版)”, “晚上”, 及“全天”）
+```{r}
+garbageRoutes$time <- str_extract(garbageRoutes$linename,"(?<=線)[:graph:]+")
+garbageRoutes$time[is.na(garbageRoutes$time)] <- "全天"
+garbageRoutes$time <- factor(garbageRoutes$time) 
+```
+
+將garbageRoutes$time的levels中的“下午(1.4版)”改成“下午”。
+```{r}
+new_levels <- c("(一、四)下午", "下午", "下午", "全天", "晚上" )
+levels(garbageRoutes$time) <- new_levels
+levels(garbageRoutes$time)
+```
+
 
 
