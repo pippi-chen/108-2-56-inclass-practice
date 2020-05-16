@@ -112,40 +112,71 @@ population[levelsInData] -> population
 
 將population由大排到小(sort(x, decreasing=T)可將x numeric vector由大排到小。)
 ```{r}
+#因為class是integer,所以可以用sort
 population <- sort(population, decreasing=T)
 population
 ```
 
 ```{r}
-
+newLevels <- names(population)
+newLevels
 ```
 
+重設levels排序
 ```{r}
+covid19$`縣市` <-
+  factor(
+    covid19$`縣市`, levels=newLevels
+  )
 
+levels(covid19$`縣市`)
 ```
 
+#practice
+將covid19$縣市 依縣市目前個案數目由大排到小。（hint: 可使用table()來得到個案數統計, 它會自然產生named integer vector）
 ```{r}
+table(covid19$`縣市`)
+base <- table(covid19$`縣市`)
+new_levels <- sort(base,decreasing = T)
+names(new_levels)
+levels(covid19$`縣市`) <- names(new_levels)
 
+levels(covid19$`縣市`)
 ```
 
+年齡應該用年齡區間起始數字排序
 ```{r}
-
+levels(covid19$`年齡層`)
 ```
 
+取出levels中各年齡層的起始數字，存在startingAges
 ```{r}
-
+level_names <- levels(covid19$`年齡層`)
+startingAges <- stringr::str_extract(
+  level_names,
+  "^[0-9]+" # regex：開頭的一串數字
+)
 ```
 
+將startingAges變成named integer vector
 ```{r}
-
+# 要numerical class排的才一定對
+startingAges <- as.integer(startingAges)
+names(startingAges) <- level_names
 ```
 
+將startingAges從小排到大。
 ```{r}
-
+sort(startingAges) -> startingAges
 ```
 
+重設levels排序
 ```{r}
-
+covid19$`年齡層` <- 
+  factor(
+    covid19$`年齡層`, names(startingAges)
+  )
+levels(covid19$`年齡層`)
 ```
 
 
