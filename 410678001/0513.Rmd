@@ -1,0 +1,156 @@
+---
+title: '0513'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##4.7 on factor class
+
+內定levels順序是根據電腦內字元排序（collating sequence）依辭典序列方式決定排序，很多時候沒有意義。
+```{r}
+char1 <- c("Wild","Apple","Donald","May","Avocada") 
+factor1 <- factor(char1)
+levels(factor1)
+```
+
+```{r}
+library(stringr)
+char2 <- c("蔡英文","習近平","Donald Trump","蔡頭") 
+factor2 <- factor(char2)
+levels(factor2) #由小到大的順序
+
+sort(
+  str_sub(char2,1,1)
+)
+sort(
+  str_sub(char2,2,2)
+)
+```
+
+查詢你的collating sequence設定：
+由於不同電腦、不同作業系統的collating sequence不同，如果levels順序在你的分析是重要的，一定要在設定factor時自行設定好。
+```{r}
+Sys.getlocale("LC_COLLATE")
+```
+
+嚴重特殊傳染性肺炎
+```{r}
+jsonlite::fromJSON("https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json") -> covid19
+```
+
+```{r}
+# 不可排序類別：性別、縣市、是否境外移入
+covid19$`縣市` <- 
+  factor(covid19$`縣市`)
+covid19$`性別` <-
+  factor(covid19$`性別`)
+covid19$`是否為境外移入` <-
+  factor(
+    covid19$`是否為境外移入`
+  )
+
+# 可排序類別資料：年齡層
+covid19$`年齡層` <-
+  factor(
+    covid19$`年齡層`,
+    ordered=TRUE
+  )
+```
+
+```{r}
+levels(covid19$`縣市`)
+levels(covid19$`性別`)
+levels(covid19$`是否為境外移入`)
+
+covid19$`年齡層`
+levels(covid19$`年齡層`)
+```
+
+#levels重新排列
+
+factor(目前的factor向量,levels=自訂排序)
+levels放第二格時， levels= 可省略。
+
+目前的類別向量的可不可排序性質依然會保留，不用特意去設ordered=T/F
+
+手動輸入排法：由女男改男女
+```{r}
+levels(covid19$`性別`)
+covid19$`性別` <- factor(covid19$`性別`, c("男","女"))
+
+levels(covid19$`性別`)
+```
+
+covid19$縣市的levels依其人口由大排到小。如“新北市”人口最多，它就要排levels的第一個，依此類推。
+
+下載台灣各縣市人口資料：
+```{r}
+jsonlite::fromJSON(
+  "https://www.dropbox.com/s/jckqryeh5zeat5w/regionPopulation.json?dl=1"
+) -> population
+unlist(population) -> population
+```
+
+資料科學心法一：拿到新的資料先檢視「內容」、「class/type」
+```{r}
+print(population)
+class(population) # 判斷出是named integer vector
+names(population) # 元素名稱是台灣各縣市
+```
+
+留下levels中有的popluation元素
+```{r}
+levels(covid19$`縣市`) # 是名稱字串向量
+
+# 由於population元素值有names，可以用`[名稱字串向量]`取出所要的
+levels(covid19$`縣市`) -> levelsInData
+population[levelsInData] -> population
+```
+
+將population由大排到小(sort(x, decreasing=T)可將x numeric vector由大排到小。)
+```{r}
+population <- sort(population, decreasing=T)
+population
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
