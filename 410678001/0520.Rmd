@@ -1,0 +1,331 @@
+---
+title: "0520"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(purrr)
+example <- list(
+  name=c("小明","小花","小新","美美"),
+  height=c(175,166,170,160),
+  weight=c(77,NA,60,43),
+  birthday=lubridate::ymd(c("1998-03-11","1999-12-22","1995-08-22","2001-10-10")),
+  hobby=c("美食 旅遊","旅遊 時尚","3C 美食","音樂 旅遊"),
+  residence=c("Taipei","New Taipei","Taichung","Kaohsiung"),
+  allowance=factor(c("0-1000","1001-2000","2000+","1001-2000")),
+  bloodType=c("A","B","B","O")
+)
+```
+
+拿出其中屬於小新的資料
+方法一
+```{r}
+names(example)
+
+pick_小新 <- example$name == "小新"
+data_selected <- 
+  list(
+    name=example$name[pick_小新],
+    weight=example$weight[pick_小新],
+    height=example$height[pick_小新],
+    hobby=example$hobby[pick_小新],
+    residence=example$residence[pick_小新],
+    allowance=example$allowance[pick_小新],
+    bloodType=example$bloodType[pick_小新]
+  )
+```
+
+方法二
+```{r}
+map(example, ~.x[pick_小新]) -> 
+  data_selected 
+  
+data_selected
+```
+
+```{r}
+jsonlite::fromJSON("https://www.dropbox.com/s/6252gbdnv9owljm/dance.json?dl=1", simplifyDataFrame = F) -> dance
+```
+
+```{r}
+# 第一個dance表演名稱
+dance[[1]]$title
+# 第二個dance表演名稱
+dance[[2]]$title
+```
+
+```{r}
+map(dance, ~.x$title) ->
+  list_titles
+
+View(list_titles)
+```
+
+每個表演有時不止演出一場，每個表演的場次總數：
+```{r}
+# 記載第一個表演的所有場次訊息
+dance[[1]]$showInfo
+str(dance[[1]]$showInfo)
+# 計算第一個表演有幾個場次
+length(dance[[1]]$showInfo)
+# 計算第二個表演有幾個場次
+length(dance[[2]]$showInfo)
+```
+
+```{r}
+map(dance,~length(.x$showInfo)) ->
+  list_numberOfShows 
+  
+View(list_numberOfShows)
+```
+
+第4個表演有6個場次，想知道它們的日期時間：
+```{r}
+str(dance[[4]]$showInfo)
+# 這個表演第1個場次的訊息
+dance[[4]]$showInfo[[1]]$time
+# 這個表演第2個場次的訊息
+dance[[4]]$showInfo[[2]]$time
+```
+
+```{r}
+map(dance[[4]]$showInfo, ~ .x$time) ->
+list_showTimes_dance4
+
+list_showTimes_dance4
+```
+
+#practice
+找出第8個表演的所有場次時間(time)和地點(location):
+```{r}
+map(dance[[8]]$showInfo, ~ .x$time) -> list_showTimes_dance8
+map(dance[[8]]$showInfo, ~ .x$location) -> list_showLocations_dance8
+
+list_showTimes_dance8
+list_showLocations_dance8
+```
+
+#practice
+```{r}
+jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/67BB3C2B-E7D1-43A7-B872-61B2F082E11B?$format=json", simplifyDataFrame = F) -> busRoutes
+```
+請抓出每條路線的Id(路線代碼)、providerId(業者代碼)、providerName(業者中文名稱)、nameZh(中文名稱)。
+```{r}
+map(busRoutes, ~ .x$Id) -> bus_Id
+map(busRoutes, ~ .x$providerId) -> bus_providerId
+map(busRoutes, ~ .x$providerName) -> bus_providerName
+map(busRoutes, ~ .x$nameZh) -> bus_nameZh
+
+length(bus_Id)
+length(bus_providerId)
+length(bus_providerName)
+length(bus_nameZh)
+```
+
+```{r}
+num <- c(2, 5, 7, 1, 3)
+map(num, ~ .x+3)
+```
+
+```{r}
+chr <- c("abaa", "accd")
+library(stringr)
+str_extract_all(chr[[1]], "[ad]")
+str_extract_all(chr[[2]], "[ad]")
+
+map(chr, ~ str_extract_all(.x, "[ad]"))
+```
+
+#practice
+```{r}
+jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+```
+2.1 找出有氣象預報資訊的縣市名稱（locationName欄位）
+```{r}
+weather_locationName <- weather_next36hours$cwbopendata$dataset$location$locationName
+```
+2.2 氣象局針對每個縣市提供了不同氣象因子在未來三個時段的預報。每個都市的氣象因子預報有那些，以第一個都市為例，它存在
+```{r}
+weather_next36hours$cwbopendata$dataset$location$weatherElement[[1]]$elementName 
+```
+請取出每個縣市有提供的氣象預報因子名稱。（個別名稱的意思要去看欄位說明文件）
+```{r}
+map(weather_next36hours$cwbopendata$dataset$location$weatherElement, ~ .x$elementName)
+```
+2.3 請抓出每縣市在第一個預告時段的
+預告開始時間
+預告結束時間
+這段時間的最高氣溫
+```{r}
+start <- map(weather_next36hours$cwbopendata$dataset$location$weatherElement, ~ .x$time[[2]]$startTime)
+end <- map(weather_next36hours$cwbopendata$dataset$location$weatherElement, ~ .x$time[[2]]$endTime)
+MaxT <- map(weather_next36hours$cwbopendata$dataset$location$weatherElement, ~ .x$time[[2]]$parameter$parameterName)
+```
+
+## Pipe
+
+```{r}
+threeHeigths <- c(Gary=178, John=182, Cam=175)
+```
+
+找出身高最高的人：
+方法一
+```{r}
+# 先排序由大到小，
+sort(threeHeigths, decreasing=T) -> sorted_heights
+
+# 把排好的人名取出
+names(sorted_heights) -> sorted_persons
+
+# 接著取出第一個位置的人名
+sorted_persons[[1]] -> highestPerson
+```
+方法二
+```{r}
+names(sort(threeHeigths, decreasing = T))[[1]] -> highestPerson
+```
+方法三
+把 -> 中間物件 換成%>%
+再把其他有用到中間物件的位置換成.
+這樣概念就叫pipe operation.
+```{r}
+library(magrittr)
+sort(threeHeigths, decreasing=T) %>% 
+names(.) %>%
+.[[1]] -> highestPerson
+```
+
+Pipe原則
+f(w) -> x
+g(x) -> y
+h(y) -> z
+可寫成
+f(w) %>%
+  g(.) %>% 
+  h(.) -> z
+或
+w %>%
+  f(.) %>%
+  g(.) %>%
+  h(.) -> z
+
+要小心%>%是將左邊output放到右邊函數
+
+```{r}
+# 由cities創出每個元素對應的北部、東部、中部region factor
+cities <- factor(c("台北","花蓮","台東","台中"))
+levels(cities)
+```
+
+```{r}
+region <- cities
+
+# 以下為一連串的pipe operation
+levels(region) -> currentLevels
+str_replace(currentLevels,"台北","北部") -> currentLevels1
+str_replace(currentLevels1,"花蓮|台東","東部") -> currentLevels2
+str_replace(currentLevels2,"台中","中部") -> regionLevels
+regionLevels -> levels(region)
+```
+
+```{r}
+levels(region) %>% 
+  str_replace(.,"台北","北部") %>%
+  str_replace(.,"花蓮|台東","東部") %>%
+  str_replace(.,"台中","中部") ->
+  levels(region)
+```
+
+#元素粹取
+
+```{r}
+num <- c(2,97,22,15,7)
+
+# 選出大於50的數字
+(num > 50) -> pick_big
+num[pick_big]
+
+(num > 50) %>%
+  num[.]
+```
+
+#執行順序
+
+R在面對pipe時會先把pipe走完最後才去做值assign給最後物件的動作
+```{r}
+threeHeights %>%
+  .sort(., decreasing=T) %>%
+  names(.) %>%
+  .[[1]] -> highestPerson
+```
+
+#.省略原則
+
+若代表中間物件的.在函數的「第一位」則.*可省略不寫，連它後面的,也去掉。小心若不在第一位則不可做省略.動作。
+```{r}
+levels(region) %>%
+  str_replace(.,"台北","北部") %>%
+  str_replace(.,"花蓮|台東","東部") %>%
+  str_replace(.,"台中","中部") ->
+  levels(region)
+#可改成
+levels(region) %>% 
+  str_replace("台北","北部") %>%
+  str_replace("花蓮|台東","東部") %>%
+  str_replace("台中","中部") -> 
+  levels(region)
+```
+
+```{r}
+# 資料
+population <- c(`cityA`=500,`cityB`=1500, `cityC`=399)
+cities <- c("cityA","cityA","cityB","cityB","cityC")
+# 分析步驟
+names(sort(population)) -> setLevels
+factor(cities, levels = setLevels) -> cities 
+
+#可改成
+population %>%
+  sort() %>%
+  names() %>%
+  factor(cities, levels=.) -> cities
+
+#或是
+population %>% 
+  {names(sort(.))} %>%
+  factor(cities, levels=.) -> cities
+```
+
+#串接非單純函數程序
+
+```{r}
+dataList <- list(
+  num=c(2,97,22,15,7),
+  chr=c("2","97","22","15","7")
+)
+```
+
+找出dataList中元素class為numeric裡那些大於50的數字
+```{r}
+map(dataList, ~ is.numeric(.x)) -> results
+#可寫成
+map(dataList, is.numeric) -> results
+
+unlist(results) -> pick_numeric
+
+dataList[pick_numeric] -> num_element
+(num_element[[1]] > 50) -> pick_big
+num_element[[1]][pick_big] -> bigNumber
+#可改成
+map(dataList, is.numeric) %>%
+unlist(.) %>%
+
+dataList[.] %>%
+{(.[[1]] > 50)} %>%
+num_element[[1]][.] -> bigNumber
+```

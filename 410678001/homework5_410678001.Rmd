@@ -2,8 +2,8 @@
 title: "homework 5"
 output: html_document
 params:
-  studentName: "你的名字"
-  studentID: "你的學號"
+  studentName: "陳舒平"
+  studentID: "410678001"
 editor_options: 
   chunk_output_type: console
 ---
@@ -40,27 +40,64 @@ jsonlite::fromJSON("https://www.dropbox.com/s/es19f62rijrd8i7/studentHeight.json
 請將「學年度」及「年齡」都改成ordered factor, levels順序以其文字數值從小排到大。( 答案物件studentHeights本身)
 
 ```{r ans11}
-# studentHeights
+studentHeights$`學年度` <- as.integer(studentHeights$`學年度`)
+table(studentHeights$`學年度`)
+studentHeights$`學年度` <- factor(studentHeights$`學年度`)
+levels(studentHeights$`學年度`)
+
+studentHeights$`年齡` <- as.integer(studentHeights$`年齡`)
+table(studentHeights$`年齡`)
+studentHeights$`年齡` <- factor(studentHeights$`年齡`)
+levels(studentHeights$`年齡`)
+
+studentHeights
 ```
 
 ### 1.2 年齡層
 請在studentHeights新增「年齡層」元素（class ordered factor），其類別排序為6-8 < 9-12 < 13-15三類年齡層。
 ```{r ans12}
-# studentHeights$`年齡層`
+studentHeights$`年齡層` <- factor(studentHeights$`年齡層`, levels = c("6-8", "9-12", "13-15"))
+levels(studentHeights$`年齡層`)
+
+studentHeights$`年齡層`
 ```
 
 ### 1.3 各年齡層平均身高
 請創造一個named numeric vector, averageHeightByGroup (class numeric, length=3) 其值分別是三組年齡層各自所包含年齡下不分性別身高的平均（即第一個值是所有6-8歲不分學年度、不分性別身高（總計身高）的平均，再來是9-12歲，最後是13-15歲），而此vector的元素名稱也分別是"6-8", "9-12", "13-15" (hint: 數值向量x元素平均, 可用mean(x)求得； 這題也考驗同學組合數個「要不要」向量`pick_XXX`)
 
 ```{r ans13}
-# averageHeightByGroup
+first <- mean(studentHeights$`平均身高`[studentHeights$`年齡層`== "6-8"])
+second <- mean(studentHeights$`平均身高`[studentHeights$`年齡層`== "9-12"])
+third <- mean(studentHeights$`平均身高`[studentHeights$`年齡層`== "13-15"])
+all <- c(first, second, third)
+names(all) <- c("6-8", "9-12", "13-15")
+averageHeightByGroup <- all
+class(averageHeightByGroup)
+length(averageHeightByGroup)
+
+averageHeightByGroup
 ```
 
 ### 1.4 性別差異
-請創造一個named numeric vector, genderDifferenceByAge (class numeric, length=3) 其值分別是三組年齡層各自所包含年齡下的「男性平均」減去「女性平均」（即第一個值是所有6-8歲不分學年度的男女平均差異，再來是9-12歲，最後是13-15歲），而此vector的元素名稱也分別是"6-8", "9-12", "13-15" (hint: 數值向量x元素平均, 可用mean(x)求得)
+請創造一個named numeric vector, heightDifferenceByGroup (class numeric, length=3) 其值分別是三組年齡層各自所包含年齡下的「男性平均身高」減去「女性平均身高」（即第一個值是所有6-8歲不分學年度的男女身高平均差異，再來是9-12歲，最後是13-15歲），而此vector的元素名稱也分別是"6-8", "9-12", "13-15" (hint: 數值向量x元素平均, 可用mean(x)求得)
 
 ```{r ans14}
-# heightDifferenceByGroup
+first_b <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "6-8") & (studentHeights$`類別` == "男")])
+first_g <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "6-8") & (studentHeights$`類別` == "女")])
+second_b <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "9-12") & (studentHeights$`類別` == "男")])
+second_g <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "9-12") & (studentHeights$`類別` == "女")])
+third_b <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "13-15") & (studentHeights$`類別` == "男")])
+third_g <- mean(studentHeights$`平均身高`[(studentHeights$`年齡層`== "13-15") & (studentHeights$`類別` == "女")])
+new_first <- (first_b-first_g)
+new_second <- (second_b-second_g)
+new_third <- (third_b-third_g)
+new_all <- c(new_first, new_second, new_third)
+names(new_all) <- c("6-8", "9-12", "13-15")
+heightDifferenceByGroup <- new_all
+class(heightDifferenceByGroup)
+length(heightDifferenceByGroup)
+
+heightDifferenceByGroup
 ```
 
 
@@ -74,6 +111,12 @@ jsonlite::fromJSON("https://www.dropbox.com/s/bp0w8tjgrhi79x7/sameMajorDifferent
 請寫下「一個」字串的regex字串向量，稱之為realEstateRegex （class character, length=1）,
 
 ```{r ans21}
+print(differentMajors)
+table(differentMajors)
+realEstateRegex <- "不動系?"
+length(realEstateRegex)
+table(str_replace(differentMajors,realEstateRegex,"不動系"))
+
 # realEstateRegex
 ```
 
@@ -87,7 +130,12 @@ str_replace(differentMajors,realEstateRegex,"不動系")
 ### 2.2 factor levels
 直接將differentMajors轉成factor, 並將它的levels存在currentLevels（class character）。（雖然同系有不同叫法而形成好幾個levels，這題不用去整併它。）
 ```{r ans22}
-# currentLevels
+differentMajors <- factor(differentMajors)
+levels(differentMajors)
+class(levels(differentMajors))
+currentLevels <- levels(differentMajors)
+
+currentLevels
 ```
 
 
@@ -111,6 +159,7 @@ str_replace(currentLevels,bSchoolRegex,"商學院")
   
 這題不限方法或regex使用次數。（答案物件differentMajors本身, class factor）
 ```{r ans24}
+
 # differentMajors
 ```
 
