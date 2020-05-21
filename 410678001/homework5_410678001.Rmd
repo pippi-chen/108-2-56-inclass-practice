@@ -113,11 +113,11 @@ jsonlite::fromJSON("https://www.dropbox.com/s/bp0w8tjgrhi79x7/sameMajorDifferent
 ```{r ans21}
 print(differentMajors)
 table(differentMajors)
-realEstateRegex <- "不動系?"
+realEstateRegex <- "不動產與城鄉環境學系?|不動產城鄉學系?"
 length(realEstateRegex)
 table(str_replace(differentMajors,realEstateRegex,"不動系"))
 
-# realEstateRegex
+realEstateRegex
 ```
 
 使得執行以下程序後differentMajors裡屬「不動產與城鄉環境學系（不管何種寫法）」的都會變成"不動系"。這裡regex還有一個限制考驗，就是：「不動產與城鄉環境學系」的十個字都只會出現一次（所以不能寫"(不動系|不動產系|...)"之類的——不、動、系三字出現二次，違規）。(hint: 這題使用regex quantifier裡的`?`會容易很多)
@@ -143,7 +143,14 @@ currentLevels
 請寫下「一個」字串的regex（class character, length=1）稱之為bSchoolRegex,
 
 ```{r ans23}
-# bSchoolRegex
+print(differentMajors)
+table(differentMajors)
+bSchoolRegex <- "休閒與運動管理學系?|休運系?|金融與合作經營學系?|金融與合作學系?|金融系?"
+length(bSchoolRegex)
+table(str_replace(currentLevels,bSchoolRegex,"商學院"))
+bSchoolRegex
+
+bSchoolRegex
 ```
 
 使得執行以下程序後currentLevels裡屬商學院的系都會變成"商學院"。（其實此題也可以要求第一題的限制，但怕難度太高這題則不設「系名字元不重覆」的限制）
@@ -159,8 +166,14 @@ str_replace(currentLevels,bSchoolRegex,"商學院")
   
 這題不限方法或regex使用次數。（答案物件differentMajors本身, class factor）
 ```{r ans24}
+differentMajors <- factor(differentMajors)
+table(differentMajors)
 
-# differentMajors
+levels(differentMajors) <- c("不動系", "不動系", "不動系", "公行系", "公行系", "公行系", "休運系", "休運系", "社工系", "社工系", "社會系", "社會系", "金融系",  "金融系", "金融系", "經濟系", "經濟系")
+class(differentMajors)
+table(differentMajors)
+
+differentMajors
 ```
 
 
@@ -176,6 +189,10 @@ str_replace(currentLevels,bSchoolRegex,"商學院")
 即levels(school)會有「公共事務學院、商學院、社科院」。
 
 ```{r ans25}
-# school
+levels(differentMajors) <- c("公共事務學院", "公共事務學院", "商學院", "社科院", "社科院", "商學院", "社科院")
+school <- differentMajors
+levels(school)
+
+school
 ```
 
