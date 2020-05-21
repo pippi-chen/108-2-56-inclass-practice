@@ -50,6 +50,9 @@ table(studentHeights$`年齡`)
 studentHeights$`年齡` <- factor(studentHeights$`年齡`)
 levels(studentHeights$`年齡`)
 
+class(studentHeights$`學年度`)
+class(studentHeights$`年齡`)
+
 studentHeights
 ```
 
@@ -114,6 +117,7 @@ jsonlite::fromJSON("https://www.dropbox.com/s/bp0w8tjgrhi79x7/sameMajorDifferent
 print(differentMajors)
 table(differentMajors)
 realEstateRegex <- "不動產與城鄉環境學系?|不動產城鄉學系?"
+class(realEstateRegex)
 length(realEstateRegex)
 table(str_replace(differentMajors,realEstateRegex,"不動系"))
 
@@ -146,6 +150,7 @@ currentLevels
 print(differentMajors)
 table(differentMajors)
 bSchoolRegex <- "休閒與運動管理學系?|休運系?|金融與合作經營學系?|金融與合作學系?|金融系?"
+class(bSchoolRegex)
 length(bSchoolRegex)
 table(str_replace(currentLevels,bSchoolRegex,"商學院"))
 bSchoolRegex
@@ -168,6 +173,7 @@ str_replace(currentLevels,bSchoolRegex,"商學院")
 ```{r ans24}
 differentMajors <- factor(differentMajors)
 table(differentMajors)
+levels(differentMajors)
 
 levels(differentMajors) <- c("不動系", "不動系", "不動系", "公行系", "公行系", "公行系", "休運系", "休運系", "社工系", "社工系", "社會系", "社會系", "金融系",  "金融系", "金融系", "經濟系", "經濟系")
 class(differentMajors)
@@ -189,6 +195,7 @@ differentMajors
 即levels(school)會有「公共事務學院、商學院、社科院」。
 
 ```{r ans25}
+levels(differentMajors)
 levels(differentMajors) <- c("公共事務學院", "公共事務學院", "商學院", "社科院", "社科院", "商學院", "社科院")
 school <- differentMajors
 levels(school)
