@@ -7,14 +7,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##on numeric class
+##4.3 on numeric class
 
 ```{r}
 a <- c(2, 3, 5)
 b <- c(4,-1, 3)
 ```
 
-#elementwise operation
 ```{r}
 a+b
 a-b
@@ -47,22 +46,21 @@ c(2+4, 3+(-1), 5+3)
 c(2**4, 3**(-1), 5**3)
 ```
 
-當向量間不等長度時，R則對短的向量進行Recycle的動作（即Python的Broadcast）:
+當向量間不等長度時，R則對短的向量進行Recycle的動
 將其中較短的向量反複堆疊到可以長得跟最長的向量一樣長度。
 
 以下4個得到的結果都一樣
 ```{r}
 5*c(1,3,4)+7
-# 其實是
+
 c(5)*c(1,3,4)+c(7)
 
-## 對向量5，向量7進行recycle:
 c(5,5,5)*c(1,3,4)+c(7,7,7)
-## Recycle等長後才進行elementwise operation:
+
 c(5*1+7, 5*3+7, 5*4+7)
 ```
-當運算的兩物件內容長度不同時，則將其中較短的一個反複堆疊到可以長得跟另一個一樣高時才來運算，稱為recycling。
 
+當運算的兩物件內容長度不同時，則將其中較短的一個反複堆疊到可以長得跟另一個一樣高時才來運算，稱為recycling。
 ```{r}
 # 狀況一: 堆疊一定倍數剛好一樣長
 c(2,3)/c(-2,-13,10,22)
@@ -80,21 +78,15 @@ Recycling不只用在數值class, 只要向量間的處理要等長度才合理�
 paste0(
   c("我叫"), c("小明","小美")
 )
-```
-
-```{r}
 paste0(
   c("我叫","我叫"), c("小明","小美")
 )
-```
-
-```{r}
 paste0(
   c("他叫","我叫"), c("小明","小美","大雄")
 )
 ```
 
-##relational operators
+##4.4 relational operators(T/F vector)
 
 ```{r}
 example <- list(
@@ -140,12 +132,17 @@ table(transcript100to103$`學屆`[pick_above85])
 class() -> Date
 typeof() -> double
 比較的雙方一定要是一樣的class
+```{r}
+example$birthday
+class(example$birthday)
+typeof(example$birthday)
+```
 
 example裡誰1998年(含)以後出生
 ```{r}
 print(example[c("name","birthday")])
 
-#錯誤()
+#錯誤
 pick_after98 <- example$birthday >= "1998-01-01"
 
 #正確
@@ -177,6 +174,8 @@ exchangeRate_after98 <-
 ```
 
 「可」排序類別資料比較:
+
+錯誤示範:此類別資料不是可排序的
 example裡誰零用錢大於1000:
 ```{r}
 print(example[c("name","allowance")])
@@ -208,6 +207,7 @@ class(example$allowance)
 #多了一個order
 ```
 
+在ordered過後，即變為可排序的類別資料
 ```{r}
 pick_allowanceOver1000 <- example$allowance >= "1001-2000"
 example$name[pick_allowanceOver1000]
@@ -217,6 +217,13 @@ example$name[pick_allowanceOver1000]
 刑事案件被害者人數
 ```{r}
 jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_female.json?dl=1", simplifyDataFrame = F) -> list_victimAges_female
+```
+
+```{r}
+str(list_victimAges_female)
+View(list_victimAges_female$`數目`)
+sum(list_victimAges_female$`數目`)
+sum(list_victimAges_female$`數目`, na.rm = T)
 ```
 
 請將list_victimAges_female各元素的class做合理設定。
@@ -238,19 +245,21 @@ levels_new <- c(levels_ages[c(12,13,1,8,2:7,9:11)])
 levels(list_victimAges_female$`年齡層`) <- levels_new
 ```
 
-可選出「30_39歲以上受害者」的「要/不要」向量：
+可選出「30_39歲以上受害者」的「要/不要」向量：(記得要相將此類別資料變為可排序的資料)
 ```{r}
+list_victimAges_female$`年齡層` <- ordered(list_victimAges_female$`年齡層`)
+
 pick_above30 <- 
   list_victimAges_female$`年齡層` >= "30_39歲"
 ```
 
 選出「30_39歲以上受害者」的數目
 ```{r}
-sum(list_victimAges_female$`數目`, na.rm=T) #na.rm -> remove NA(先移除NA再進行相加)
 sum(list_victimAges_female$`數目`[pick_above30], na.rm = T)
 ```
 
 #相等，屬於
+
 ==: 等於
 !=: 不等於
 ==與!=可使用於字串
@@ -299,7 +308,7 @@ levels(factor(transcript100to103$`學院`))
 unique(transcript100to103$`學院`)
 
 set_lawbusiness <- c("法學院", "商學院")
-pick_lawbusiness <- transcript100to103$`學院` %in%set_lawbusiness
+pick_lawbusiness <- transcript100to103$`學院` %in% set_lawbusiness
 ```
 
 #negation(否定用法)
@@ -318,8 +327,8 @@ example$name[pick_not_fromTaipeiMetro]
 ```
 
 #資料狀態
-is.na: 有缺失
 
+is.na: 有缺失
 is.{class/type name}: is.integer, is.character, is.factor … etc
 
 有時資料有缺失，在R裡會記成NA(即not available)如下例：
@@ -381,19 +390,9 @@ pick_loveFood <- example$hobby == "美食"
 # == 的意思是要說""中一定要完全一樣
 ```
 
-錯誤寫法2
-```{r}
-example[["hobby2"]] <- c("美食", "時尚", "美食", "旅遊")
-
-print(example[c("name", "hobby2")])
-pick_loveFood2 <- example$hobby2 == "美食"
-example$name[pick_loveFood2]
-```
-
 以下資料為新北市垃圾車路線
 ```{r}
-jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") ->
-  garbageRoutes
+jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") -> garbageRoutes
 ```
 
 ```{r}

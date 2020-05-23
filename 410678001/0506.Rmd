@@ -20,7 +20,7 @@ example <- list(
 )
 ```
 
-##On logical class
+##4.5 On logical class
 
 邏輯向量間（即「要/不要」向量）的操作主要是以下幾個：
 &: AND
@@ -65,8 +65,7 @@ example$name[
 ]
 ```
 
-
-##On character class
+##4.6 on character class
 
 ```{r}
 library(stringr)
@@ -101,7 +100,7 @@ lubridate::ymd(
 )
 ```
 
-#Regular expression(regex)
+#regular expression(regex)
 
 ```{r}
 str_extract_all(
@@ -273,7 +272,7 @@ target前有A後有B：(?<=A_regex)target_regex(?=B_regex)
 
 民國年月日存成date class：
 ```{r}
-twDate <-  c("民國108年12月5日","民國98年10月5日")
+twDate <- c("民國108年12月5日","民國98年10月5日")
 
 library(stringr)
 # 準備regex: 
@@ -374,8 +373,5 @@ c(
   "student5"
 ) -> studentGithubURLs
 
-
-
-
-
+str_extract(studentGithubURLs, "(https://github.com/student)[0-9]+(/108-2-)(56|78)(-inclass-practice)")
 ```
