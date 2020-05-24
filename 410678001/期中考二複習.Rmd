@@ -5,7 +5,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-民國年月日存成date class：
+1. 民國年月日存成date class：
 ```{r}
 twDate <- c("民國108年12月5日","民國98年10月5日")
 
@@ -45,3 +45,12 @@ print(twDate_reformat)
 
 
 lubridate::ymd(twDate_reformat)
+```
+
+
+2. 
+
+
+
+
+

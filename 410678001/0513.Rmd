@@ -135,13 +135,7 @@ levels(covid19$`縣市`)
 #practice
 將covid19$縣市 依縣市目前個案數目由大排到小。（hint: 可使用table()來得到個案數統計, 它會自然產生named integer vector）
 ```{r}
-table(covid19$`縣市`)
-base <- table(covid19$`縣市`)
-new_levels <- sort(base,decreasing = T)
-names(new_levels)
-levels(covid19$`縣市`) <- names(new_levels)
-
-levels(covid19$`縣市`)
+new <- sort(table(covid19$`縣市`), decreasing = T)
 ```
 
 年齡應該用年齡區間起始數字排序
@@ -236,6 +230,7 @@ south_regex <-
   "嘉義市|嘉義縣|[台臺]南[縣市]|高雄市|屏東縣|澎湖縣"
 east_regex <- "花蓮縣|台東縣"
 
+library(stringr)
 currentLevels <- str_replace(currentLevels, 
             north_regex, "北部")
 currentLevels <- str_replace(currentLevels, 
@@ -264,7 +259,7 @@ middleLevels <-
 newLevels <- c("4", middleLevels, "65+", "65+")
 
 levels(covid19$`年齡層`) <- newLevels
-covid19$`年齡層`
+levels(covid19$`年齡層`)
 ```
 
 #levels擴充
@@ -276,12 +271,16 @@ factor2 <-
 levels(factor2)
 ```
 
+添加新level:
+
+錯誤示範:
 加一筆新資料“差”（之前沒有這類）
 ```{r}
 factor2[[6]] <- "差"
 factor2 # 元素6變NA
 ```
 
+正確示範:
 先擴大levels, 再加新資料
 ```{r}
 factor2 <- 
