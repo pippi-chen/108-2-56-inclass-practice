@@ -69,8 +69,8 @@ c(2,3,2,3)/c(-2,-13,10,22)
 
 ```{r}
 # 狀況二: 倍數堆疊一定會超過，只好截斷
-c(2,3)/c(-2,-13,10)
-c(2,3,2)/c(-2,-13,10)
+c(2,3)/c(-2,-13,10,15)
+c(2,3,2)/c(-2,-13,10,15)
 ```
 
 Recycling不只用在數值class, 只要向量間的處理要等長度才合理時，recycling通常也會用在其他的class。
@@ -392,7 +392,7 @@ pick_loveFood <- example$hobby == "美食"
 
 以下資料為新北市垃圾車路線
 ```{r}
-jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") -> garbageRoutes
+jsonlite::fromJSON("https://data.ntpc.gov.tw/api/datasets/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8/json") -> garbageRoutes
 ```
 
 ```{r}

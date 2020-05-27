@@ -331,7 +331,7 @@ levels(covid19$`性別`)
 #practice
 以下資料為新北市垃圾車路線
 ```{r}
-jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") ->
+jsonlite::fromJSON("https://data.ntpc.gov.tw/api/datasets/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8/json") ->
   garbageRoutes
 ```
 

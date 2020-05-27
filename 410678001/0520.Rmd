@@ -111,7 +111,8 @@ list_showLocations_dance8
 
 #practice
 ```{r}
-jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/67BB3C2B-E7D1-43A7-B872-61B2F082E11B?$format=json", simplifyDataFrame = F) -> busRoutes
+jsonlite::fromJSON("https://www.dropbox.com/s/5nozcipa3rzrrmy/busRoutes.json?dl=1", simplifyDataFrame = F) ->
+  busRoutes
 ```
 請抓出每條路線的Id(路線代碼)、providerId(業者代碼)、providerName(業者中文名稱)、nameZh(中文名稱)。
 ```{r}
