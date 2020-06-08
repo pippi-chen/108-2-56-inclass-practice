@@ -161,16 +161,65 @@ formals(askSilly_weather)
 body(askSilly_weather)
 ```
 
+函數可以存在list裡
 ```{r}
+learning_topics <- 
+  list(
+    subject="函數",
+    date=lubridate::ymd("2020-06-03"),
+    functionsCreated=list(
+      demand=demand_return # 等號右邊是呼叫demand_return的定義值，也就是function(...){...}值定義本身。
+    )
+  )
 
+
+
+learning_topics$functionsCreated$demand(1.2)
+
+rm(demand_return)
+learning_topics$functionsCreated$demand(1.2)
+#就算將environment中的demand_return拿掉，仍然可以從list中把它叫出來
 ```
 
 ```{r}
+#再把demand_return存回environment
+demand_return <- 
+  function(p){
+    q_d <- 10-5*p
+    return(q_d)
+  }
 
+typeof(demand_return)
+class(demand_return)
+
+# 查詢函數執行所要求環境
+environment(demand_return)
+
+# 若函數執行需要Global environment已存在某些物件，查詢需要哪些物件
+codetools::findGlobals(demand_return)
 ```
 
 ```{r}
+intercept <- 10
+slope <- -5
+myDemand <- function(p){
+  q_d <- intercept + slope*p
+  return(q_d)
+}
 
+environment(demand_return)
+environment(myDemand)
+
+codetools::findGlobals(demand_return)
+codetools::findGlobals(myDemand) 
+# myDemand對Global environment的要求多了intercept及slope
+
+# 移除global environment裡的intercept及slope
+rm(intercept, slope)
+
+demand_return(1.2) # 維持正常運作
+
+myDemand(1.2) # 無法運作
 ```
 
 ```{r}
