@@ -141,11 +141,24 @@ askSilly_weather("花蓮縣",today())
 
 打造一個國際時間轉換機器人叫what_time_it_is
 ```{r}
+what_time_it_is<-function(timezone){
+now<-with_tz(now(),tz=timezone)
+return(now)
+}
 
+
+
+what_time_it_is("Europe/Paris")
 ```
 
 ```{r}
+class(demand_return)
 
+# 查詢函數formals arguments要求
+formals(askSilly_weather)
+
+# 查詢函數主體
+body(askSilly_weather)
 ```
 
 ```{r}
