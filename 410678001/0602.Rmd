@@ -262,21 +262,21 @@ myDemand2(1.2, intercept=5, slope=-1.2)
 ```
 
 ```{r}
+library(httr)
+library(magrittr)
+GET("https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/NewTaipei/916?$top=30&$format=JSON") %>%
+  content -> estimatedArrivalTime_916
 
-```
+GET("https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/NewTaipei/939?$top=30&$format=JSON") %>%
+  content -> route_916
 
-```{r}
 
-```
+when_busArrive <- function(){
+  
+}
 
-```{r}
 
-```
 
-```{r}
-
-```
-
-```{r}
-
+when_busArrives("916","臺北大學正門")
+when_busArrives("939","學勤路")
 ```
