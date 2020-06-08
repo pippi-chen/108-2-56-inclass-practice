@@ -27,6 +27,15 @@ demand <- # 創造一個物件叫demand
 ```
 
 ```{r}
+p
+qd
+demand
+demand()
+demand(p=1.2)
+demand(1.2)
+```
+
+```{r}
 # p=1.2的需求量
 demand(1.2) 
 # p=1.3的需求量
@@ -35,37 +44,102 @@ demand(1.3)
 demand(1.4)
 ```
 
+每一個function只能return一個物件，如果要return多個的時候，可以用list包起來。
 ```{r}
-p
-qd
-demand
-demand()
+demand_return <- 
+  function(p){
+    q_d <- 10-5*p
+    return(q_d)
+  }
+# 印在螢幕，但Global Environment並不會有q_d
+demand_return(1.2)
+
+demand(1.2)
+demand_return(1.2)
+```
+
+最近一步會使用到電腦記憶體的運算值會暫時記在：
+```{r}
+.Last.value
+
+2-5
+.Last.value
+
+# 要長久存在Global Environment要指定物件名稱（不要求與q_d同名）
+demand_return(1.2) -> q_d1.2
+```
+
+當function有return時,
+```{r}
+demand_return(1.2) # 相當於
+4
+
+demand_return(1.2) -> q_d1.2 # 相當於
+4 -> q_d1.2
 ```
 
 ```{r}
+#自行先設定
+q_d <- 5
 
+#問機器人的結果
+demand_return(p=1.2)
+print(q_d)
+
+#雖然同樣會產生一個q_d，但機器人想的只會return他所想的值，不會影響到在environment所設定的相同的q_d的值
 ```
 
 ```{r}
+library(lubridate)
+dateInput <- today()
+locationInput <- "新北市"
 
+jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+
+# 找出符合地點的天氣資訊：weatherAtLocation
+(weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location # 可挑出locationInput的「要/不要」向量
+
+weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+
+# 在weatherAtLocation找出符合時間的天氣資訊
+
+(weatherAtLocation$elementName=="MaxT") ->
+  pick_MaxT
+(weatherAtLocation$elementName=="MinT") ->
+  pick_MinT
+weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+
+glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
 ```
 
+打造Silly天氣預報機器人：
 ```{r}
+askSilly_weather <- function(locationInput,dateInput){
+  jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+  (weatherAtLocation$elementName=="MaxT") ->
+    pick_MaxT
+  (weatherAtLocation$elementName=="MinT") ->
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+  
+  glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
+}
 
+
+
+askSilly_weather("臺中市",today())
+askSilly_weather("花蓮縣",today())
 ```
 
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
+打造一個國際時間轉換機器人叫what_time_it_is
 ```{r}
 
 ```
