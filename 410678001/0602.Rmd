@@ -220,10 +220,25 @@ rm(intercept, slope)
 demand_return(1.2) # 維持正常運作
 
 myDemand(1.2) # 無法運作
+
+#將intercept以及slope重新定義，即可成功執行myDemand
+intercept <- 10
+slope <- -5
+myDemand(1.2)
 ```
 
+若重新定義intercept或slope，會造成myDemand()的值改變
 ```{r}
+intercept <- 10
+slope <- -5
+myDemand(1.2)
 
+slope <- -1
+myDemand(1.2)
+
+intercept <- 5
+slope <- -1.2
+myDemand(1.2)
 ```
 
 ```{r}
