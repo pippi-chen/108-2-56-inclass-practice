@@ -118,47 +118,213 @@ system.time(
 ```
 
 ```{r}
+rm(weather_next36hours)
 
+if(!exists("weather_next36hours")){
+    jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+    weather_next36hours
+  SOAR::Store(weather_next36hours) # 存在.R_cache environment中 -> 創造一個佔存的環境
+}
+
+exists("weather_next36hours")
 ```
 
 ```{r}
-
+askSilly_weather <- function(locationInput,dateInput){
+  jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+  (weatherAtLocation$elementName=="MaxT") ->
+    pick_MaxT
+  (weatherAtLocation$elementName=="MinT") ->
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+  
+  glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
+}
 ```
 
 ```{r}
-
+askSilly_weather2 <- function(locationInput,dateInput){
+  if(!exists("weather_next36hours")){
+      jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+      weather_next36hours
+    SOAR::Store(weather_next36hours) # 存在.R_cache environment中
+  }  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+  (weatherAtLocation$elementName=="MaxT") ->
+    pick_MaxT
+  (weatherAtLocation$elementName=="MinT") ->
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+  
+  glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
+}
 ```
 
 ```{r}
+library(lubridate)
+system.time(
+  askSilly_weather("新北市",today())
+)
+system.time(
+  askSilly_weather("臺北市",today())
+)
 
+askSilly_weather("新北市",today())
+askSilly_weather("臺北市",today())
 ```
 
 ```{r}
+SOAR::Remove(weather_next36hours)
+system.time(
+  askSilly_weather2("新北市",today())
+)
+system.time(
+  askSilly_weather2("臺北市",today())
+)
 
+askSilly_weather2("新北市",today())
+askSilly_weather2("臺北市",today())
+```
+
+if(condition){
+  body for TRUE condition
+} else {
+  body for FALSE condition
+}
+
+```{r}
+# n 為偶數
+n <- 54
+fvalue <- n/2
+
+# n 為奇數
+n <- 33
+fvalue <- -(n+1)/2
 ```
 
 ```{r}
+(n %% 2)==1 # 表示「奇數」; 或...
 
+as.logical(n %% 2) # 只有0會變F，其他數值都是T
 ```
 
 ```{r}
+n <- 54
+if(as.logical(n %% 2)){
+  fvalue <- -(n+1)/2
+} else {
+  fvalue <- n/2
+}
+print(fvalue)
 
+
+myFun <- function(n){
+  if(as.logical(n %% 2)){
+    fvalue <- -(n+1)/2
+  } else {
+    fvalue <- n/2
+  }
+  return(fvalue)
+}
+
+myFun(54)
+myFun(33)
 ```
 
 ```{r}
+jsonlite::fromJSON("https://www.dropbox.com/s/d14j5hp3i5ps657/examSubmissionTimes.json?dl=1") -> examSubmissionTime
 
+
+head(examSubmissionTime$section)
+head(examSubmissionTime$time)
 ```
 
+沒有分歧情境
+只有一個交卷時間：
 ```{r}
+i<-1
+student_i_section <- examSubmissionTime$section[[i]]
+student_i_time <- examSubmissionTime$time[[i]]
 
+deadline <- lubridate::ymd_hms("2020-05-27 15:00:00", tz="Asia/Taipei") 
+
+howEarly <- deadline - lubridate::ymd_hms(
+  student_i_time, tz="Asia/Taipei") 
+print(howEarly)
 ```
 
+有分歧情境
+有兩個交卷時間：
 ```{r}
+i<-1
+student_i_section <- examSubmissionTime$section[[i]]
+student_i_time <- examSubmissionTime$time[[i]]
 
+if(student_i_section=="56"){
+  deadline <- lubridate::ymd_hms("2020-05-27 15:00:00", tz="Asia/Taipei")
+} else {
+  deadline <- lubridate::ymd_hms("2020-05-27 17:00:00", tz="Asia/Taipei")
+}
+
+howEarly <- deadline - lubridate::ymd_hms(student_i_time, tz="Asia/Taipei")
+print(howEarly)
 ```
 
+function+map的用法
 ```{r}
+compute_howEarly <- function(student_i_section, student_i_time){
+  # student_i_section <- examSubmissionTime$section[[i]]
+  # student_i_time <- examSubmissionTime$time[[i]]
+  
+  if(student_i_section=="56"){
+    deadline <- lubridate::ymd_hms("2020-05-27 15:00:00", tz="Asia/Taipei")
+  } else {
+    deadline <- lubridate::ymd_hms("2020-05-27 17:00:00", tz="Asia/Taipei")
+  }
+  
+  howEarly <- deadline - lubridate::ymd_hms(student_i_time, tz="Asia/Taipei")
+  # print(howEarly)
+  
+  return(howEarly)
+}
 
+
+compute_howEarly(examSubmissionTime$section[[1]],examSubmissionTime$time[[1]])
+compute_howEarly(examSubmissionTime$section[[2]],examSubmissionTime$time[[2]])
+compute_howEarly(examSubmissionTime$section[[3]],examSubmissionTime$time[[3]])
+
+
+studentSequence <- 1:length(examSubmissionTime$section)
+
+library(purrr)
+map(studentSequence,
+    ~compute_howEarly(
+      examSubmissionTime$section[[.x]],
+      examSubmissionTime$time[[.x]])
+    ) -> list_howEarly
+
+
+#78節和56節交卷提早時間比較
+library(magrittr)
+list_howEarly %>%
+  unlist() -> examSubmissionTime$howEarly
+
+pick_56 <- examSubmissionTime$section=="56"
+mean(examSubmissionTime$howEarly[pick_56])
+median(examSubmissionTime$howEarly[pick_56])
+
+pick_78 <- examSubmissionTime$section=="78"
+mean(examSubmissionTime$howEarly[pick_78])
+median(examSubmissionTime$howEarly[pick_78])
 ```
 
 ```{r}

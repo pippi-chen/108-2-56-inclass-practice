@@ -345,70 +345,279 @@ convert_TaiwanDate2WesternDate(twDate)</code></pre>
 <p>不重複下載</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDmqqLoppbmraXpqZ/ogJfmmYJlbGFwc2UgdGltZVxuc3lzdGVtLnRpbWUoXG4gIGpzb25saXRlOjpmcm9tSlNPTihcImh0dHBzOi8vb3BlbmRhdGEuY3diLmdvdi50dy9maWxlYXBpL3YxL29wZW5kYXRhYXBpL0YtQzAwMzItMDAxP0F1dGhvcml6YXRpb249cmRlYy1rZXktMTIzLTQ1Njc4LTAxMTEyMTMxNCZmb3JtYXQ9SlNPTlwiKSAtPlxuICB3ZWF0aGVyX25leHQzNmhvdXJzXG4pXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDmqqLoppbmraXpqZ/ogJfmmYJlbGFwc2UgdGltZVxuc3lzdGVtLnRpbWUoXG4gIGpzb25saXRlOjpmcm9tSlNPTihcImh0dHBzOi8vb3BlbmRhdGEuY3diLmdvdi50dy9maWxlYXBpL3YxL29wZW5kYXRhYXBpL0YtQzAwMzItMDAxP0F1dGhvcml6YXRpb249cmRlYy1rZXktMTIzLTQ1Njc4LTAxMTEyMTMxNCZmb3JtYXQ9SlNPTlwiKSAtPlxuICB3ZWF0aGVyX25leHQzNmhvdXJzXG4pXG5gYGAifQ== -->
 <pre class="r"><code># 檢視步驟耗時elapse time
 system.time(
   jsonlite::fromJSON(&quot;https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&amp;format=JSON&quot;) -&gt;
   weather_next36hours
-)
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhpc3RzKFwid2VhdGhlcl9uZXh0MzZob3Vyc1wiKVxuXG5gYGAifQ== -->
+<pre class="r"><code>exists(&quot;weather_next36hours&quot;)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgdXNlciAgc3lzdGVtIGVsYXBzZWQgXG4gICAwLjA5ICAgIDAuMDAgICAgMC40MyBcbiJ9 -->
-<pre><code>   user  system elapsed 
-   0.09    0.00    0.43 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlczpcbjE6IEluIHN0cnNwbGl0KHgsIFwiXFxuXCIpIDogaW5wdXQgc3RyaW5nIDEgaXMgaW52YWxpZCBpbiB0aGlzIGxvY2FsZVxuMjogSW4gc3Ryc3BsaXQoeCwgXCJcXG5cIikgOiBpbnB1dCBzdHJpbmcgMSBpcyBpbnZhbGlkIGluIHRoaXMgbG9jYWxlXG4zOiBJbiBzdHJzcGxpdCh4LCBcIlxcblwiKSA6IGlucHV0IHN0cmluZyAxIGlzIGludmFsaWQgaW4gdGhpcyBsb2NhbGVcbjQ6IEluIHN0cnNwbGl0KGNvZGUsIFwiXFxuXCIsIGZpeGVkID0gVFJVRSkgOlxuICBpbnB1dCBzdHJpbmcgMSBpcyBpbnZhbGlkIGluIHRoaXMgbG9jYWxlXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlczpcbjE6IEluIHN0cnNwbGl0KHgsIFwiXFxuXCIpIDogaW5wdXQgc3RyaW5nIDEgaXMgaW52YWxpZCBpbiB0aGlzIGxvY2FsZVxuMjogSW4gc3Ryc3BsaXQoY29kZSwgXCJcXG5cIiwgZml4ZWQgPSBUUlVFKSA6XG4gIGlucHV0IHN0cmluZyAxIGlzIGludmFsaWQgaW4gdGhpcyBsb2NhbGVcbiJ9 -->
 <pre><code>Warning messages:
 1: In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale
-2: In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale
-3: In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale
-4: In strsplit(code, &quot;\n&quot;, fixed = TRUE) :
+2: In strsplit(code, &quot;\n&quot;, fixed = TRUE) :
   input string 1 is invalid in this locale</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXNrU2lsbHlfd2VhdGhlciA8LSBmdW5jdGlvbihsb2NhdGlvbklucHV0LGRhdGVJbnB1dCl7XG4gIGpzb25saXRlOjpmcm9tSlNPTihcImh0dHBzOi8vb3BlbmRhdGEuY3diLmdvdi50dy9maWxlYXBpL3YxL29wZW5kYXRhYXBpL0YtQzAwMzItMDAxP0F1dGhvcml6YXRpb249cmRlYy1rZXktMTIzLTQ1Njc4LTAxMTEyMTMxNCZmb3JtYXQ9SlNPTlwiKSAtPlxuICB3ZWF0aGVyX25leHQzNmhvdXJzXG4gIFxuICAod2VhdGhlcl9uZXh0MzZob3VycyRjd2JvcGVuZGF0YSRkYXRhc2V0JGxvY2F0aW9uJGxvY2F0aW9uTmFtZSA9PSBsb2NhdGlvbklucHV0KSAtPiBwaWNrX2xvY2F0aW9uXG4gIFxuICB3ZWF0aGVyX25leHQzNmhvdXJzJGN3Ym9wZW5kYXRhJGRhdGFzZXQkbG9jYXRpb24kd2VhdGhlckVsZW1lbnRbcGlja19sb2NhdGlvbl1bWzFdXSAtPiB3ZWF0aGVyQXRMb2NhdGlvblxuICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PVwiTWF4VFwiKSAtPlxuICAgIHBpY2tfTWF4VFxuICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PVwiTWluVFwiKSAtPlxuICAgIHBpY2tfTWluVFxuICB3ZWF0aGVyQXRMb2NhdGlvbiR0aW1lW3BpY2tfTWF4VF1bWzFdXSRwYXJhbWV0ZXIkcGFyYW1ldGVyTmFtZVtbMV1dIC0+IG1heFRcbiAgd2VhdGhlckF0TG9jYXRpb24kdGltZVtwaWNrX01pblRdW1sxXV0kcGFyYW1ldGVyJHBhcmFtZXRlck5hbWVbWzFdXSAtPiBtaW5UXG4gIFxuICBnbHVlOjpnbHVlKFwie2xvY2F0aW9uSW5wdXR9IHtkYXRlSW5wdXR9IOawo+a6q++8jOacgOmrmHttYXhUfeW6pu+8jOacgOS9jnttaW5UfeW6puOAglwiKVxufVxuYGBgIn0= -->
+<pre class="r"><code>askSilly_weather &lt;- function(locationInput,dateInput){
+  jsonlite::fromJSON(&quot;https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&amp;format=JSON&quot;) -&gt;
+  weather_next36hours
+  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -&gt; pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -&gt; weatherAtLocation
+  (weatherAtLocation$elementName==&quot;MaxT&quot;) -&gt;
+    pick_MaxT
+  (weatherAtLocation$elementName==&quot;MinT&quot;) -&gt;
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -&gt; maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -&gt; minT
+  
+  glue::glue(&quot;{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。&quot;)
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXNrU2lsbHlfd2VhdGhlcjIgPC0gZnVuY3Rpb24obG9jYXRpb25JbnB1dCxkYXRlSW5wdXQpe1xuICBpZighZXhpc3RzKFwid2VhdGhlcl9uZXh0MzZob3Vyc1wiKSl7XG4gICAgICBqc29ubGl0ZTo6ZnJvbUpTT04oXCJodHRwczovL29wZW5kYXRhLmN3Yi5nb3YudHcvZmlsZWFwaS92MS9vcGVuZGF0YWFwaS9GLUMwMDMyLTAwMT9BdXRob3JpemF0aW9uPXJkZWMta2V5LTEyMy00NTY3OC0wMTExMjEzMTQmZm9ybWF0PUpTT05cIikgLT5cbiAgICAgIHdlYXRoZXJfbmV4dDM2aG91cnNcbiAgICBTT0FSOjpTdG9yZSh3ZWF0aGVyX25leHQzNmhvdXJzKSAjIOWtmOWcqC5SX2NhY2hlIGVudmlyb25tZW505LitXG4gIH0gIFxuICAod2VhdGhlcl9uZXh0MzZob3VycyRjd2JvcGVuZGF0YSRkYXRhc2V0JGxvY2F0aW9uJGxvY2F0aW9uTmFtZSA9PSBsb2NhdGlvbklucHV0KSAtPiBwaWNrX2xvY2F0aW9uXG4gIFxuICB3ZWF0aGVyX25leHQzNmhvdXJzJGN3Ym9wZW5kYXRhJGRhdGFzZXQkbG9jYXRpb24kd2VhdGhlckVsZW1lbnRbcGlja19sb2NhdGlvbl1bWzFdXSAtPiB3ZWF0aGVyQXRMb2NhdGlvblxuICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PVwiTWF4VFwiKSAtPlxuICAgIHBpY2tfTWF4VFxuICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PVwiTWluVFwiKSAtPlxuICAgIHBpY2tfTWluVFxuICB3ZWF0aGVyQXRMb2NhdGlvbiR0aW1lW3BpY2tfTWF4VF1bWzFdXSRwYXJhbWV0ZXIkcGFyYW1ldGVyTmFtZVtbMV1dIC0+IG1heFRcbiAgd2VhdGhlckF0TG9jYXRpb24kdGltZVtwaWNrX01pblRdW1sxXV0kcGFyYW1ldGVyJHBhcmFtZXRlck5hbWVbWzFdXSAtPiBtaW5UXG4gIFxuICBnbHVlOjpnbHVlKFwie2xvY2F0aW9uSW5wdXR9IHtkYXRlSW5wdXR9IOawo+a6q++8jOacgOmrmHttYXhUfeW6pu+8jOacgOS9jnttaW5UfeW6puOAglwiKVxufVxuYGBgIn0= -->
+<pre class="r"><code>askSilly_weather2 &lt;- function(locationInput,dateInput){
+  if(!exists(&quot;weather_next36hours&quot;)){
+      jsonlite::fromJSON(&quot;https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&amp;format=JSON&quot;) -&gt;
+      weather_next36hours
+    SOAR::Store(weather_next36hours) # 存在.R_cache environment中
+  }  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -&gt; pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -&gt; weatherAtLocation
+  (weatherAtLocation$elementName==&quot;MaxT&quot;) -&gt;
+    pick_MaxT
+  (weatherAtLocation$elementName==&quot;MinT&quot;) -&gt;
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -&gt; maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -&gt; minT
+  
+  glue::glue(&quot;{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。&quot;)
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5zeXN0ZW0udGltZShcbiAgYXNrU2lsbHlfd2VhdGhlcihcIuaWsOWMl+W4glwiLHRvZGF5KCkpXG4pXG5zeXN0ZW0udGltZShcbiAgYXNrU2lsbHlfd2VhdGhlcihcIuiHuuWMl+W4glwiLHRvZGF5KCkpXG4pXG5cbmFza1NpbGx5X3dlYXRoZXIoXCLmlrDljJfluIJcIix0b2RheSgpKVxuYXNrU2lsbHlfd2VhdGhlcihcIuiHuuWMl+W4glwiLHRvZGF5KCkpXG5gYGAifQ== -->
+<pre class="r"><code>library(lubridate)
+system.time(
+  askSilly_weather(&quot;新北市&quot;,today())
+)
+system.time(
+  askSilly_weather(&quot;臺北市&quot;,today())
+)
+
+askSilly_weather(&quot;新北市&quot;,today())
+askSilly_weather(&quot;臺北市&quot;,today())</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuU09BUjo6UmVtb3ZlKHdlYXRoZXJfbmV4dDM2aG91cnMpXG5zeXN0ZW0udGltZShcbiAgYXNrU2lsbHlfd2VhdGhlcjIoXCLmlrDljJfluIJcIix0b2RheSgpKVxuKVxuc3lzdGVtLnRpbWUoXG4gIGFza1NpbGx5X3dlYXRoZXIyKFwi6Ie65YyX5biCXCIsdG9kYXkoKSlcbilcblxuYXNrU2lsbHlfd2VhdGhlcjIoXCLmlrDljJfluIJcIix0b2RheSgpKVxuYXNrU2lsbHlfd2VhdGhlcjIoXCLoh7rljJfluIJcIix0b2RheSgpKVxuYGBgIn0= -->
+<pre class="r"><code>SOAR::Remove(weather_next36hours)
+system.time(
+  askSilly_weather2(&quot;新北市&quot;,today())
+)
+system.time(
+  askSilly_weather2(&quot;臺北市&quot;,today())
+)
+
+askSilly_weather2(&quot;新北市&quot;,today())
+askSilly_weather2(&quot;臺北市&quot;,today())</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>if(condition){ body for TRUE condition } else { body for FALSE condition }</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBuIOeCuuWBtuaVuFxubiA8LSA1NFxuZnZhbHVlIDwtIG4vMlxuXG4jIG4g54K65aWH5pW4XG5uIDwtIDMzXG5mdmFsdWUgPC0gLShuKzEpLzJcbmBgYCJ9 -->
+<pre class="r"><code># n 為偶數
+n &lt;- 54
+fvalue &lt;- n/2
+
+# n 為奇數
+n &lt;- 33
+fvalue &lt;- -(n+1)/2</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKG4gJSUgMik9PTEgIyDooajnpLrjgIzlpYfmlbjjgI07IOaIli4uLlxuYGBgIn0= -->
+<pre class="r"><code>(n %% 2)==1 # 表示「奇數」; 或...</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlczpcbjE6IEluIHN0cnNwbGl0KHgsIFwiXFxuXCIpIDogaW5wdXQgc3RyaW5nIDEgaXMgaW52YWxpZCBpbiB0aGlzIGxvY2FsZVxuMjogSW4gc3Ryc3BsaXQoY29kZSwgXCJcXG5cIiwgZml4ZWQgPSBUUlVFKSA6XG4gIGlucHV0IHN0cmluZyAxIGlzIGludmFsaWQgaW4gdGhpcyBsb2NhbGVcbiJ9 -->
+<pre><code>Warning messages:
+1: In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale
+2: In strsplit(code, &quot;\n&quot;, fixed = TRUE) :
+  input string 1 is invalid in this locale</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXMubG9naWNhbChuICUlIDIpICMg5Y+q5pyJMOacg+iuikbvvIzlhbbku5bmlbjlgLzpg73mmK9UXG5gYGAifQ== -->
+<pre class="r"><code>as.logical(n %% 2) # 只有0會變F，其他數值都是T</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA8LSA1NFxuaWYoYXMubG9naWNhbChuICUlIDIpKXtcbiAgZnZhbHVlIDwtIC0obisxKS8yXG59IGVsc2Uge1xuICBmdmFsdWUgPC0gbi8yXG59XG5wcmludChmdmFsdWUpXG5cblxubXlGdW4gPC0gZnVuY3Rpb24obil7XG4gIGlmKGFzLmxvZ2ljYWwobiAlJSAyKSl7XG4gICAgZnZhbHVlIDwtIC0obisxKS8yXG4gIH0gZWxzZSB7XG4gICAgZnZhbHVlIDwtIG4vMlxuICB9XG4gIHJldHVybihmdmFsdWUpXG59XG5cbm15RnVuKDU0KVxubXlGdW4oMzMpXG5gYGAifQ== -->
+<pre class="r"><code>n &lt;- 54
+if(as.logical(n %% 2)){
+  fvalue &lt;- -(n+1)/2
+} else {
+  fvalue &lt;- n/2
+}
+print(fvalue)
+
+
+myFun &lt;- function(n){
+  if(as.logical(n %% 2)){
+    fvalue &lt;- -(n+1)/2
+  } else {
+    fvalue &lt;- n/2
+  }
+  return(fvalue)
+}
+
+myFun(54)
+myFun(33)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuanNvbmxpdGU6OmZyb21KU09OKFwiaHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9kMTRqNWhwM2k1cHM2NTcvZXhhbVN1Ym1pc3Npb25UaW1lcy5qc29uP2RsPTFcIikgLT4gZXhhbVN1Ym1pc3Npb25UaW1lXG5gYGAifQ== -->
+<pre class="r"><code>jsonlite::fromJSON(&quot;https://www.dropbox.com/s/d14j5hp3i5ps657/examSubmissionTimes.json?dl=1&quot;) -&gt; examSubmissionTime</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlczpcbjE6IEluIHNjYW4oZmlsZSA9IGZpbGUsIHdoYXQgPSB3aGF0LCBzZXAgPSBzZXAsIHF1b3RlID0gcXVvdGUsIGRlYyA9IGRlYywgIDpcbiAgRU9GIHdpdGhpbiBxdW90ZWQgc3RyaW5nXG4yOiBJbiBzdHJzcGxpdCh4LCBcIlxcblwiKSA6IGlucHV0IHN0cmluZyAxIGlzIGludmFsaWQgaW4gdGhpcyBsb2NhbGVcbiJ9 -->
+<pre><code>Warning messages:
+1: In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+  EOF within quoted string
+2: In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbilcbmBgYCJ9 -->
+<pre class="r"><code>head(examSubmissionTime$section)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiNTZcIiBcIjc4XCIgXCI3OFwiIFwiNzhcIiBcIjU2XCIgXCI3OFwiXG4ifQ== -->
+<pre><code>[1] &quot;56&quot; &quot;78&quot; &quot;78&quot; &quot;78&quot; &quot;56&quot; &quot;78&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChleGFtU3VibWlzc2lvblRpbWUkdGltZSlcbmBgYCJ9 -->
+<pre class="r"><code>head(examSubmissionTime$time)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMjAyMC0wNS0yNyAxNDo0OToxOFwiIFwiMjAyMC0wNS0yNyAxNjo0Mzo0MVwiIFwiMjAyMC0wNS0yNyAxNjozNjoxNFwiXG5bNF0gXCIyMDIwLTA1LTI3IDE2OjM2OjExXCIgXCIyMDIwLTA1LTI3IDE0OjU3OjAzXCIgXCIyMDIwLTA1LTI3IDE1OjQ3OjIyXCJcbiJ9 -->
+<pre><code>[1] &quot;2020-05-27 14:49:18&quot; &quot;2020-05-27 16:43:41&quot; &quot;2020-05-27 16:36:14&quot;
+[4] &quot;2020-05-27 16:36:11&quot; &quot;2020-05-27 14:57:03&quot; &quot;2020-05-27 15:47:22&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>沒有分歧情境 只有一個交卷時間：</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaG93RWFybHkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>print(howEarly)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGltZSBkaWZmZXJlbmNlIG9mIDEwLjcgbWluc1xuIn0= -->
+<pre><code>Time difference of 10.7 mins</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlOlxuSW4gc3Ryc3BsaXQoeCwgXCJcXG5cIikgOiBpbnB1dCBzdHJpbmcgMSBpcyBpbnZhbGlkIGluIHRoaXMgbG9jYWxlXG4ifQ== -->
+<pre><code>Warning message:
+In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>有分歧情境 有兩個交卷時間：</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaG93RWFybHkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>print(howEarly)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGltZSBkaWZmZXJlbmNlIG9mIDEwLjcgbWluc1xuIn0= -->
+<pre><code>Time difference of 10.7 mins</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBtZXNzYWdlOlxuSW4gc3Ryc3BsaXQoeCwgXCJcXG5cIikgOiBpbnB1dCBzdHJpbmcgMSBpcyBpbnZhbGlkIGluIHRoaXMgbG9jYWxlXG4ifQ== -->
+<pre><code>Warning message:
+In strsplit(x, &quot;\n&quot;) : input string 1 is invalid in this locale</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>function+map的用法</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcHV0ZV9ob3dFYXJseSA8LSBmdW5jdGlvbihzdHVkZW50X2lfc2VjdGlvbiwgc3R1ZGVudF9pX3RpbWUpe1xuICAjIHN0dWRlbnRfaV9zZWN0aW9uIDwtIGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uW1tpXV1cbiAgIyBzdHVkZW50X2lfdGltZSA8LSBleGFtU3VibWlzc2lvblRpbWUkdGltZVtbaV1dXG4gIFxuICBpZihzdHVkZW50X2lfc2VjdGlvbj09XCI1NlwiKXtcbiAgICBkZWFkbGluZSA8LSBsdWJyaWRhdGU6OnltZF9obXMoXCIyMDIwLTA1LTI3IDE1OjAwOjAwXCIsIHR6PVwiQXNpYS9UYWlwZWlcIilcbiAgfSBlbHNlIHtcbiAgICBkZWFkbGluZSA8LSBsdWJyaWRhdGU6OnltZF9obXMoXCIyMDIwLTA1LTI3IDE3OjAwOjAwXCIsIHR6PVwiQXNpYS9UYWlwZWlcIilcbiAgfVxuICBcbiAgaG93RWFybHkgPC0gZGVhZGxpbmUgLSBsdWJyaWRhdGU6OnltZF9obXMoc3R1ZGVudF9pX3RpbWUsIHR6PVwiQXNpYS9UYWlwZWlcIilcbiAgIyBwcmludChob3dFYXJseSlcbiAgXG4gIHJldHVybihob3dFYXJseSlcbn1cblxuXG5jb21wdXRlX2hvd0Vhcmx5KGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uW1sxXV0sZXhhbVN1Ym1pc3Npb25UaW1lJHRpbWVbWzFdXSlcbmNvbXB1dGVfaG93RWFybHkoZXhhbVN1Ym1pc3Npb25UaW1lJHNlY3Rpb25bWzJdXSxleGFtU3VibWlzc2lvblRpbWUkdGltZVtbMl1dKVxuY29tcHV0ZV9ob3dFYXJseShleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbltbM11dLGV4YW1TdWJtaXNzaW9uVGltZSR0aW1lW1szXV0pXG5cblxuc3R1ZGVudFNlcXVlbmNlIDwtIDE6bGVuZ3RoKGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uKVxuXG5saWJyYXJ5KHB1cnJyKVxubWFwKHN0dWRlbnRTZXF1ZW5jZSxcbiAgICB+Y29tcHV0ZV9ob3dFYXJseShcbiAgICAgIGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uW1sueF1dLFxuICAgICAgZXhhbVN1Ym1pc3Npb25UaW1lJHRpbWVbWy54XV0pXG4gICAgKSAtPiBsaXN0X2hvd0Vhcmx5XG5cblxuIzc456+A5ZKMNTbnr4DkuqTljbfmj5Dml6nmmYLplpPmr5TovINcbmxpYnJhcnkobWFncml0dHIpXG5saXN0X2hvd0Vhcmx5ICU+JVxuICB1bmxpc3QoKSAtPiBleGFtU3VibWlzc2lvblRpbWUkaG93RWFybHlcblxucGlja181NiA8LSBleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbj09XCI1NlwiXG5tZWFuKGV4YW1TdWJtaXNzaW9uVGltZSRob3dFYXJseVtwaWNrXzU2XSlcbm1lZGlhbihleGFtU3VibWlzc2lvblRpbWUkaG93RWFybHlbcGlja181Nl0pXG5cbnBpY2tfNzggPC0gZXhhbVN1Ym1pc3Npb25UaW1lJHNlY3Rpb249PVwiNzhcIlxubWVhbihleGFtU3VibWlzc2lvblRpbWUkaG93RWFybHlbcGlja183OF0pXG5tZWRpYW4oZXhhbVN1Ym1pc3Npb25UaW1lJGhvd0Vhcmx5W3BpY2tfNzhdKVxuYGBgIn0= -->
+<pre class="r"><code>compute_howEarly &lt;- function(student_i_section, student_i_time){
+  # student_i_section &lt;- examSubmissionTime$section[[i]]
+  # student_i_time &lt;- examSubmissionTime$time[[i]]
+  
+  if(student_i_section==&quot;56&quot;){
+    deadline &lt;- lubridate::ymd_hms(&quot;2020-05-27 15:00:00&quot;, tz=&quot;Asia/Taipei&quot;)
+  } else {
+    deadline &lt;- lubridate::ymd_hms(&quot;2020-05-27 17:00:00&quot;, tz=&quot;Asia/Taipei&quot;)
+  }
+  
+  howEarly &lt;- deadline - lubridate::ymd_hms(student_i_time, tz=&quot;Asia/Taipei&quot;)
+  # print(howEarly)
+  
+  return(howEarly)
+}
+
+
+compute_howEarly(examSubmissionTime$section[[1]],examSubmissionTime$time[[1]])
+compute_howEarly(examSubmissionTime$section[[2]],examSubmissionTime$time[[2]])
+compute_howEarly(examSubmissionTime$section[[3]],examSubmissionTime$time[[3]])
+
+
+studentSequence &lt;- 1:length(examSubmissionTime$section)
+
+library(purrr)
+map(studentSequence,
+    ~compute_howEarly(
+      examSubmissionTime$section[[.x]],
+      examSubmissionTime$time[[.x]])
+    ) -&gt; list_howEarly
+
+
+#78節和56節交卷提早時間比較
+library(magrittr)
+list_howEarly %&gt;%
+  unlist() -&gt; examSubmissionTime$howEarly
+
+pick_56 &lt;- examSubmissionTime$section==&quot;56&quot;
+mean(examSubmissionTime$howEarly[pick_56])
+median(examSubmissionTime$howEarly[pick_56])
+
+pick_78 &lt;- examSubmissionTime$section==&quot;78&quot;
+mean(examSubmissionTime$howEarly[pick_78])
+median(examSubmissionTime$howEarly[pick_78])</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -435,7 +644,7 @@ system.time(
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjA2MTAiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCueUqOWcqOOAjOafkOWAi+aineS7tuespuWQiOaJjeWft+ihjOOAjeeahOeLgOazgeOAgg0KaWYoY29uZGl0aW9uKXsNCiAgQm9keSBmb3IgVFJVRQ0KICB9DQoNCmBgYHtyfQ0KIyDlhYjln7fooYzmraTooYzovLjlhaXlrbjomZ8NCnJlYWRsaW5lKHByb21wdCA9ICLoq4vovLjlhaXkvaDnmoTlrbjomZ8iKSAtPiBzdHVkZW50SWQgDQoNCiMg5LmL5b6M5omN5Z+36KGM5Lul5LiL56iL5byPDQppZigNCiAgc3RyaW5ncjo6c3RyX2RldGVjdChzdHVkZW50SWQsJ15bNDNdKDFbMDFdWzAtOV18OVswLTldKVswLTldezV9JCcsbmVnYXRlPVQpICMgY29uZGl0aW9uOiDmmK/lkKbovLjlhaXlrbjomZ/mraPnorrvvJ8NCiAgI14kIC0+IOmAmeS4gOS4suaVuOWtl+aXouaYr+mWi+mgreS5n+aYr+e1kOWwvu+8jOS5n+WwseaYr+mAmeS4suaVuOWtl+eahOWJjeW+jOS4jeiDveWGjeacieWFtuS7luaVuOWtlw0KKSB7DQogIHdhcm5pbmcoImluY29ycmVjdCBzdHVkZW50IElEIikNCn0NCg0KDQoj5Lul5LiL5YWp6ICF55qE5beu55WwDQpwcmludCgiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0Kd2FybmluZygiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0KYGBgDQoNCmBgYHtyfQ0KaWYoIXJlcXVpcmUobHVicmlkYXRlKSl7ICMgY29uZGl0aW9uOiDmmK/lkKbjgIzmspLlronoo51sdWJyaWRhdGXjgI3vvJ8NCiAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCn0NCmx1YnJpZGF0ZTo6eW1kX2htcygiMjAyMC0wNy0wMSAxMzowMDowMCBHTVQiKQ0KYGBgDQoNCmBgYHtyfQ0KY29udmVydF9UYWl3YW5EYXRlMldlc3Rlcm5EYXRlIDwtIGZ1bmN0aW9uKHR3RGF0ZSl7DQogIGxpYnJhcnkoc3RyaW5ncikNCiAgcmVnZXhfcGF0dGVybiA8LQ0KICAgICIoPzw95rCR5ZyLKVswLTldKyg/PeW5tCkiDQogIA0KICAjIOWPluWHuuawkeWci+W5tO+8jOioiOeul+ilv+WFg+W5tA0KICB5ZWFyIDwtIA0KICAgIHN0cl9leHRyYWN0KA0KICAgICAgdHdEYXRlLA0KICAgICAgcmVnZXhfcGF0dGVybikNCiAgd2VzdGVyblllYXIgPC0gYXMuaW50ZWdlcih5ZWFyKSsxOTExDQogIA0KICAjIOabv+aPm+awkeWci3h45bm055qEeHjmiJDopb/lhYPlubTmlbjlrZcNCiAgc3RyX3JlcGxhY2UoDQogICAgdHdEYXRlLA0KICAgIHJlZ2V4X3BhdHRlcm4sICAjIOimgeaPm+aOieeahOaWh+Wtlw0KICAgIGFzLmNoYXJhY3Rlcih3ZXN0ZXJuWWVhcikgIyDopoHmm7/mj5vnmoTlhaflrrkNCiAgKSAtPiB0d0RhdGVfcmVmb3JtYXQNCiAgDQogIGx1YnJpZGF0ZTo6eW1kKHR3RGF0ZV9yZWZvcm1hdCkgLT4gd2VzdGVybkRhdGUNCiAgcmV0dXJuKHdlc3Rlcm5EYXRlKQ0KfQ0KDQp0d0RhdGUgPC0gIGMoIuawkeWcizEwOOW5tDEy5pyINeaXpSIsIuawkeWcizk45bm0MTDmnIg15pelIikNCmNvbnZlcnRfVGFpd2FuRGF0ZTJXZXN0ZXJuRGF0ZSh0d0RhdGUpDQpgYGANCg0KYGBge3J9DQpjb252ZXJ0X1RhaXdhbkRhdGUyV2VzdGVybkRhdGUgPC0gZnVuY3Rpb24odHdEYXRlKXsNCiAgDQogIGlmKCFyZXF1aXJlKCJzdHJpbmdyIikpew0KICAgIGluc3RhbGwucGFja2FnZXMoInN0cmluZ3IiKQ0KICB9DQogIGlmKCFyZXF1aXJlKCJsdWJyaWRhdGUiKSl7DQogICAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCiAgfQ0KICANCiAgbGlicmFyeShzdHJpbmdyKQ0KICByZWdleF9wYXR0ZXJuIDwtDQogICAgIig/PD3msJHlnIspWzAtOV0rKD895bm0KSINCiAgDQogICMg5Y+W5Ye65rCR5ZyL5bm077yM6KiI566X6KW/5YWD5bm0DQogIHllYXIgPC0gDQogICAgc3RyX2V4dHJhY3QoDQogICAgICB0d0RhdGUsDQogICAgICByZWdleF9wYXR0ZXJuKQ0KICB3ZXN0ZXJuWWVhciA8LSBhcy5pbnRlZ2VyKHllYXIpKzE5MTENCiAgDQogICMg5pu/5o+b5rCR5ZyLeHjlubTnmoR4eOaIkOilv+WFg+W5tOaVuOWtlw0KICBzdHJfcmVwbGFjZSgNCiAgICB0d0RhdGUsDQogICAgcmVnZXhfcGF0dGVybiwgICMg6KaB5o+b5o6J55qE5paH5a2XDQogICAgYXMuY2hhcmFjdGVyKHdlc3Rlcm5ZZWFyKSAjIOimgeabv+aPm+eahOWFp+WuuQ0KICApIC0+IHR3RGF0ZV9yZWZvcm1hdA0KICANCiAgbHVicmlkYXRlOjp5bWQodHdEYXRlX3JlZm9ybWF0KSAtPiB3ZXN0ZXJuRGF0ZQ0KICByZXR1cm4od2VzdGVybkRhdGUpDQp9DQpgYGANCg0KYGBge3J9DQoi5a+r5LiA5YCLY2hlY2tfcGFja2FnZShwa2dOYW1lKeWHveaVuO+8jOWug+acg+aqouafpeS9v+eUqOiAheaYr+WQpuacieWuieijnXBrZ05hbWXlgLzvvIhjbGFzcyBjaGFyYWN0ZXLvvIxsZW5ndGg9Me+8ieeahOWll+S7tu+8jOWmguaenOaykuacieWwseWuieijnSIgLT4gbXl0ZXh0DQoNCiNjbGlw55qE55So5rOV77yM5LiA6Iis5oyJ5Y+z6Y21Y29weeWujOeahOadseilv++8jOiXieeUsXJlYWRfY2xpcCgp5Y+v5Lul55u05o6l5b6e5Ymq6LK857C/5a2Y6YCy5L6G77yM5Lmf5bCx5LiN55So5omT5LiK6Z2i55qE6YKj5LiA5aSn5LiyDQpsaWJyYXJ5KGNsaXByKQ0KcmVhZF9jbGlwKCkgLT4gbXl0ZXh0Mg0KbXl0ZXh0Mg0KYGBgDQoNCuS4jemHjeikh+S4i+i8iQ0KYGBge3J9DQojIOaqouimluatpempn+iAl+aZgmVsYXBzZSB0aW1lDQpzeXN0ZW0udGltZSgNCiAganNvbmxpdGU6OmZyb21KU09OKCJodHRwczovL29wZW5kYXRhLmN3Yi5nb3YudHcvZmlsZWFwaS92MS9vcGVuZGF0YWFwaS9GLUMwMDMyLTAwMT9BdXRob3JpemF0aW9uPXJkZWMta2V5LTEyMy00NTY3OC0wMTExMjEzMTQmZm9ybWF0PUpTT04iKSAtPg0KICB3ZWF0aGVyX25leHQzNmhvdXJzDQopDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBg</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjA2MTAiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCueUqOWcqOOAjOafkOWAi+aineS7tuespuWQiOaJjeWft+ihjOOAjeeahOeLgOazgeOAgg0KaWYoY29uZGl0aW9uKXsNCiAgQm9keSBmb3IgVFJVRQ0KICB9DQoNCmBgYHtyfQ0KIyDlhYjln7fooYzmraTooYzovLjlhaXlrbjomZ8NCnJlYWRsaW5lKHByb21wdCA9ICLoq4vovLjlhaXkvaDnmoTlrbjomZ8iKSAtPiBzdHVkZW50SWQgDQoNCiMg5LmL5b6M5omN5Z+36KGM5Lul5LiL56iL5byPDQppZigNCiAgc3RyaW5ncjo6c3RyX2RldGVjdChzdHVkZW50SWQsJ15bNDNdKDFbMDFdWzAtOV18OVswLTldKVswLTldezV9JCcsbmVnYXRlPVQpICMgY29uZGl0aW9uOiDmmK/lkKbovLjlhaXlrbjomZ/mraPnorrvvJ8NCiAgI14kIC0+IOmAmeS4gOS4suaVuOWtl+aXouaYr+mWi+mgreS5n+aYr+e1kOWwvu+8jOS5n+WwseaYr+mAmeS4suaVuOWtl+eahOWJjeW+jOS4jeiDveWGjeacieWFtuS7luaVuOWtlw0KKSB7DQogIHdhcm5pbmcoImluY29ycmVjdCBzdHVkZW50IElEIikNCn0NCg0KDQoj5Lul5LiL5YWp6ICF55qE5beu55WwDQpwcmludCgiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0Kd2FybmluZygiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0KYGBgDQoNCmBgYHtyfQ0KaWYoIXJlcXVpcmUobHVicmlkYXRlKSl7ICMgY29uZGl0aW9uOiDmmK/lkKbjgIzmspLlronoo51sdWJyaWRhdGXjgI3vvJ8NCiAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCn0NCmx1YnJpZGF0ZTo6eW1kX2htcygiMjAyMC0wNy0wMSAxMzowMDowMCBHTVQiKQ0KYGBgDQoNCmBgYHtyfQ0KY29udmVydF9UYWl3YW5EYXRlMldlc3Rlcm5EYXRlIDwtIGZ1bmN0aW9uKHR3RGF0ZSl7DQogIGxpYnJhcnkoc3RyaW5ncikNCiAgcmVnZXhfcGF0dGVybiA8LQ0KICAgICIoPzw95rCR5ZyLKVswLTldKyg/PeW5tCkiDQogIA0KICAjIOWPluWHuuawkeWci+W5tO+8jOioiOeul+ilv+WFg+W5tA0KICB5ZWFyIDwtIA0KICAgIHN0cl9leHRyYWN0KA0KICAgICAgdHdEYXRlLA0KICAgICAgcmVnZXhfcGF0dGVybikNCiAgd2VzdGVyblllYXIgPC0gYXMuaW50ZWdlcih5ZWFyKSsxOTExDQogIA0KICAjIOabv+aPm+awkeWci3h45bm055qEeHjmiJDopb/lhYPlubTmlbjlrZcNCiAgc3RyX3JlcGxhY2UoDQogICAgdHdEYXRlLA0KICAgIHJlZ2V4X3BhdHRlcm4sICAjIOimgeaPm+aOieeahOaWh+Wtlw0KICAgIGFzLmNoYXJhY3Rlcih3ZXN0ZXJuWWVhcikgIyDopoHmm7/mj5vnmoTlhaflrrkNCiAgKSAtPiB0d0RhdGVfcmVmb3JtYXQNCiAgDQogIGx1YnJpZGF0ZTo6eW1kKHR3RGF0ZV9yZWZvcm1hdCkgLT4gd2VzdGVybkRhdGUNCiAgcmV0dXJuKHdlc3Rlcm5EYXRlKQ0KfQ0KDQp0d0RhdGUgPC0gIGMoIuawkeWcizEwOOW5tDEy5pyINeaXpSIsIuawkeWcizk45bm0MTDmnIg15pelIikNCmNvbnZlcnRfVGFpd2FuRGF0ZTJXZXN0ZXJuRGF0ZSh0d0RhdGUpDQpgYGANCg0KYGBge3J9DQpjb252ZXJ0X1RhaXdhbkRhdGUyV2VzdGVybkRhdGUgPC0gZnVuY3Rpb24odHdEYXRlKXsNCiAgDQogIGlmKCFyZXF1aXJlKCJzdHJpbmdyIikpew0KICAgIGluc3RhbGwucGFja2FnZXMoInN0cmluZ3IiKQ0KICB9DQogIGlmKCFyZXF1aXJlKCJsdWJyaWRhdGUiKSl7DQogICAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCiAgfQ0KICANCiAgbGlicmFyeShzdHJpbmdyKQ0KICByZWdleF9wYXR0ZXJuIDwtDQogICAgIig/PD3msJHlnIspWzAtOV0rKD895bm0KSINCiAgDQogICMg5Y+W5Ye65rCR5ZyL5bm077yM6KiI566X6KW/5YWD5bm0DQogIHllYXIgPC0gDQogICAgc3RyX2V4dHJhY3QoDQogICAgICB0d0RhdGUsDQogICAgICByZWdleF9wYXR0ZXJuKQ0KICB3ZXN0ZXJuWWVhciA8LSBhcy5pbnRlZ2VyKHllYXIpKzE5MTENCiAgDQogICMg5pu/5o+b5rCR5ZyLeHjlubTnmoR4eOaIkOilv+WFg+W5tOaVuOWtlw0KICBzdHJfcmVwbGFjZSgNCiAgICB0d0RhdGUsDQogICAgcmVnZXhfcGF0dGVybiwgICMg6KaB5o+b5o6J55qE5paH5a2XDQogICAgYXMuY2hhcmFjdGVyKHdlc3Rlcm5ZZWFyKSAjIOimgeabv+aPm+eahOWFp+WuuQ0KICApIC0+IHR3RGF0ZV9yZWZvcm1hdA0KICANCiAgbHVicmlkYXRlOjp5bWQodHdEYXRlX3JlZm9ybWF0KSAtPiB3ZXN0ZXJuRGF0ZQ0KICByZXR1cm4od2VzdGVybkRhdGUpDQp9DQpgYGANCg0KYGBge3J9DQoi5a+r5LiA5YCLY2hlY2tfcGFja2FnZShwa2dOYW1lKeWHveaVuO+8jOWug+acg+aqouafpeS9v+eUqOiAheaYr+WQpuacieWuieijnXBrZ05hbWXlgLzvvIhjbGFzcyBjaGFyYWN0ZXLvvIxsZW5ndGg9Me+8ieeahOWll+S7tu+8jOWmguaenOaykuacieWwseWuieijnSIgLT4gbXl0ZXh0DQoNCiNjbGlw55qE55So5rOV77yM5LiA6Iis5oyJ5Y+z6Y21Y29weeWujOeahOadseilv++8jOiXieeUsXJlYWRfY2xpcCgp5Y+v5Lul55u05o6l5b6e5Ymq6LK857C/5a2Y6YCy5L6G77yM5Lmf5bCx5LiN55So5omT5LiK6Z2i55qE6YKj5LiA5aSn5LiyDQpsaWJyYXJ5KGNsaXByKQ0KcmVhZF9jbGlwKCkgLT4gbXl0ZXh0Mg0KbXl0ZXh0Mg0KYGBgDQoNCuS4jemHjeikh+S4i+i8iQ0KYGBge3J9DQojIOaqouimluatpempn+iAl+aZgmVsYXBzZSB0aW1lDQpzeXN0ZW0udGltZSgNCiAganNvbmxpdGU6OmZyb21KU09OKCJodHRwczovL29wZW5kYXRhLmN3Yi5nb3YudHcvZmlsZWFwaS92MS9vcGVuZGF0YWFwaS9GLUMwMDMyLTAwMT9BdXRob3JpemF0aW9uPXJkZWMta2V5LTEyMy00NTY3OC0wMTExMjEzMTQmZm9ybWF0PUpTT04iKSAtPg0KICB3ZWF0aGVyX25leHQzNmhvdXJzDQopDQpgYGANCg0KYGBge3J9DQpybSh3ZWF0aGVyX25leHQzNmhvdXJzKQ0KDQppZighZXhpc3RzKCJ3ZWF0aGVyX25leHQzNmhvdXJzIikpew0KICAgIGpzb25saXRlOjpmcm9tSlNPTigiaHR0cHM6Ly9vcGVuZGF0YS5jd2IuZ292LnR3L2ZpbGVhcGkvdjEvb3BlbmRhdGFhcGkvRi1DMDAzMi0wMDE/QXV0aG9yaXphdGlvbj1yZGVjLWtleS0xMjMtNDU2NzgtMDExMTIxMzE0JmZvcm1hdD1KU09OIikgLT4NCiAgICB3ZWF0aGVyX25leHQzNmhvdXJzDQogIFNPQVI6OlN0b3JlKHdlYXRoZXJfbmV4dDM2aG91cnMpICMg5a2Y5ZyoLlJfY2FjaGUgZW52aXJvbm1lbnTkuK0gLT4g5Ym16YCg5LiA5YCL5L2U5a2Y55qE55Kw5aKDDQp9DQoNCmV4aXN0cygid2VhdGhlcl9uZXh0MzZob3VycyIpDQpgYGANCg0KYGBge3J9DQphc2tTaWxseV93ZWF0aGVyIDwtIGZ1bmN0aW9uKGxvY2F0aW9uSW5wdXQsZGF0ZUlucHV0KXsNCiAganNvbmxpdGU6OmZyb21KU09OKCJodHRwczovL29wZW5kYXRhLmN3Yi5nb3YudHcvZmlsZWFwaS92MS9vcGVuZGF0YWFwaS9GLUMwMDMyLTAwMT9BdXRob3JpemF0aW9uPXJkZWMta2V5LTEyMy00NTY3OC0wMTExMjEzMTQmZm9ybWF0PUpTT04iKSAtPg0KICB3ZWF0aGVyX25leHQzNmhvdXJzDQogIA0KICAod2VhdGhlcl9uZXh0MzZob3VycyRjd2JvcGVuZGF0YSRkYXRhc2V0JGxvY2F0aW9uJGxvY2F0aW9uTmFtZSA9PSBsb2NhdGlvbklucHV0KSAtPiBwaWNrX2xvY2F0aW9uDQogIA0KICB3ZWF0aGVyX25leHQzNmhvdXJzJGN3Ym9wZW5kYXRhJGRhdGFzZXQkbG9jYXRpb24kd2VhdGhlckVsZW1lbnRbcGlja19sb2NhdGlvbl1bWzFdXSAtPiB3ZWF0aGVyQXRMb2NhdGlvbg0KICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PSJNYXhUIikgLT4NCiAgICBwaWNrX01heFQNCiAgKHdlYXRoZXJBdExvY2F0aW9uJGVsZW1lbnROYW1lPT0iTWluVCIpIC0+DQogICAgcGlja19NaW5UDQogIHdlYXRoZXJBdExvY2F0aW9uJHRpbWVbcGlja19NYXhUXVtbMV1dJHBhcmFtZXRlciRwYXJhbWV0ZXJOYW1lW1sxXV0gLT4gbWF4VA0KICB3ZWF0aGVyQXRMb2NhdGlvbiR0aW1lW3BpY2tfTWluVF1bWzFdXSRwYXJhbWV0ZXIkcGFyYW1ldGVyTmFtZVtbMV1dIC0+IG1pblQNCiAgDQogIGdsdWU6OmdsdWUoIntsb2NhdGlvbklucHV0fSB7ZGF0ZUlucHV0fSDmsKPmuqvvvIzmnIDpq5h7bWF4VH3luqbvvIzmnIDkvY57bWluVH3luqbjgIIiKQ0KfQ0KYGBgDQoNCmBgYHtyfQ0KYXNrU2lsbHlfd2VhdGhlcjIgPC0gZnVuY3Rpb24obG9jYXRpb25JbnB1dCxkYXRlSW5wdXQpew0KICBpZighZXhpc3RzKCJ3ZWF0aGVyX25leHQzNmhvdXJzIikpew0KICAgICAganNvbmxpdGU6OmZyb21KU09OKCJodHRwczovL29wZW5kYXRhLmN3Yi5nb3YudHcvZmlsZWFwaS92MS9vcGVuZGF0YWFwaS9GLUMwMDMyLTAwMT9BdXRob3JpemF0aW9uPXJkZWMta2V5LTEyMy00NTY3OC0wMTExMjEzMTQmZm9ybWF0PUpTT04iKSAtPg0KICAgICAgd2VhdGhlcl9uZXh0MzZob3Vycw0KICAgIFNPQVI6OlN0b3JlKHdlYXRoZXJfbmV4dDM2aG91cnMpICMg5a2Y5ZyoLlJfY2FjaGUgZW52aXJvbm1lbnTkuK0NCiAgfSAgDQogICh3ZWF0aGVyX25leHQzNmhvdXJzJGN3Ym9wZW5kYXRhJGRhdGFzZXQkbG9jYXRpb24kbG9jYXRpb25OYW1lID09IGxvY2F0aW9uSW5wdXQpIC0+IHBpY2tfbG9jYXRpb24NCiAgDQogIHdlYXRoZXJfbmV4dDM2aG91cnMkY3dib3BlbmRhdGEkZGF0YXNldCRsb2NhdGlvbiR3ZWF0aGVyRWxlbWVudFtwaWNrX2xvY2F0aW9uXVtbMV1dIC0+IHdlYXRoZXJBdExvY2F0aW9uDQogICh3ZWF0aGVyQXRMb2NhdGlvbiRlbGVtZW50TmFtZT09Ik1heFQiKSAtPg0KICAgIHBpY2tfTWF4VA0KICAod2VhdGhlckF0TG9jYXRpb24kZWxlbWVudE5hbWU9PSJNaW5UIikgLT4NCiAgICBwaWNrX01pblQNCiAgd2VhdGhlckF0TG9jYXRpb24kdGltZVtwaWNrX01heFRdW1sxXV0kcGFyYW1ldGVyJHBhcmFtZXRlck5hbWVbWzFdXSAtPiBtYXhUDQogIHdlYXRoZXJBdExvY2F0aW9uJHRpbWVbcGlja19NaW5UXVtbMV1dJHBhcmFtZXRlciRwYXJhbWV0ZXJOYW1lW1sxXV0gLT4gbWluVA0KICANCiAgZ2x1ZTo6Z2x1ZSgie2xvY2F0aW9uSW5wdXR9IHtkYXRlSW5wdXR9IOawo+a6q++8jOacgOmrmHttYXhUfeW6pu+8jOacgOS9jnttaW5UfeW6puOAgiIpDQp9DQpgYGANCg0KYGBge3J9DQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCnN5c3RlbS50aW1lKA0KICBhc2tTaWxseV93ZWF0aGVyKCLmlrDljJfluIIiLHRvZGF5KCkpDQopDQpzeXN0ZW0udGltZSgNCiAgYXNrU2lsbHlfd2VhdGhlcigi6Ie65YyX5biCIix0b2RheSgpKQ0KKQ0KDQphc2tTaWxseV93ZWF0aGVyKCLmlrDljJfluIIiLHRvZGF5KCkpDQphc2tTaWxseV93ZWF0aGVyKCLoh7rljJfluIIiLHRvZGF5KCkpDQpgYGANCg0KYGBge3J9DQpTT0FSOjpSZW1vdmUod2VhdGhlcl9uZXh0MzZob3VycykNCnN5c3RlbS50aW1lKA0KICBhc2tTaWxseV93ZWF0aGVyMigi5paw5YyX5biCIix0b2RheSgpKQ0KKQ0Kc3lzdGVtLnRpbWUoDQogIGFza1NpbGx5X3dlYXRoZXIyKCLoh7rljJfluIIiLHRvZGF5KCkpDQopDQoNCmFza1NpbGx5X3dlYXRoZXIyKCLmlrDljJfluIIiLHRvZGF5KCkpDQphc2tTaWxseV93ZWF0aGVyMigi6Ie65YyX5biCIix0b2RheSgpKQ0KYGBgDQoNCmlmKGNvbmRpdGlvbil7DQogIGJvZHkgZm9yIFRSVUUgY29uZGl0aW9uDQp9IGVsc2Ugew0KICBib2R5IGZvciBGQUxTRSBjb25kaXRpb24NCn0NCg0KYGBge3J9DQojIG4g54K65YG25pW4DQpuIDwtIDU0DQpmdmFsdWUgPC0gbi8yDQoNCiMgbiDngrrlpYfmlbgNCm4gPC0gMzMNCmZ2YWx1ZSA8LSAtKG4rMSkvMg0KYGBgDQoNCmBgYHtyfQ0KKG4gJSUgMik9PTEgIyDooajnpLrjgIzlpYfmlbjjgI07IOaIli4uLg0KDQphcy5sb2dpY2FsKG4gJSUgMikgIyDlj6rmnIkw5pyD6K6KRu+8jOWFtuS7luaVuOWAvOmDveaYr1QNCmBgYA0KDQpgYGB7cn0NCm4gPC0gNTQNCmlmKGFzLmxvZ2ljYWwobiAlJSAyKSl7DQogIGZ2YWx1ZSA8LSAtKG4rMSkvMg0KfSBlbHNlIHsNCiAgZnZhbHVlIDwtIG4vMg0KfQ0KcHJpbnQoZnZhbHVlKQ0KDQoNCm15RnVuIDwtIGZ1bmN0aW9uKG4pew0KICBpZihhcy5sb2dpY2FsKG4gJSUgMikpew0KICAgIGZ2YWx1ZSA8LSAtKG4rMSkvMg0KICB9IGVsc2Ugew0KICAgIGZ2YWx1ZSA8LSBuLzINCiAgfQ0KICByZXR1cm4oZnZhbHVlKQ0KfQ0KDQpteUZ1big1NCkNCm15RnVuKDMzKQ0KYGBgDQoNCmBgYHtyfQ0KanNvbmxpdGU6OmZyb21KU09OKCJodHRwczovL3d3dy5kcm9wYm94LmNvbS9zL2QxNGo1aHAzaTVwczY1Ny9leGFtU3VibWlzc2lvblRpbWVzLmpzb24/ZGw9MSIpIC0+IGV4YW1TdWJtaXNzaW9uVGltZQ0KDQoNCmhlYWQoZXhhbVN1Ym1pc3Npb25UaW1lJHNlY3Rpb24pDQpoZWFkKGV4YW1TdWJtaXNzaW9uVGltZSR0aW1lKQ0KYGBgDQoNCuaykuacieWIhuatp+aDheWigw0K5Y+q5pyJ5LiA5YCL5Lqk5Y235pmC6ZaT77yaDQpgYGB7cn0NCmk8LTENCnN0dWRlbnRfaV9zZWN0aW9uIDwtIGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uW1tpXV0NCnN0dWRlbnRfaV90aW1lIDwtIGV4YW1TdWJtaXNzaW9uVGltZSR0aW1lW1tpXV0NCg0KZGVhZGxpbmUgPC0gbHVicmlkYXRlOjp5bWRfaG1zKCIyMDIwLTA1LTI3IDE1OjAwOjAwIiwgdHo9IkFzaWEvVGFpcGVpIikgDQoNCmhvd0Vhcmx5IDwtIGRlYWRsaW5lIC0gbHVicmlkYXRlOjp5bWRfaG1zKA0KICBzdHVkZW50X2lfdGltZSwgdHo9IkFzaWEvVGFpcGVpIikgDQpwcmludChob3dFYXJseSkNCmBgYA0KDQrmnInliIbmrafmg4XlooMNCuacieWFqeWAi+S6pOWNt+aZgumWk++8mg0KYGBge3J9DQppPC0xDQpzdHVkZW50X2lfc2VjdGlvbiA8LSBleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbltbaV1dDQpzdHVkZW50X2lfdGltZSA8LSBleGFtU3VibWlzc2lvblRpbWUkdGltZVtbaV1dDQoNCmlmKHN0dWRlbnRfaV9zZWN0aW9uPT0iNTYiKXsNCiAgZGVhZGxpbmUgPC0gbHVicmlkYXRlOjp5bWRfaG1zKCIyMDIwLTA1LTI3IDE1OjAwOjAwIiwgdHo9IkFzaWEvVGFpcGVpIikNCn0gZWxzZSB7DQogIGRlYWRsaW5lIDwtIGx1YnJpZGF0ZTo6eW1kX2htcygiMjAyMC0wNS0yNyAxNzowMDowMCIsIHR6PSJBc2lhL1RhaXBlaSIpDQp9DQoNCmhvd0Vhcmx5IDwtIGRlYWRsaW5lIC0gbHVicmlkYXRlOjp5bWRfaG1zKHN0dWRlbnRfaV90aW1lLCB0ej0iQXNpYS9UYWlwZWkiKQ0KcHJpbnQoaG93RWFybHkpDQpgYGANCg0KZnVuY3Rpb24rbWFw55qE55So5rOVDQpgYGB7cn0NCmNvbXB1dGVfaG93RWFybHkgPC0gZnVuY3Rpb24oc3R1ZGVudF9pX3NlY3Rpb24sIHN0dWRlbnRfaV90aW1lKXsNCiAgIyBzdHVkZW50X2lfc2VjdGlvbiA8LSBleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbltbaV1dDQogICMgc3R1ZGVudF9pX3RpbWUgPC0gZXhhbVN1Ym1pc3Npb25UaW1lJHRpbWVbW2ldXQ0KICANCiAgaWYoc3R1ZGVudF9pX3NlY3Rpb249PSI1NiIpew0KICAgIGRlYWRsaW5lIDwtIGx1YnJpZGF0ZTo6eW1kX2htcygiMjAyMC0wNS0yNyAxNTowMDowMCIsIHR6PSJBc2lhL1RhaXBlaSIpDQogIH0gZWxzZSB7DQogICAgZGVhZGxpbmUgPC0gbHVicmlkYXRlOjp5bWRfaG1zKCIyMDIwLTA1LTI3IDE3OjAwOjAwIiwgdHo9IkFzaWEvVGFpcGVpIikNCiAgfQ0KICANCiAgaG93RWFybHkgPC0gZGVhZGxpbmUgLSBsdWJyaWRhdGU6OnltZF9obXMoc3R1ZGVudF9pX3RpbWUsIHR6PSJBc2lhL1RhaXBlaSIpDQogICMgcHJpbnQoaG93RWFybHkpDQogIA0KICByZXR1cm4oaG93RWFybHkpDQp9DQoNCg0KY29tcHV0ZV9ob3dFYXJseShleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbltbMV1dLGV4YW1TdWJtaXNzaW9uVGltZSR0aW1lW1sxXV0pDQpjb21wdXRlX2hvd0Vhcmx5KGV4YW1TdWJtaXNzaW9uVGltZSRzZWN0aW9uW1syXV0sZXhhbVN1Ym1pc3Npb25UaW1lJHRpbWVbWzJdXSkNCmNvbXB1dGVfaG93RWFybHkoZXhhbVN1Ym1pc3Npb25UaW1lJHNlY3Rpb25bWzNdXSxleGFtU3VibWlzc2lvblRpbWUkdGltZVtbM11dKQ0KDQoNCnN0dWRlbnRTZXF1ZW5jZSA8LSAxOmxlbmd0aChleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbikNCg0KbGlicmFyeShwdXJycikNCm1hcChzdHVkZW50U2VxdWVuY2UsDQogICAgfmNvbXB1dGVfaG93RWFybHkoDQogICAgICBleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbltbLnhdXSwNCiAgICAgIGV4YW1TdWJtaXNzaW9uVGltZSR0aW1lW1sueF1dKQ0KICAgICkgLT4gbGlzdF9ob3dFYXJseQ0KDQoNCiM3OOevgOWSjDU256+A5Lqk5Y235o+Q5pep5pmC6ZaT5q+U6LyDDQpsaWJyYXJ5KG1hZ3JpdHRyKQ0KbGlzdF9ob3dFYXJseSAlPiUNCiAgdW5saXN0KCkgLT4gZXhhbVN1Ym1pc3Npb25UaW1lJGhvd0Vhcmx5DQoNCnBpY2tfNTYgPC0gZXhhbVN1Ym1pc3Npb25UaW1lJHNlY3Rpb249PSI1NiINCm1lYW4oZXhhbVN1Ym1pc3Npb25UaW1lJGhvd0Vhcmx5W3BpY2tfNTZdKQ0KbWVkaWFuKGV4YW1TdWJtaXNzaW9uVGltZSRob3dFYXJseVtwaWNrXzU2XSkNCg0KcGlja183OCA8LSBleGFtU3VibWlzc2lvblRpbWUkc2VjdGlvbj09Ijc4Ig0KbWVhbihleGFtU3VibWlzc2lvblRpbWUkaG93RWFybHlbcGlja183OF0pDQptZWRpYW4oZXhhbVN1Ym1pc3Npb25UaW1lJGhvd0Vhcmx5W3BpY2tfNzhdKQ0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBg</div>
 
 
 
