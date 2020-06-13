@@ -1,0 +1,120 @@
+---
+title: "0610"
+output: html_notebook
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+用在「某個條件符合才執行」的狀況。
+if(condition){
+  Body for TRUE
+  }
+
+```{r}
+# 先執行此行輸入學號
+readline(prompt = "請輸入你的學號") -> studentId 
+
+# 之後才執行以下程式
+if(
+  stringr::str_detect(studentId,'^[43](1[01][0-9]|9[0-9])[0-9]{5}$',negate=T) # condition: 是否輸入學號正確？
+  #^$ -> 這一串數字既是開頭也是結尾，也就是這串數字的前後不能再有其他數字
+) {
+  warning("incorrect student ID")
+}
+
+
+#以下兩者的差異
+print("incorrect student ID")
+warning("incorrect student ID")
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
