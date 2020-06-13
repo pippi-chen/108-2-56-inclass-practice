@@ -100,11 +100,21 @@ convert_TaiwanDate2WesternDate <- function(twDate){
 ```
 
 ```{r}
+"寫一個check_package(pkgName)函數，它會檢查使用者是否有安裝pkgName值（class character，length=1）的套件，如果沒有就安裝" -> mytext
 
+#clip的用法，一般按右鍵copy完的東西，藉由read_clip()可以直接從剪貼簿存進來，也就不用打上面的那一大串
+library(clipr)
+read_clip() -> mytext2
+mytext2
 ```
 
+不重複下載
 ```{r}
-
+# 檢視步驟耗時elapse time
+system.time(
+  jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+)
 ```
 
 ```{r}
