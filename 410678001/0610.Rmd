@@ -327,26 +327,41 @@ mean(examSubmissionTime$howEarly[pick_78])
 median(examSubmissionTime$howEarly[pick_78])
 ```
 
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
+if(condition A){
+  body for A 
+} else if(condition B){
+  body for B
+} else if(condition C){
+  body for C
+} else {
+  body for none of the above
+}
 
 ```{r}
+readline("請輸入你的成績（整數）： ") -> grade # 單獨執行
 
+if(grade >=90){
+  print("優")
+} else if(grade>=80 & grade<=89){
+  print("良")
+} else if(grade>=70 & grade<=79){
+  print("尚可")
+} else {
+  print("待加強")
+}
 ```
 
+各情境一定要互斥，即不可以有兩個情境有可能同時為TRUE，如果發生多個情境吻合會以第一個結果的body來執行。
 ```{r}
-
+grade <- 80
+if(grade >=90){
+  print("優")
+} else if(grade>=75 & grade<=89){
+  print("良")
+} else if(grade>=70 & grade<=85){
+  print("尚可")
+} else {
+  print("待加強")
+}
 ```
 
-```{r}
-
-```
