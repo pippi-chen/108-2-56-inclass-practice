@@ -32,15 +32,71 @@ warning("incorrect student ID")
 ```
 
 ```{r}
-
+if(!require(lubridate)){ # condition: 是否「沒安裝lubridate」？
+  install.packages("lubridate")
+}
+lubridate::ymd_hms("2020-07-01 13:00:00 GMT")
 ```
 
 ```{r}
+convert_TaiwanDate2WesternDate <- function(twDate){
+  library(stringr)
+  regex_pattern <-
+    "(?<=民國)[0-9]+(?=年)"
+  
+  # 取出民國年，計算西元年
+  year <- 
+    str_extract(
+      twDate,
+      regex_pattern)
+  westernYear <- as.integer(year)+1911
+  
+  # 替換民國xx年的xx成西元年數字
+  str_replace(
+    twDate,
+    regex_pattern,  # 要換掉的文字
+    as.character(westernYear) # 要替換的內容
+  ) -> twDate_reformat
+  
+  lubridate::ymd(twDate_reformat) -> westernDate
+  return(westernDate)
+}
 
+twDate <-  c("民國108年12月5日","民國98年10月5日")
+convert_TaiwanDate2WesternDate(twDate)
 ```
 
 ```{r}
-
+convert_TaiwanDate2WesternDate <- function(twDate){
+  
+  if(!require("stringr")){
+    install.packages("stringr")
+  }
+  if(!require("lubridate")){
+    install.packages("lubridate")
+  }
+  
+  library(stringr)
+  regex_pattern <-
+    "(?<=民國)[0-9]+(?=年)"
+  
+  # 取出民國年，計算西元年
+  year <- 
+    str_extract(
+      twDate,
+      regex_pattern)
+  westernYear <- as.integer(year)+1911
+  
+  # 替換民國xx年的xx成西元年數字
+  str_replace(
+    twDate,
+    regex_pattern,  # 要換掉的文字
+    as.character(westernYear) # 要替換的內容
+  ) -> twDate_reformat
+  
+  lubridate::ymd(twDate_reformat) -> westernDate
+  return(westernDate)
+}
 ```
 
 ```{r}

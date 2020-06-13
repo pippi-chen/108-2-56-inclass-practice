@@ -249,14 +249,79 @@ summary {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWYoIXJlcXVpcmUobHVicmlkYXRlKSl7ICMgY29uZGl0aW9uOiDmmK/lkKbjgIzmspLlronoo51sdWJyaWRhdGXjgI3vvJ9cbiAgaW5zdGFsbC5wYWNrYWdlcyhcImx1YnJpZGF0ZVwiKVxufVxubHVicmlkYXRlOjp5bWRfaG1zKFwiMjAyMC0wNy0wMSAxMzowMDowMCBHTVRcIilcbmBgYCJ9 -->
+<pre class="r"><code>if(!require(lubridate)){ # condition: 是否「沒安裝lubridate」？
+  install.packages(&quot;lubridate&quot;)
+}
+lubridate::ymd_hms(&quot;2020-07-01 13:00:00 GMT&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29udmVydF9UYWl3YW5EYXRlMldlc3Rlcm5EYXRlIDwtIGZ1bmN0aW9uKHR3RGF0ZSl7XG4gIGxpYnJhcnkoc3RyaW5ncilcbiAgcmVnZXhfcGF0dGVybiA8LVxuICAgIFwiKD88PeawkeWciylbMC05XSsoPz3lubQpXCJcbiAgXG4gICMg5Y+W5Ye65rCR5ZyL5bm077yM6KiI566X6KW/5YWD5bm0XG4gIHllYXIgPC0gXG4gICAgc3RyX2V4dHJhY3QoXG4gICAgICB0d0RhdGUsXG4gICAgICByZWdleF9wYXR0ZXJuKVxuICB3ZXN0ZXJuWWVhciA8LSBhcy5pbnRlZ2VyKHllYXIpKzE5MTFcbiAgXG4gICMg5pu/5o+b5rCR5ZyLeHjlubTnmoR4eOaIkOilv+WFg+W5tOaVuOWtl1xuICBzdHJfcmVwbGFjZShcbiAgICB0d0RhdGUsXG4gICAgcmVnZXhfcGF0dGVybiwgICMg6KaB5o+b5o6J55qE5paH5a2XXG4gICAgYXMuY2hhcmFjdGVyKHdlc3Rlcm5ZZWFyKSAjIOimgeabv+aPm+eahOWFp+WuuVxuICApIC0+IHR3RGF0ZV9yZWZvcm1hdFxuICBcbiAgbHVicmlkYXRlOjp5bWQodHdEYXRlX3JlZm9ybWF0KSAtPiB3ZXN0ZXJuRGF0ZVxuICByZXR1cm4od2VzdGVybkRhdGUpXG59XG5cbnR3RGF0ZSA8LSAgYyhcIuawkeWcizEwOOW5tDEy5pyINeaXpVwiLFwi5rCR5ZyLOTjlubQxMOaciDXml6VcIilcbmNvbnZlcnRfVGFpd2FuRGF0ZTJXZXN0ZXJuRGF0ZSh0d0RhdGUpXG5gYGAifQ== -->
+<pre class="r"><code>convert_TaiwanDate2WesternDate &lt;- function(twDate){
+  library(stringr)
+  regex_pattern &lt;-
+    &quot;(?&lt;=民國)[0-9]+(?=年)&quot;
+  
+  # 取出民國年，計算西元年
+  year &lt;- 
+    str_extract(
+      twDate,
+      regex_pattern)
+  westernYear &lt;- as.integer(year)+1911
+  
+  # 替換民國xx年的xx成西元年數字
+  str_replace(
+    twDate,
+    regex_pattern,  # 要換掉的文字
+    as.character(westernYear) # 要替換的內容
+  ) -&gt; twDate_reformat
+  
+  lubridate::ymd(twDate_reformat) -&gt; westernDate
+  return(westernDate)
+}
+
+twDate &lt;-  c(&quot;民國108年12月5日&quot;,&quot;民國98年10月5日&quot;)
+convert_TaiwanDate2WesternDate(twDate)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29udmVydF9UYWl3YW5EYXRlMldlc3Rlcm5EYXRlIDwtIGZ1bmN0aW9uKHR3RGF0ZSl7XG4gIFxuICBpZighcmVxdWlyZShcInN0cmluZ3JcIikpe1xuICAgIGluc3RhbGwucGFja2FnZXMoXCJzdHJpbmdyXCIpXG4gIH1cbiAgaWYoIXJlcXVpcmUoXCJsdWJyaWRhdGVcIikpe1xuICAgIGluc3RhbGwucGFja2FnZXMoXCJsdWJyaWRhdGVcIilcbiAgfVxuICBcbiAgbGlicmFyeShzdHJpbmdyKVxuICByZWdleF9wYXR0ZXJuIDwtXG4gICAgXCIoPzw95rCR5ZyLKVswLTldKyg/PeW5tClcIlxuICBcbiAgIyDlj5blh7rmsJHlnIvlubTvvIzoqIjnrpfopb/lhYPlubRcbiAgeWVhciA8LSBcbiAgICBzdHJfZXh0cmFjdChcbiAgICAgIHR3RGF0ZSxcbiAgICAgIHJlZ2V4X3BhdHRlcm4pXG4gIHdlc3Rlcm5ZZWFyIDwtIGFzLmludGVnZXIoeWVhcikrMTkxMVxuICBcbiAgIyDmm7/mj5vmsJHlnIt4eOW5tOeahHh45oiQ6KW/5YWD5bm05pW45a2XXG4gIHN0cl9yZXBsYWNlKFxuICAgIHR3RGF0ZSxcbiAgICByZWdleF9wYXR0ZXJuLCAgIyDopoHmj5vmjonnmoTmloflrZdcbiAgICBhcy5jaGFyYWN0ZXIod2VzdGVyblllYXIpICMg6KaB5pu/5o+b55qE5YWn5a65XG4gICkgLT4gdHdEYXRlX3JlZm9ybWF0XG4gIFxuICBsdWJyaWRhdGU6OnltZCh0d0RhdGVfcmVmb3JtYXQpIC0+IHdlc3Rlcm5EYXRlXG4gIHJldHVybih3ZXN0ZXJuRGF0ZSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>convert_TaiwanDate2WesternDate &lt;- function(twDate){
+  
+  if(!require(&quot;stringr&quot;)){
+    install.packages(&quot;stringr&quot;)
+  }
+  if(!require(&quot;lubridate&quot;)){
+    install.packages(&quot;lubridate&quot;)
+  }
+  
+  library(stringr)
+  regex_pattern &lt;-
+    &quot;(?&lt;=民國)[0-9]+(?=年)&quot;
+  
+  # 取出民國年，計算西元年
+  year &lt;- 
+    str_extract(
+      twDate,
+      regex_pattern)
+  westernYear &lt;- as.integer(year)+1911
+  
+  # 替換民國xx年的xx成西元年數字
+  str_replace(
+    twDate,
+    regex_pattern,  # 要換掉的文字
+    as.character(westernYear) # 要替換的內容
+  ) -&gt; twDate_reformat
+  
+  lubridate::ymd(twDate_reformat) -&gt; westernDate
+  return(westernDate)
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -335,7 +400,7 @@ summary {
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjA2MTAiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCueUqOWcqOOAjOafkOWAi+aineS7tuespuWQiOaJjeWft+ihjOOAjeeahOeLgOazgeOAgg0KaWYoY29uZGl0aW9uKXsNCiAgQm9keSBmb3IgVFJVRQ0KICB9DQoNCmBgYHtyfQ0KIyDlhYjln7fooYzmraTooYzovLjlhaXlrbjomZ8NCnJlYWRsaW5lKHByb21wdCA9ICLoq4vovLjlhaXkvaDnmoTlrbjomZ8iKSAtPiBzdHVkZW50SWQgDQoNCiMg5LmL5b6M5omN5Z+36KGM5Lul5LiL56iL5byPDQppZigNCiAgc3RyaW5ncjo6c3RyX2RldGVjdChzdHVkZW50SWQsJ15bNDNdKDFbMDFdWzAtOV18OVswLTldKVswLTldezV9JCcsbmVnYXRlPVQpICMgY29uZGl0aW9uOiDmmK/lkKbovLjlhaXlrbjomZ/mraPnorrvvJ8NCiAgI14kIC0+IOmAmeS4gOS4suaVuOWtl+aXouaYr+mWi+mgreS5n+aYr+e1kOWwvu+8jOS5n+WwseaYr+mAmeS4suaVuOWtl+eahOWJjeW+jOS4jeiDveWGjeacieWFtuS7luaVuOWtlw0KKSB7DQogIHdhcm5pbmcoImluY29ycmVjdCBzdHVkZW50IElEIikNCn0NCg0KDQoj5Lul5LiL5YWp6ICF55qE5beu55WwDQpwcmludCgiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0Kd2FybmluZygiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGA=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjA2MTAiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCueUqOWcqOOAjOafkOWAi+aineS7tuespuWQiOaJjeWft+ihjOOAjeeahOeLgOazgeOAgg0KaWYoY29uZGl0aW9uKXsNCiAgQm9keSBmb3IgVFJVRQ0KICB9DQoNCmBgYHtyfQ0KIyDlhYjln7fooYzmraTooYzovLjlhaXlrbjomZ8NCnJlYWRsaW5lKHByb21wdCA9ICLoq4vovLjlhaXkvaDnmoTlrbjomZ8iKSAtPiBzdHVkZW50SWQgDQoNCiMg5LmL5b6M5omN5Z+36KGM5Lul5LiL56iL5byPDQppZigNCiAgc3RyaW5ncjo6c3RyX2RldGVjdChzdHVkZW50SWQsJ15bNDNdKDFbMDFdWzAtOV18OVswLTldKVswLTldezV9JCcsbmVnYXRlPVQpICMgY29uZGl0aW9uOiDmmK/lkKbovLjlhaXlrbjomZ/mraPnorrvvJ8NCiAgI14kIC0+IOmAmeS4gOS4suaVuOWtl+aXouaYr+mWi+mgreS5n+aYr+e1kOWwvu+8jOS5n+WwseaYr+mAmeS4suaVuOWtl+eahOWJjeW+jOS4jeiDveWGjeacieWFtuS7luaVuOWtlw0KKSB7DQogIHdhcm5pbmcoImluY29ycmVjdCBzdHVkZW50IElEIikNCn0NCg0KDQoj5Lul5LiL5YWp6ICF55qE5beu55WwDQpwcmludCgiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0Kd2FybmluZygiaW5jb3JyZWN0IHN0dWRlbnQgSUQiKQ0KYGBgDQoNCmBgYHtyfQ0KaWYoIXJlcXVpcmUobHVicmlkYXRlKSl7ICMgY29uZGl0aW9uOiDmmK/lkKbjgIzmspLlronoo51sdWJyaWRhdGXjgI3vvJ8NCiAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCn0NCmx1YnJpZGF0ZTo6eW1kX2htcygiMjAyMC0wNy0wMSAxMzowMDowMCBHTVQiKQ0KYGBgDQoNCmBgYHtyfQ0KY29udmVydF9UYWl3YW5EYXRlMldlc3Rlcm5EYXRlIDwtIGZ1bmN0aW9uKHR3RGF0ZSl7DQogIGxpYnJhcnkoc3RyaW5ncikNCiAgcmVnZXhfcGF0dGVybiA8LQ0KICAgICIoPzw95rCR5ZyLKVswLTldKyg/PeW5tCkiDQogIA0KICAjIOWPluWHuuawkeWci+W5tO+8jOioiOeul+ilv+WFg+W5tA0KICB5ZWFyIDwtIA0KICAgIHN0cl9leHRyYWN0KA0KICAgICAgdHdEYXRlLA0KICAgICAgcmVnZXhfcGF0dGVybikNCiAgd2VzdGVyblllYXIgPC0gYXMuaW50ZWdlcih5ZWFyKSsxOTExDQogIA0KICAjIOabv+aPm+awkeWci3h45bm055qEeHjmiJDopb/lhYPlubTmlbjlrZcNCiAgc3RyX3JlcGxhY2UoDQogICAgdHdEYXRlLA0KICAgIHJlZ2V4X3BhdHRlcm4sICAjIOimgeaPm+aOieeahOaWh+Wtlw0KICAgIGFzLmNoYXJhY3Rlcih3ZXN0ZXJuWWVhcikgIyDopoHmm7/mj5vnmoTlhaflrrkNCiAgKSAtPiB0d0RhdGVfcmVmb3JtYXQNCiAgDQogIGx1YnJpZGF0ZTo6eW1kKHR3RGF0ZV9yZWZvcm1hdCkgLT4gd2VzdGVybkRhdGUNCiAgcmV0dXJuKHdlc3Rlcm5EYXRlKQ0KfQ0KDQp0d0RhdGUgPC0gIGMoIuawkeWcizEwOOW5tDEy5pyINeaXpSIsIuawkeWcizk45bm0MTDmnIg15pelIikNCmNvbnZlcnRfVGFpd2FuRGF0ZTJXZXN0ZXJuRGF0ZSh0d0RhdGUpDQpgYGANCg0KYGBge3J9DQpjb252ZXJ0X1RhaXdhbkRhdGUyV2VzdGVybkRhdGUgPC0gZnVuY3Rpb24odHdEYXRlKXsNCiAgDQogIGlmKCFyZXF1aXJlKCJzdHJpbmdyIikpew0KICAgIGluc3RhbGwucGFja2FnZXMoInN0cmluZ3IiKQ0KICB9DQogIGlmKCFyZXF1aXJlKCJsdWJyaWRhdGUiKSl7DQogICAgaW5zdGFsbC5wYWNrYWdlcygibHVicmlkYXRlIikNCiAgfQ0KICANCiAgbGlicmFyeShzdHJpbmdyKQ0KICByZWdleF9wYXR0ZXJuIDwtDQogICAgIig/PD3msJHlnIspWzAtOV0rKD895bm0KSINCiAgDQogICMg5Y+W5Ye65rCR5ZyL5bm077yM6KiI566X6KW/5YWD5bm0DQogIHllYXIgPC0gDQogICAgc3RyX2V4dHJhY3QoDQogICAgICB0d0RhdGUsDQogICAgICByZWdleF9wYXR0ZXJuKQ0KICB3ZXN0ZXJuWWVhciA8LSBhcy5pbnRlZ2VyKHllYXIpKzE5MTENCiAgDQogICMg5pu/5o+b5rCR5ZyLeHjlubTnmoR4eOaIkOilv+WFg+W5tOaVuOWtlw0KICBzdHJfcmVwbGFjZSgNCiAgICB0d0RhdGUsDQogICAgcmVnZXhfcGF0dGVybiwgICMg6KaB5o+b5o6J55qE5paH5a2XDQogICAgYXMuY2hhcmFjdGVyKHdlc3Rlcm5ZZWFyKSAjIOimgeabv+aPm+eahOWFp+WuuQ0KICApIC0+IHR3RGF0ZV9yZWZvcm1hdA0KICANCiAgbHVicmlkYXRlOjp5bWQodHdEYXRlX3JlZm9ybWF0KSAtPiB3ZXN0ZXJuRGF0ZQ0KICByZXR1cm4od2VzdGVybkRhdGUpDQp9DQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA0KDQpgYGB7cn0NCg0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KYGBge3J9DQoNCmBgYA==</div>
 
 
 
