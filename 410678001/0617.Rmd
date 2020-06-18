@@ -41,5 +41,18 @@ switch(
 print(fvalue)
 ```
 
+ifelse(test, yes, no)是超級好用/常用的函數：
+test: class logical. 測試條件的結果
+yes: 結果為T 時你希望的回傳值
+no: 結果為F 時你希望的回傳值
 
+```{r}
+grades <- c(52, 77, 59, 88, 90)
+
+ifelse(grades >= 60, "及格", "不及格")
+```
+
+```{r}
+
+```
 
