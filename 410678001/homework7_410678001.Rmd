@@ -33,13 +33,26 @@ library(readr); library(stringr); library(purrr); library(magrittr); library(lub
 ### 1.1 單一立方體表面積
 立方體的表面積計算方式為六個面的面積加總，請計算長寬高分別為20,10,15的立方體A的表面積，並將結果存到surface_A(class integer)。
 ```{r ans11}
-# surface_A
+long<- 20
+width <- 10
+height <- 15
+
+surface_A <- 2*(long*width+long*height+width*height)
+
+surface_A
+
 ```
 
 ### 1.2 立方體表面積計算機
 請寫一個叫做surface_cube的function，它的功能是在你輸入長寬高後能自動回傳表面積的值，比如輸入surface_cube(20,10,15)，執行結果應該出現和你1.1計算出來一樣值。
 ```{r ans12}
-# surface_cube
+surface_cube <- function(long, width, height){
+  surface_A <- 2*(long*width+long*height+width*height)
+  return(surface_A)
+}
+
+surface_cube(20, 10, 15)
+
 ```
 
 ## 2 口罩實名制
@@ -52,14 +65,30 @@ read_csv("https://www.dropbox.com/s/9xzccsvwrnctzul/mask.csv?dl=1") -> Mask
 請取出Mask裡的第一個身分證字號並用程式判斷他的單雙號，將結果儲存在1st_odd_or_even(class integer,length = 1)。
 單號請用1表示、雙號則用0表示。
 ```{r ans21}
-# `1st_odd_or_even`
+Mask[[1]][[1]]
+pick <- str_extract(Mask[[1]][[1]], "[0-9]+")
+pick <- as.numeric(pick)
+`1st_odd_or_even` <- pick%%2
+
+`1st_odd_or_even`
+
 ```
 
 ### 2.2 身分證末碼判斷function
 請寫一個叫做odd_or_even的function，它的功能是在你輸入身分證字號後能自動回傳其末碼屬於單數還是雙數(單雙數表示法同2.1)，比如輸入
 odd_or_even(Mask$身分證字號[[1]])，執行結果應該出現和你2.1計算出來的一樣。
 ```{r ans22}
-# odd_or_even
+odd_or_even <- function(number){
+  pick <- str_extract(number, "[0-9]+")
+  pick <- as.numeric(pick)
+  `1st_odd_or_even` <- pick%%2
+  return(`1st_odd_or_even`)
+}
+
+odd_or_even(Mask$`身分證字號`[[1]])
+
+odd_or_even
+
 ```
 
 ### 2.3 口罩實名制1.0—購買口罩日期
