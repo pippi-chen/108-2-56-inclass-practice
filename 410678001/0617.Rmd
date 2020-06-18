@@ -53,6 +53,97 @@ ifelse(grades >= 60, "及格", "不及格")
 ```
 
 ```{r}
+#方法1
+miniFun <- function(){
+  lubridate::now()
+}
+miniFun()
+
+#方法2
+miniFun2 <- function() lubridate::now()
+miniFun2()
+```
+
+```{r}
+result <- 
+  {
+    x <- 2
+    y <- 3
+    x**y+15
+  }
+print(result)
+
+
+result2 <-
+  {
+    x <- 2
+    y <- 3
+    if(x< 3){
+      warning("x值太小")
+    } else {
+      x**y+15
+    }
+  }
+print(result2)
+```
+
+function(...){....}的body若最後一個「被執行」的指令是會印在螢幕的值，如該值要當回傳值可以不用return(...)就可以產生值回傳效果。
+```{r}
+myFun <- function(x,y){
+  return(x**y+15)
+}
+
+# 等同於
+myFun2 <- function(x,y){
+  x**y+15
+}
+
+myFun(5,3) -> outcome
+myFun2(5,3) -> outcome2
+print(outcome)
+print(outcome2)
+```
+
+cut(x, c(a,b,c))
+```{r}
+a <- c(1,2,3)
+typeof(a)
+cut(a, c(1,2,3))
+```
+
+```{r}
+grade <- sample(1:100, 10, replace=T)
+grade
+
+cut(grade, c(-1,69,79,89,100)) -> grade
+grade #變成類別資料
+levels(grade)
+
+switch(
+  as.character(grade[[1]]),
+  "(-1,69]"={
+    print("-_-")
+    "F"},
+  "(69,79]"={
+    print("棒")
+    "C"
+    },
+  "(79,89]"={
+    print("好棒")
+    "B"
+    },
+  "(89,100]"={
+    print("好棒棒")
+    "A"
+    }
+) -> letterGrade # 有回存時要螢幕印出的訊息一定要加print
+```
+
+```{r}
+
+```
+
+```{r}
 
 ```
 
