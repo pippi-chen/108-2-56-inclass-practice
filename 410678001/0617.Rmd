@@ -143,6 +143,8 @@ letterGrade
 ```{r}
 today()
 nowtime <- glue::glue("{today()} 18:00:00") %>% ymd_hms(tz="Asia/Taipei")
+class(nowtime)
+typeof(nowtime) #可以用cut
 
 library(lubridate)
 library(glue)
@@ -162,8 +164,10 @@ cutpoints %>%
 
 ## 將nowtime轉成它對應的時段是"morning", "evening", 或其他。
 cut(nowtime, cutpoints) -> nowtime
+nowtime
 levels(nowtime)[c(1,3,5)] <-
   c("morning","evening","jazz time")
+nowtime
 
 ## 使用switch決定要做什麼事
 switch(
