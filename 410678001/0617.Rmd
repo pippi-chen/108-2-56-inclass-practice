@@ -329,6 +329,8 @@ if(myAge >=65 ||  myChildrenNumber >3){
 x <- c(2,5,10,-21,3,8)
 ifelse(x %% 2==0, "even", "odd")
 
+
+
 y <- sample(40:100,20, replace=T)
 dplyr::case_when(
   y < 60 ~ "F",
