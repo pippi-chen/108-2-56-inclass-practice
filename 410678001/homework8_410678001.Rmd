@@ -1,0 +1,168 @@
+---
+title: "homework 8"
+output: html_document
+params:
+  studentName: "你的名字"
+  studentID: "你的學號"
+---
+
+# 注意事項
+
+存檔與填寫注意事項：
+
+假設你叫王小明，學號41078392。
+
+  1. 有些同學可能家裡電腦不是utf-8設定，為防萬一，請於存檔時使用：File > save with enconding, 然後選utf-8
+
+  2. 本文檔開始的Frontmatter中，studentID（即key）其value目前為"你的學號"，以上面學號為例則必需改成"41078392"；而studentName（key）其value目前為"你的名字"，以上面名字為例則必需改成"王小明"
+  
+> 每次作業滿分10分：有寫作業於期限內上傳得3分，剩餘7分依作業準確率決定最後得分多寡，除非該題另有規定。
+
+> 前述存檔與frontmatter要求缺任何一個則扣1分。
+
+請先執以下code chunk, 引入所需packages，答案禁止引用其他套件（Package）。
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, eval=F)
+library(readr); library(stringr); library(purrr); library(magrittr); library(lubridate); library(jsonlite)
+```
+
+# 題目
+
+## 1. 新北市政府大樓查詢面板
+新北市政府計畫打造一個查詢面板使民眾可以輸入單位名稱以查詢該單位所在樓層與分類，但大家都知道民眾一般都不會記清楚詳細名稱只會記得關鍵字，所以要讓即使只輸入關鍵字也能查詢到該單位，例如輸入"員工"要能查詢到"員工汽車停車場"、"員工汽車停車場"這兩個。
+
+讀入以下資料會得到新北市政府各樓層資料：
+```{r data1}
+fromJSON("https://data.ntpc.gov.tw/api/datasets/C3FFC733-C2E3-42C6-9C14-CDDDDF3D2AEC/json/preview") -> ntpc_building_info
+```
+
+### 1.1 單位查詢——停車場
+請取出所有名稱裡包含"停車場"的單位資訊，並將這些單位資訊從ntpc_building_info取出成單獨一個data.frame，名稱是ntpc_building_parking(4 obs. of  4 variables)。
+```{r ans11}
+# ntpc_building_parking
+```
+
+### 1.2 單位查詢——查無此單位
+請寫一個叫做no_found的function，它的功能是若輸入關鍵字(key_word)沒有對應的名稱時要回傳warning message(內容為"No Found")。
+```{r ans12}
+# no_found
+```
+
+### 1.3 單位查詢
+請結合1.1和1.2寫一個叫做search_engine的function，它的功能是輸入關鍵字(key_word)後若有對應的單位則回傳如1.1的data.frame，無則如1.2回傳warning message(內容為"No Found")。
+
+如果可以寫出來的話代表你只差介面就寫出一個查詢面板了呢!做漂亮一點搞不好能賣給新北市政府喔XD
+```{r ans13}
+# search_engine
+```
+
+## 2 最佳消費組合
+小熊人生中最喜歡的東西就是皮卡丘，現在某咖啡店推出限期間限定的皮卡丘蛋糕和甜甜圈，以下為小熊在固定預算下可消費的購買組合和總效用：
+```{r data2}
+read_csv("https://www.dropbox.com/s/8mlf6cory32q1eq/bear.csv?dl=1") ->
+  bear
+```
+
+已知最佳消費組合是最大化總效用，請寫一個叫做best_choice的function，它的功能是輸入某給定的消費組合(choice)後回傳應該多消費甚麼、少消費甚麼或是維持現在的消費組合，如輸入best_choice(bear[6,])要回傳"維持現有消費組合"。
+回傳值請設定為"少消費蛋糕、多消費甜甜圈"、"多消費蛋糕、少消費甜甜圈"和"維持現有消費組合"，回傳就好，不用以warning message的方式呈現。
+```{r ans2}
+# best_choice
+```
+
+## 3. 自動排位系統
+
+執行以下程序會看到一個座位圖，這個空間總共有7排座位號碼分單雙號，單號為1、3、5、7，雙號為2、4、6。一個座位可以以 ？排？號形容，如圖中X為3排5號。
+```{r data3}
+browseURL("https://docs.google.com/spreadsheets/d/1bdb4XPEwrQByujQ79PeQ5D0V_157ouRrRVDiA9cs3B0/edit#gid=0")
+```
+
+### 3.1 seatingChart
+創造一個list of 7，每個元素皆有名稱分別為"row1","row2",...,"row7"，此外個別元素均為class integer vector，其中每個vector長度為9，且這9個元素有個自的名字依序是"7","5","A1","3","1","2","4","A2","6"。每個row元素除名字為"A1","A2"為-1外，其餘放0。此list of 7答案物件名為seatingChart。
+```{r ans31}
+# seatingChart
+```
+
+### 3.2 list_availableSeats
+seatingChart中0表示可以選的位置，-1表示沒辦法選的位置。創立一個函數list_availableSeats(seatingChart):
+
+Argument: 
+  
+  * seatingChart: class list。如前一題的結果。
+
+Value: a character class of vector, 代表seatingChart中所有可以選的座位，一個座位是一個元素值並以"row?-?"方式表示，如網頁圖中x的位置會是"row3-5"
+```{r ans32}
+# list_availableSeats
+```
+
+### 3.3 update_seatingChart
+創造一個函數update_seatingChart(seatingChart, selectedSeat):
+
+Arguments:
+
+  * seatingChart: list class. 如前一小題的seatingChart。
+  
+  * selectedSeat: length=1 class character. "row?-?"形式的字串用來代表消費者所選的位置。
+  
+Value：a list, 如原始的seatingChart結構，但被選走的位置的值會由0改成-1。若selectedSeat不在可選的位置裡則以warning出現"很抱歉您所選的位置已無法選"，回傳值會是原本的seatingChart。
+
+```{r ans33}
+# update_seatingChart
+```
+
+### 3.4 assign_seats
+執行以下程式會得到15位動物森友會的森友：
+```{r data34}
+jsonlite::fromJSON("https://www.dropbox.com/s/eb4xcfp97ro7m3y/animal_names.json?dl=1") -> animal_friends
+animal15 <- animal_friends[1:15]
+```
+
+寫一個**「可隨機選位」的排座位**程式assign_seats(people, seatingChart):
+
+Arguments:
+
+  * people: vector of class character. 每個元素值是個名字. 
+  
+  * seatingChart: list class。如本大題一開始的seatingChart。
+  
+Value: a vector of class character. 每個元素值是個"row?-?"形式的座位**，代表「隨機排給people」的座位（使用`sample()函數來達到隨機選位）。**此外，這是個named vector，元素值的name即為該位置所屬人物名稱。
+
+**隨機性在於哪個空位會被抽出來分派事前是未知的。**
+
+你可以用assign_seats(animal15, seatingChart)測試是否15位森友都有位置。
+
+```{r ans34}
+# assign_seats
+```
+
+### 3.5 remove_seats_covid19
+基於covid-19防疫，政府要求同一row，每個人左右兩邊至少要空一個位置或走道。（前後row則不管）請寫一個remove_seats_covid19(seatingChart):
+
+Arguments:
+
+  * seatingChart: a list。如本大題一開始的seatingChart。 
+  
+Value: 如seatingChart定義，但它會把input argument seatingChart中每一個被選走的位置其左右兩側的位置也放-1。
+
+(可能有用工具：relational operator如==, >=, %in%, 如判斷結果logical vector放到which()函數會回傳logical vector中元素值為TRUE的位置。）
+
+```{r ans35}
+# remove_seats_covid19
+```
+
+### 3.6 assign_seats_covid19 (Optional, 可不用寫)
+寫一個程式assign_seats_covid19(people, seatingChart):
+
+Arguments:
+
+  * people: vector of class character. 每個元素值是個名字. 
+  
+  * seatingChart: list class。如本大題一開始的seatingChart。
+  
+Value: a vector of class character. 每個元素值是個"row?-?"形式的座位。此外，這是個named vector，元素值的name即為該位置所屬人物名稱。除此之外，每個名字所分配到的座位都有符合政府防疫要求。
+
+你可以用assign_seats_covid19(animal15, seatingChart)測試是否15位森友都有位置。
+
+```{r ans36}
+# assign_seats_covid19
+```
+
