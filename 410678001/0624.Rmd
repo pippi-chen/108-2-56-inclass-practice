@@ -144,28 +144,81 @@ map(1:10,
     ~toast_withEggHam(toast=toast[[.x]], egg=eggs[[.x]], ham=ham[[.x]]))
 ```
 
+output <- vector("{type}", length={len})
+for(.x in {sequence}){
+  {body}
+}
 ```{r}
+### 前置作業
+entranceYear <- 100
+major <- "經濟系"
+allGrades <- paste0(major, 1:4)
+academicYears <- entranceYear+0:3
 
+jsonlite::fromJSON("https://www.dropbox.com/s/7myzzdnoor21hye/courseStructure2.json?dl=1") -> courseStructure
+
+get_courses <- function(acadYear_i, grade_i, courseStructure){
+  pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+  
+  return(
+    unique(courseStructure$科目名稱[pick])
+  )
+}
 ```
 
 ```{r}
+# 前置作業，接map iteration
+map(1:4, 
+    ~{
+      get_courses(academicYears[[.x]], 
+              allGrades[[.x]], 
+              courseStructure)})
 
+# 前置作業，接for iteration
+output <- vector("list", length=4)
+for(.x in 1:4){
+  get_courses(academicYears[[.x]], 
+                allGrades[[.x]], 
+                courseStructure) -> output[[.x]]
+}
 ```
 
 ```{r}
+eggs <- rep("雞蛋x1",10)
+ham <- rep("火腿x1", 10)
+toast <- rep("土司2片",10)
 
+toast_withEggHam <- function(toast=NULL, egg=NULL, ham=NULL){
+  if(is.null(toast) || !str_detect(toast, "土司")){stop("少了土司")}
+  if(is.null(egg) || !str_detect(egg, "蛋")){stop("少了蛋")}
+  if(is.null(ham) || !str_detect(ham, "火腿")){stop("少了火腿")}
+  "火腿蛋三明治"
+}
 ```
 
 ```{r}
+map(1:10,
+    ~toast_withEggHam(toast=toast[[.x]], egg=eggs[[.x]], ham=ham[[.x]]))
 
+output <- vector("character", 10)
+for(.x in 1:10){
+  toast_withEggHam(toast=toast[[.x]], egg=eggs[[.x]], ham=ham[[.x]]) -> output[[.x]]
+}
 ```
 
 ```{r}
+a <- sample(1:100, 10, replace=T)
+print(a)
 
-```
+sum <- 0
+for(.x in 1:10){
+  sum <- sum+a[[.x]]
+}
 
-```{r}
-
+print(sum)
 ```
 
 ```{r}
