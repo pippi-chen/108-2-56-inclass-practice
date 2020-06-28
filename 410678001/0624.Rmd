@@ -269,23 +269,82 @@ print(output)
 ```
 
 ```{r}
-
+sum <- 0
+for(i in 1:10){
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{i}次得到{sum}次正面"))
+}
 ```
 
 ```{r}
+sum <- 0
+for(i in 1:100){
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{i}次得到{sum}次正面"))
+  if(sum==5){
+    break
+  }
+}
+```
 
+while(continueCondition){
+  body
+}
+```{r}
+sum <- 0
+count <- 0 # 計數器
+while(sum<5){
+  count <- count+1 # 計數器+1
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{count}次得到{sum}次正面"))
+}
 ```
 
 ```{r}
-
+count <- 0 # 計數器開始值
+max_count <- 500 # 計數上限
+while(continueCondition && count <= max_count){ # 增加計數上限條件
+  count <- count+1 # 計數器加1
+  body
+}
 ```
 
 ```{r}
+set.seed(1000) # 控制sample抽出的數字sequence固定，通常進行方法比對用
 
-```
+output <- c()
+for(.x in 1:10){
+  new <- sample(0:100,1)
+  if(new %% 3==0){
+    output <- c(output, new)
+  }
+}
 
-```{r}
+print(output)
 
+
+set.seed(1000) # 控制sample抽出的數字sequence固定，通常進行方法比對用
+
+count <- 0 # 計數器起始值
+output <- c()
+while(count <= 10){ # 計數上限條件
+  count <- count+1 # 計數器+1
+  new <- sample(0:100,1)
+  if(new %% 3==0){
+    output <- c(output, new)
+  }
+}
+
+print(output)
 ```
 
 ```{r}
