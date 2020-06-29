@@ -39,13 +39,30 @@ fromJSON("https://data.ntpc.gov.tw/api/datasets/C3FFC733-C2E3-42C6-9C14-CDDDDF3D
 ### 1.1 單位查詢——停車場
 請取出所有名稱裡包含"停車場"的單位資訊，並將這些單位資訊從ntpc_building_info取出成單獨一個data.frame，名稱是ntpc_building_parking(4 obs. of  4 variables)。
 ```{r ans11}
-# ntpc_building_parking
+pick <- str_detect(ntpc_building_info$name, "停車場")
+data <- list(
+  type = ntpc_building_info$type[pick],
+  floer = ntpc_building_info$floer[pick],
+  name = ntpc_building_info$name[pick], 
+  name_en = ntpc_building_info$name_en[pick]
+)
+
+ntpc_building_parking <- data.frame(data)
+
+ntpc_building_parking
 ```
 
 ### 1.2 單位查詢——查無此單位
 請寫一個叫做no_found的function，它的功能是若輸入關鍵字(key_word)沒有對應的名稱時要回傳warning message(內容為"No Found")。
 ```{r ans12}
-# no_found
+no_found <- function(key_word){
+  pick <- str_detect(ntpc_building_info$name, key_word)
+  if(sum(pick)==0){
+    warning("No Found")
+  }
+}
+
+no_found
 ```
 
 ### 1.3 單位查詢
@@ -53,7 +70,23 @@ fromJSON("https://data.ntpc.gov.tw/api/datasets/C3FFC733-C2E3-42C6-9C14-CDDDDF3D
 
 如果可以寫出來的話代表你只差介面就寫出一個查詢面板了呢!做漂亮一點搞不好能賣給新北市政府喔XD
 ```{r ans13}
-# search_engine
+search_engine <- function(key_word){
+  pick <- str_detect(ntpc_building_info$name, key_word)
+  data <- list(
+  type = ntpc_building_info$type[pick],
+  floer = ntpc_building_info$floer[pick],
+  name = ntpc_building_info$name[pick], 
+  name_en = ntpc_building_info$name_en[pick]
+  )
+  ntpc_building_parking <- data.frame(data)
+  if(sum(pick)==0){
+    warning("No Found")
+  } else {
+    return(ntpc_building_parking)
+  }
+}
+
+search_engine
 ```
 
 ## 2 最佳消費組合
@@ -66,7 +99,17 @@ read_csv("https://www.dropbox.com/s/8mlf6cory32q1eq/bear.csv?dl=1") ->
 已知最佳消費組合是最大化總效用，請寫一個叫做best_choice的function，它的功能是輸入某給定的消費組合(choice)後回傳應該多消費甚麼、少消費甚麼或是維持現在的消費組合，如輸入best_choice(bear[6,])要回傳"維持現有消費組合"。
 回傳值請設定為"少消費蛋糕、多消費甜甜圈"、"多消費蛋糕、少消費甜甜圈"和"維持現有消費組合"，回傳就好，不用以warning message的方式呈現。
 ```{r ans2}
-# best_choice
+best_choice <- function(cake, sweet){
+  if((cake>bear[6,]$`蛋糕(Q1)`) | (sweet<bear[6,]$`甜甜圈(Q2)`)){
+    return("少消費蛋糕、多消費甜甜圈")
+  } else if((cake<bear[6,]$`蛋糕(Q1)`) | (sweet>bear[6,]$`甜甜圈(Q2)`)){
+    return("多消費蛋糕、少消費甜甜圈")
+  } else if((cake=bear[6,]$`蛋糕(Q1)`) & (sweet=bear[6,]$`甜甜圈(Q2)`)){
+    return("維持現有消費組合")
+  }
+}
+
+best_choice
 ```
 
 ## 3. 自動排位系統
