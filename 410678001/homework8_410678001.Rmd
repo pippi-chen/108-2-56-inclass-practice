@@ -271,9 +271,14 @@ Value: a vector of class character. 每個元素值是個"row?-?"形式的座位
 
 ```{r ans36}
 assign_seats_covid19 <- function(people, seatingChart){
-  sample <- sample(list_availableSeats(seatingChart), length(people), replace = F)
-  names(sample) <- people
-  return(sample)
+  for(i in 1 : length(people)){
+    sample <- remove_seats_covid19(seatingChart)
+    names(sample) <- people[i]
+    return(sample)
+   if(i>15){
+     break
+    }  
+  }
 }
 
 assign_seats_covid19
