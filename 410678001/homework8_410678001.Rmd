@@ -122,7 +122,19 @@ browseURL("https://docs.google.com/spreadsheets/d/1bdb4XPEwrQByujQ79PeQ5D0V_157o
 ### 3.1 seatingChart
 創造一個list of 7，每個元素皆有名稱分別為"row1","row2",...,"row7"，此外個別元素均為class integer vector，其中每個vector長度為9，且這9個元素有個自的名字依序是"7","5","A1","3","1","2","4","A2","6"。每個row元素除名字為"A1","A2"為-1外，其餘放0。此list of 7答案物件名為seatingChart。
 ```{r ans31}
-# seatingChart
+name <- c(0, 0, -1, 0, 0, 0, 0, -1, 0)
+name <- as.integer(name)
+seatingChart <- list(
+  row1 = name,
+  row2 = name, 
+  row3 = name, 
+  row4 = name, 
+  row5 = name, 
+  row6 = name, 
+  row7 = name
+)
+
+seatingChart
 ```
 
 ### 3.2 list_availableSeats
@@ -134,7 +146,13 @@ Argument:
 
 Value: a character class of vector, 代表seatingChart中所有可以選的座位，一個座位是一個元素值並以"row?-?"方式表示，如網頁圖中x的位置會是"row3-5"
 ```{r ans32}
-# list_availableSeats
+seat <- c(rep(7,7), rep(5,7), rep(3,7), rep(1,7), rep(2,7), rep(4,7), rep(6,7))
+list_availableSeats <- function(seating){
+  c <- paste0(rep((names(seating)[1:7]),7), "-", seat)
+  return(c)
+}
+
+list_availableSeats
 ```
 
 ### 3.3 update_seatingChart
@@ -184,7 +202,7 @@ Arguments:
 
   * seatingChart: a list。如本大題一開始的seatingChart。 
   
-Value: 如seatingChart定義，但它會把input argument seatingChart中每一個被選走的位置其左右兩側的位置也放-1。
+Value: 如seatingChart定義，但它會把input argument seatingChart中selectedSeat位置其左右兩側的位置也放-1。
 
 (可能有用工具：relational operator如==, >=, %in%, 如判斷結果logical vector放到which()函數會回傳logical vector中元素值為TRUE的位置。）
 
