@@ -146,11 +146,15 @@ Argument:
 
 Value: a character class of vector, 代表seatingChart中所有可以選的座位，一個座位是一個元素值並以"row?-?"方式表示，如網頁圖中x的位置會是"row3-5"
 ```{r ans32}
-seat <- c(rep(7,7), rep(5,7), rep(3,7), rep(1,7), rep(2,7), rep(4,7), rep(6,7))
-list_availableSeats <- function(seating){
-  c <- paste0(rep((names(seating)[1:7]),7), "-", seat)
-  return(c)
+seat <- c(7, 5, 3, 1, 2, 4, 6)
+a <- NULL
+list_availableSeats <- function(seatingChart){
+  for(i in 1:7){
+  c <- paste0(rep((names(seatingChart)[i]),7), "-", seat)
+  a <- c(a,c)}
+  return(a)
 }
+class(list_availableSeats(seatingChart))
 
 list_availableSeats
 ```
@@ -167,7 +171,21 @@ Arguments:
 Value：a list, 如原始的seatingChart結構，但被選走的位置的值會由0改成-1。若selectedSeat不在可選的位置裡則以warning出現"很抱歉您所選的位置已無法選"，回傳值會是原本的seatingChart。
 
 ```{r ans33}
-# update_seatingChart
+seat1 <- c(7, 5, 0, 3, 1, 2, 4, 0, 6)
+update_seatingChart <- function(seatingChart, selectedSeat){
+  select <- str_split(selectedSeat, "-")
+  row <- select[[1]][[1]]
+  col <- as.integer(select[[1]][[2]])
+  if(seatingChart[[row]][col==seat1]==-1){
+    warning("很抱歉您所選的位置已無法選")
+  } else {
+  seatingChart[[row]][col==seat1] <- -1
+  return(seatingChart)
+  }
+}
+
+
+update_seatingChart
 ```
 
 ### 3.4 assign_seats
@@ -192,7 +210,13 @@ Value: a vector of class character. 每個元素值是個"row?-?"形式的座位
 你可以用assign_seats(animal15, seatingChart)測試是否15位森友都有位置。
 
 ```{r ans34}
-# assign_seats
+assign_seats <- function(people, seatingChart){
+  sample <- sample(list_availableSeats(seatingChart), length(people), replace = F)
+  names(sample) <- people
+  return(sample)
+}
+
+assign_seats
 ```
 
 ### 3.5 remove_seats_covid19
@@ -207,7 +231,29 @@ Value: 如seatingChart定義，但它會把input argument seatingChart中selecte
 (可能有用工具：relational operator如==, >=, %in%, 如判斷結果logical vector放到which()函數會回傳logical vector中元素值為TRUE的位置。）
 
 ```{r ans35}
-# remove_seats_covid19
+seat1 <- c(7, 5, 0, 3, 1, 2, 4, 0, 6)
+remove_seats_covid19 <- function(seatingChart){
+  sample <- sample(list_availableSeats(seatingChart), 1)
+  select <- str_split(sample, "-")
+  row <- select[[1]][[1]]
+  col <- as.integer(select[[1]][[2]])
+  if(seatingChart[[row]][col==seat1]==0 & (which(col==seat1))==9){
+    seatingChart[[row]][col==seat1] <- -1
+    seatingChart$row1[[(which(col==seat1)-1)]] <- -1
+    return(seatingChart)
+  } else if(seatingChart[[row]][col==seat1]==0 & (which(col==seat1))==1) {
+    seatingChart[[row]][col==seat1] <- -1
+    seatingChart$row1[[(which(col==seat1)+1)]] <- -1
+    return(seatingChart)
+  } else {
+    seatingChart[[row]][col==seat1] <- -1
+    seatingChart$row1[[(which(col==seat1)-1)]] <- -1
+    seatingChart$row1[[(which(col==seat1)+1)]] <- -1
+    return(seatingChart)
+  }
+}
+
+remove_seats_covid19
 ```
 
 ### 3.6 assign_seats_covid19 (Optional, 可不用寫)
@@ -224,6 +270,12 @@ Value: a vector of class character. 每個元素值是個"row?-?"形式的座位
 你可以用assign_seats_covid19(animal15, seatingChart)測試是否15位森友都有位置。
 
 ```{r ans36}
-# assign_seats_covid19
+assign_seats_covid19 <- function(people, seatingChart){
+  sample <- sample(list_availableSeats(seatingChart), length(people), replace = F)
+  names(sample) <- people
+  return(sample)
+}
+
+assign_seats_covid19
 ```
 
